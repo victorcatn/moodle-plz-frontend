@@ -1,3 +1,22 @@
-<p>
-  project-model works!
-</p>
+<h2>My Projects</h2>
+
+<div class="column">
+  <label>project name:
+    <input [(ngModel)]="project.name" />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button class="sm" (click)="add()">
+    add
+  </button>
+</div>
+
+<ul class="projects">
+  <li *ngFor="let project of projects">
+    <a routerLink="/project/{{project.id}}">
+      <span class="badge">{{project.id}}</span>
+      <span class="desc">{{project.name}} </span>
+    </a>
+    <button class="delete" title="delete project"
+            (click)="delete(project)">x</button>
+  </li>
+</ul>

@@ -37,6 +37,14 @@ import {
 import { AppRoutingModule } from './/app-routing.module';
 import { ProjectModelComponent } from './project/project-model/project-model.component';
 import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
+import { SkillDetailComponent } from './skill/skill-detail/skill-detail.component';
+import { SkillModelComponent } from './skill/skill-model/skill-model.component';
+import { KnowledgeModelComponent } from './knowledge/knowledge-model/knowledge-model.component';
+import { KnowledgeDetailComponent } from './knowledge/knowledge-detail/knowledge-detail.component';
+import { ProjectSearchComponent } from './project/project-search/project-search.component';
+import {MessagesComponent} from "./components/messages/messages.component";
+import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -44,9 +52,17 @@ import { ProjectDetailComponent } from './project/project-detail/project-detail.
     AppComponent,
     MenubarComponent,
     ProjectModelComponent,
-    ProjectDetailComponent
+    ProjectDetailComponent,
+    SkillDetailComponent,
+    SkillModelComponent,
+    KnowledgeModelComponent,
+    KnowledgeDetailComponent,
+    ProjectSearchComponent,
+    MessagesComponent,
+
   ],
   imports: [
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
@@ -83,6 +99,7 @@ import { ProjectDetailComponent } from './project/project-detail/project-detail.
     MatToolbarModule,
     MatTooltipModule,
     AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
