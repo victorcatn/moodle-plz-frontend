@@ -45,6 +45,8 @@ import { ProjectSearchComponent } from './project/project-search/project-search.
 import {MessagesComponent} from "./components/messages/messages.component";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { CreateSkillComponent } from './skill/create-skill/create-skill.component';
+
 
 
 @NgModule({
@@ -59,6 +61,7 @@ import {HttpClientModule} from "@angular/common/http";
     KnowledgeDetailComponent,
     ProjectSearchComponent,
     MessagesComponent,
+    CreateSkillComponent,
 
   ],
   imports: [

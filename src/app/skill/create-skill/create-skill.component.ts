@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Skill } from '../Skill';
 import { SkillServiceService } from '../service/skill-service.service';
 
 @Component({
-  selector: 'app-skill-model',
-  templateUrl: './skill-model.component.html',
-  styleUrls: ['./skill-model.component.css']
+  selector: 'app-create-skill',
+  templateUrl: './create-skill.component.html',
+  styleUrls: ['./create-skill.component.css']
 })
-export class SkillModelComponent implements OnInit {
+export class CreateSkillComponent implements OnInit {
 
   skills: Skill[];
 
@@ -27,21 +28,16 @@ export class SkillModelComponent implements OnInit {
       .subscribe(skills => this.skills = skills);
   }
 
-  /*add(): void {
+  saveSkill(): void{
     if (!this.skill.name) { return; }
     this.skillService.addSkill(this.skill)
       .subscribe(skill => {
         this.skills.push(skill);
         this.skill = {
           id:'',
-          name:''
+          name:'',
         };
     });
-  }*/
-
-  delete(skill: Skill): void {
-    this.skills = this.skills.filter(h => h !== skill);
-    this.skillService.deleteSkill(skill).subscribe();
   }
 
 }
