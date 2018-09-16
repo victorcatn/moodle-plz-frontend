@@ -49,6 +49,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { GroupCreationComponent } from './group/group-creation/group-creation.component';
 import { StaffmemberListComponent } from './staffmember/staffmember-list/staffmember-list.component';
+import { CreateSkillComponent } from './skill/create-skill/create-skill.component';
+
 
 
 @NgModule({
@@ -67,6 +69,7 @@ import { StaffmemberListComponent } from './staffmember/staffmember-list/staffme
     MessagesComponent,
     GroupCreationComponent,
     StaffmemberListComponent,
+    CreateSkillComponent,
 
   ],
   imports: [

@@ -8,6 +8,9 @@ import {ProjectDetailComponent} from "./project/project-detail/project-detail.co
 import {GroupListComponent} from './group/group-list/group-list.component';
 import {GroupDetailComponent} from './group/group-detail/group-detail.component';
 import {GroupCreationComponent} from './group/group-creation/group-creation.component';
+import { SkillModelComponent } from './skill/skill-model/skill-model.component';
+import { SkillDetailComponent } from './skill/skill-detail/skill-detail.component';
+import { CreateSkillComponent } from './skill/create-skill/create-skill.component';
 
 const routes: Routes = [
   { path: 'staffmember', component: StaffmemberListComponent },
@@ -16,6 +19,9 @@ const routes: Routes = [
   { path: 'groups', component: GroupListComponent },
   { path: 'groups/create', component: GroupCreationComponent },
   { path: 'groups/:id', component: GroupDetailComponent }
+  { path: 'skills', component: SkillModelComponent },
+  { path: 'skills/create', component: CreateSkillComponent },
+  { path: 'skills/:id', component: SkillDetailComponent },
 ];
 
 @NgModule({

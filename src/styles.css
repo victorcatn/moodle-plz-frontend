@@ -1,2 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500 );
+
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2{
+    font-weight: 300;
+}
+
+body, h3{
+    font-weight: 400;
+}
+
+button{
+    font-weight: 500;
+}
