@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class SkillServiceService {
 
-  private skillUrl = 'http://localhost:8080/skill'
+  private skillUrl = 'http://localhost:8080/skills'
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 

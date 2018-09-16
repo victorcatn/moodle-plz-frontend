@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'project/:id', component: ProjectDetailComponent },
   { path: 'groups', component: GroupListComponent },
   { path: 'groups/create', component: GroupCreationComponent },
-  { path: 'groups/:id', component: GroupDetailComponent }
+  { path: 'groups/:id', component: GroupDetailComponent },
   { path: 'skills', component: SkillModelComponent },
   { path: 'skills/create', component: CreateSkillComponent },
   { path: 'skills/:id', component: SkillDetailComponent },
