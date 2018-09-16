@@ -16,8 +16,8 @@ export class ProjectModelComponent implements OnInit {
   startDate:null,
   endDate:null,
 
-  neededSkill:null,
-  neededKnowledge:null,
+  neededSkills:null,
+  neededKnowledges:null,
 
   assignedGroupId:'',
 };
@@ -44,8 +44,8 @@ export class ProjectModelComponent implements OnInit {
           startDate:null,
           endDate:null,
 
-          neededSkill:null,
-          neededKnowledge:null,
+          neededSkills:null,
+          neededKnowledges:null,
 
           assignedGroupId:'',
         };

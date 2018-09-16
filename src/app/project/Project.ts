@@ -7,8 +7,8 @@ export class Project{
   startDate:Date;
   endDate:Date;
 
-  neededSkill:SkillScore[];
-  neededKnowledge:KnowledgeScore[];
+  neededSkills:SkillScore[];
+  neededKnowledges:KnowledgeScore[];
 
   assignedGroupId:String;
 }
