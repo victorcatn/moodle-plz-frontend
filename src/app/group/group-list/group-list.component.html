@@ -1,0 +1,20 @@
+<h2>Groups</h2>
+
+<mat-card *ngFor="let group of groups" class="group-card" >
+    <mat-card-title routerLink="{{group.id}}" >{{group.id}}</mat-card-title>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item *ngFor="let staffMember of group.getStaffMembers"> <!--TODO: make this method-->
+                {{staffMember.name}}
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button>edit</button>
+        <button mat-button (click)="delete(group)" >delete</button>
+    </mat-card-actions>
+</mat-card>
+
+<button mat-fab color="primary" class="fav-add-group" routerLink="create">
+    <mat-icon aria-label="Add new group">add</mat-icon>
+</button>

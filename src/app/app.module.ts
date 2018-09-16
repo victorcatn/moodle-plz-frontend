@@ -42,9 +42,13 @@ import { SkillModelComponent } from './skill/skill-model/skill-model.component';
 import { KnowledgeModelComponent } from './knowledge/knowledge-model/knowledge-model.component';
 import { KnowledgeDetailComponent } from './knowledge/knowledge-detail/knowledge-detail.component';
 import { ProjectSearchComponent } from './project/project-search/project-search.component';
+import {GroupListComponent} from './group/group-list/group-list.component';
+import {GroupDetailComponent} from './group/group-detail/group-detail.component';
 import {MessagesComponent} from "./components/messages/messages.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { GroupCreationComponent } from './group/group-creation/group-creation.component';
+import { StaffmemberListComponent } from './staffmember/staffmember-list/staffmember-list.component';
 
 
 @NgModule({
@@ -58,7 +62,11 @@ import {HttpClientModule} from "@angular/common/http";
     KnowledgeModelComponent,
     KnowledgeDetailComponent,
     ProjectSearchComponent,
+    GroupListComponent,
+    GroupDetailComponent,
     MessagesComponent,
+    GroupCreationComponent,
+    StaffmemberListComponent,
 
   ],
   imports: [
@@ -100,6 +108,7 @@ import {HttpClientModule} from "@angular/common/http";
     MatTooltipModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

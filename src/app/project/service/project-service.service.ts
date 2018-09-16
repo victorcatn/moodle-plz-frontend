@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class ProjectServiceService {
 
-  private projectUrl = 'http://localhost:8080/project';  // URL to web api
+  private projectUrl = 'http://localhost:8080/projects';  // URL to web api
 
   constructor(
     private http: HttpClient,
