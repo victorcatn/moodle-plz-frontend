@@ -67,8 +67,8 @@ export class ProjectServiceService {
   //////// Save methods //////////
 
   /** POST: add a new project to the server */
-  addProject (hero: Project): Observable<Project> {
-    return this.http.post<Project>(this.projectUrl, hero, httpOptions).pipe(
+  addProject (project: Project): Observable<Project> {
+    return this.http.post<Project>(this.projectUrl, project, httpOptions).pipe(
       tap((customer: Project) => this.log(`added project w/ id=${customer.id}`)),
       catchError(this.handleError<Project>('addHero'))
     );
