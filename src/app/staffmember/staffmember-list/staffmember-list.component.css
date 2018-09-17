@@ -2,18 +2,13 @@ h2{
     text-align: center;
 }
 
-.group-card{
-    display: inline-block;
-    width: 300px;
-    margin: 5px;
-}
-
 .fav-add-group{
     position: fixed;
     bottom: 70px;
     right: 25px;
 }
 
-.staffMemberTitle{
+.staffMemberName{
     cursor: pointer;
+    width: 40%;
 }

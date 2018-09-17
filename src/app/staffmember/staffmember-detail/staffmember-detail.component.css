@@ -1,0 +1,18 @@
+h2{
+    text-align: center;
+}
+
+.container{
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.mat-list-icon {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 14px!important;
+}
+
+.mat-line{
+    margin-bottom: 9px!important;
+}

@@ -1,0 +1,27 @@
+<div *ngIf="staffMember">
+  <h2>Staff Member Detail</h2>
+  <div class="container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{staffMember.name}} {{staffMember.lastName}}</mat-card-title>
+        <mat-card-subtitle>{{staffMember.email}}</mat-card-subtitle>
+        <mat-card-subtitle>{{staffMember.document}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <h2 mat-subheader>Skills</h2>
+          <mat-list-item *ngFor="let skill of skills">
+            <mat-icon mat-list-icon>lens</mat-icon>
+            <p mat-line>{{skill.name}}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <h2 mat-subheader>Knowledges</h2>
+          <mat-list-item *ngFor="let knowledge of knowledges">
+              <mat-icon mat-list-icon>lens</mat-icon>
+              <p mat-line>{{knowledge.name}}</p>
+            </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

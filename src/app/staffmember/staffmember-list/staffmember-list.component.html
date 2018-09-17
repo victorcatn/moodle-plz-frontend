@@ -1,18 +1,12 @@
 <h2>Staff Members</h2>
 
-<mat-card *ngFor="let staffMember of staffMembers" class="group-card">
-  <mat-card-header>
-      <mat-card-title routerLink="{{staffMember.id}}" class="staffMemberTitle">{{staffMember.name}} {{staffMember.lastName}}</mat-card-title>
-      <mat-card-subtitle>{{staffMember.email}}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p>Document: {{staffMember.document}}</p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button routerLink="{{staffMember.id}}/edit">Edit</button>
-    <button mat-button (click)="delete(staffMember)">Delete</button>
-  </mat-card-actions>
-</mat-card>
+<mat-list>
+  <mat-list-item *ngFor="let staffMember of staffMembers" routerLink="{{staffMember.id}}" class="staffMemberName">
+    <h4 mat-line rout>{{staffMember.name}} {{staffMember.lastName}}</h4>
+    <p mat-line>{{staffMember.email}}</p>
+    <mat-divider class="mat-divider"></mat-divider>
+  </mat-list-item>
+</mat-list>
 
 <button mat-fab color="primary" class="fav-add-group" routerLink="create">
   <mat-icon aria-label="Add new staffMember">add</mat-icon>
