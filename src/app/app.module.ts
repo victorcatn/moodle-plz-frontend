@@ -52,6 +52,7 @@ import { StaffmemberListComponent } from './staffmember/staffmember-list/staffme
 import { CreateSkillComponent } from './skill/create-skill/create-skill.component';
 import { CreateKnowledgeComponent } from './knowledge/create-knowledge/create-knowledge.component';
 import { EditSkillComponent } from './skill/edit-skill/edit-skill.component';
+import { CreateStaffmemberComponent } from './staffmember/create-staffmember/create-staffmember.component';
 
 
 
@@ -74,6 +75,7 @@ import { EditSkillComponent } from './skill/edit-skill/edit-skill.component';
     CreateSkillComponent,
     CreateKnowledgeComponent,
     EditSkillComponent,
+    CreateStaffmemberComponent,
 
   ],
   imports: [

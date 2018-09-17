@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, of} from "rxjs";
 import {StaffMember} from "../StaffMember";
 import {catchError, map, tap} from "rxjs/operators";
+import { MessageService } from '../../message.service';
 
 
 const httpOptions = {
@@ -17,7 +18,7 @@ export class StaffMemberService {
   private staffMembersUrl = 'http://localhost:8080/staffmembers';  // URL to web api
 
   constructor(
-    private http: HttpClient) { }
+    private http: HttpClient, private messageService: MessageService) { }
 
   /** GET staff members from the server */
   getStaffMembers (): Observable<StaffMember[]> {
@@ -25,6 +26,70 @@ export class StaffMemberService {
       .pipe(
         catchError(this.handleError('getstaffmembers', []))
       );
+  }
+
+  /** GET staffMembers by id. Return `undefined` when id not found */
+  getStaffMemberNo404<Data>(id: string): Observable<StaffMember> {
+    const url = `${this.staffMembersUrl}/?id=${id}`;
+    return this.http.get<StaffMember[]>(url)
+      .pipe(
+        map(staffMembers => staffMembers[0]), // returns a {0|1} element array
+        tap(h => {
+          const outcome = h ? `fetched` : `did not find`;
+          this.log(`${outcome} staffMembers id=${id}`);
+        }),
+        catchError(this.handleError<StaffMember>(`getstaffMembers id=${id}`))
+      );
+  }
+
+  /** GET staffMembers by id. Will 404 if id not found */
+  getStaffMember(id: string): Observable<StaffMember> {
+    const url = `${this.staffMembersUrl}/${id}`;
+    return this.http.get<StaffMember>(url).pipe(
+      tap(_ => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError<StaffMember>(`getStaffMembers id=${id}`))
+    );
+  }
+
+  /* GET staffMember whose name contains search term */
+  searchStaffMember(term: string): Observable<StaffMember[]> {
+    if (!term.trim()) {
+      // if not search term, return empty staffMember array.
+      return of([]);
+    }
+    return this.http.get<StaffMember[]>(`${this.staffMembersUrl}/?name=${term}`).pipe(
+      tap(_ => this.log(`found staffMembers matching "${term}"`)),
+      catchError(this.handleError<StaffMember[]>('searchStaffMember', []))
+    );
+  }
+
+  //////// Save methods //////////
+
+  /** POST: add a new staffMember to the server */
+  addStaffMember (staffMember: StaffMember): Observable<StaffMember> {
+    return this.http.post<StaffMember>(this.staffMembersUrl, staffMember, httpOptions).pipe(
+      tap((staffMember: StaffMember) => this.log(`added staffMember w/ id=${staffMember.id}`)),
+      catchError(this.handleError<StaffMember>('addStaffMember'))
+    );
+  }
+
+  /** DELETE: delete the staffMember from the server */
+  deleteStaffMember (staffMember: StaffMember | number): Observable<StaffMember> {
+    const id = typeof staffMember === 'number' ? staffMember : staffMember.id;
+    const url = `${this.staffMembersUrl}/${id}`;
+
+    return this.http.delete<StaffMember>(url, httpOptions).pipe(
+      tap(_ => this.log(`deleted staffMember id=${id}`)),
+      catchError(this.handleError<StaffMember>('deleteStaffMember'))
+    );
+  }
+
+  /** PUT: update the staffMember on the server */
+  updateStaffMember (staffMember: StaffMember): Observable<any> {
+    return this.http.put(this.staffMembersUrl, staffMember, httpOptions).pipe(
+      tap(_ => this.log(`updated staffMember id=${staffMember.id}`)),
+      catchError(this.handleError<any>('StaffMember'))
+    );
   }
 
   /**
