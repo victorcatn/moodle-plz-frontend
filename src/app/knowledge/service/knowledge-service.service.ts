@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Knowledge} from "../Knowledge";
 
@@ -12,5 +12,11 @@ export class KnowledgeServiceService {
   getKnowledges(): Observable<Knowledge[]>{
     let vacio: Observable<Knowledge[]> = null
     return vacio
+  }
+
+  getKnowledge(id: string): Observable<Knowledge> {
+    let vacio: Observable<Knowledge> = null
+    return vacio
+
   }
 }

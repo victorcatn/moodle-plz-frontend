@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Project} from "../Project";
 import {ProjectServiceService} from "../service/project-service.service";
 
@@ -33,24 +33,6 @@ export class ProjectModelComponent implements OnInit {
       .subscribe(projects => this.projects = projects);
   }
 
-  add(): void {
-    if (!this.project.name) { return; }
-    this.projectService.addProject(this.project)
-      .subscribe(project => {
-        this.projects.push(project);
-        this.project = {
-          id:'',
-          name:'',
-          startDate:null,
-          endDate:null,
-
-          neededSkills:null,
-          neededKnowledges:null,
-
-          assignedGroupId:'',
-        };
-      });
-  }
 
   delete(project: Project): void {
     this.projects = this.projects.filter(h => h !== project);
