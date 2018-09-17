@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Knowledge } from '../Knowledge';
+import { KnowledgeServiceService } from '../service/knowledge-service.service';
 
 @Component({
   selector: 'app-knowledge-model',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KnowledgeModelComponent implements OnInit {
 
-  constructor() { }
+  knowledges: Knowledge[];
+
+  knowledge: Knowledge = {
+    id: '',
+    name: ''
+  };
+
+  constructor(private knowledgeService: KnowledgeServiceService) { }
 
   ngOnInit() {
+    this.getKnowledges()
+  }
+
+  getKnowledges(): void{
+    this.knowledgeService.getKnowledges().subscribe(knowledges => this.knowledges = knowledges)
+  }
+
+  delete(knowledge: Knowledge): void{
+    this.knowledges = this.knowledges.filter(h => h !== knowledge);
+    this.knowledgeService.deleteKnowledge(knowledge).subscribe();
   }
 
 }

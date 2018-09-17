@@ -50,6 +50,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { GroupCreationComponent } from './group/group-creation/group-creation.component';
 import { StaffmemberListComponent } from './staffmember/staffmember-list/staffmember-list.component';
 import { CreateSkillComponent } from './skill/create-skill/create-skill.component';
+import { CreateKnowledgeComponent } from './knowledge/create-knowledge/create-knowledge.component';
+import { EditSkillComponent } from './skill/edit-skill/edit-skill.component';
 
 
 
@@ -70,6 +72,8 @@ import { CreateSkillComponent } from './skill/create-skill/create-skill.componen
     GroupCreationComponent,
     StaffmemberListComponent,
     CreateSkillComponent,
+    CreateKnowledgeComponent,
+    EditSkillComponent,
 
   ],
   imports: [

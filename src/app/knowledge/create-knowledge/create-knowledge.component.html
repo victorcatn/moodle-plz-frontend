@@ -1,0 +1,9 @@
+<h2>Create Knowledge</h2>
+
+<form>
+  <mat-form-field>
+    <input matInput placeholder="Knowledge name" class="knowledgeName" #knowledgeName />
+  </mat-form-field>
+  <button mat-raised-button color="primary" class="botonCrear" (click)="saveKnowledge(knowledgeName.value); knowledgeName.value=''">Create</button>
+  <button mat-raised-button color="secundary" class="botonDevolver" (click)="goBack()">Go Back</button>
+</form>

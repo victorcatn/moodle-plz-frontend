@@ -11,6 +11,9 @@ import {GroupCreationComponent} from './group/group-creation/group-creation.comp
 import { SkillModelComponent } from './skill/skill-model/skill-model.component';
 import { SkillDetailComponent } from './skill/skill-detail/skill-detail.component';
 import { CreateSkillComponent } from './skill/create-skill/create-skill.component';
+import { KnowledgeModelComponent } from './knowledge/knowledge-model/knowledge-model.component';
+import { CreateKnowledgeComponent } from './knowledge/create-knowledge/create-knowledge.component';
+import { EditSkillComponent } from './skill/edit-skill/edit-skill.component';
 
 const routes: Routes = [
   { path: 'staffmember', component: StaffmemberListComponent },
@@ -21,7 +24,10 @@ const routes: Routes = [
   { path: 'groups/:id', component: GroupDetailComponent },
   { path: 'skills', component: SkillModelComponent },
   { path: 'skills/create', component: CreateSkillComponent },
-  { path: 'skills/:id', component: SkillDetailComponent },
+  { path: 'skills/:id/', component: SkillDetailComponent },
+  { path: 'skills/:id/edit', component: EditSkillComponent },
+  { path: 'knowledges', component: KnowledgeModelComponent },
+  { path: 'knowledges/create', component: CreateKnowledgeComponent },
 ];
 
 @NgModule({
