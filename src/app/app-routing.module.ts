@@ -11,11 +11,13 @@ import {GroupCreationComponent} from './group/group-creation/group-creation.comp
 import { SkillModelComponent } from './skill/skill-model/skill-model.component';
 import { SkillDetailComponent } from './skill/skill-detail/skill-detail.component';
 import { CreateSkillComponent } from './skill/create-skill/create-skill.component';
+import {ProjectCreationComponent} from "./project/project-creation/project-creation.component";
 
 const routes: Routes = [
   { path: 'staffmember', component: StaffmemberListComponent },
-  { path: 'project', component: ProjectModelComponent },
-  { path: 'project/:id', component: ProjectDetailComponent },
+  { path: 'projects', component: ProjectModelComponent },
+  { path: 'projects/id/:id', component: ProjectDetailComponent },
+  { path: 'projects/create', component: ProjectCreationComponent },
   { path: 'groups', component: GroupListComponent },
   { path: 'groups/create', component: GroupCreationComponent },
   { path: 'groups/:id', component: GroupDetailComponent },

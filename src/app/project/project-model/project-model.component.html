@@ -1,22 +1,29 @@
-<h2>My Projects</h2>
+<h2>Projects</h2>
 
-<div class="column">
-  <label>Project name:
-    <input [(ngModel)]="project.name" />
-  </label>
-  <!-- (click) passes input value to add() and then clears the input -->
-  <button class="sm" (click)="add()">
-    Add
-  </button>
-</div>
+<mat-card *ngFor="let project of projects" class="project-card" routerLink="id/{{project.id}}">
+  <mat-card-title>{{project.name}}´s information</mat-card-title>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item>
+        project id:{{project.id}}
+      </mat-list-item>
+      <mat-list-item>
+        assigned group: {{project.assignedGroupId}}
+      </mat-list-item>
+      <mat-list-item>
+        start date: {{project.startDate}}
+      </mat-list-item>
+      <mat-list-item>
+        end date: {{project.endDate}}
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>edit</button>
+    <button mat-button (click)="delete(project)" >delete</button>
+  </mat-card-actions>
+</mat-card>
 
-<ul class="projects">
-  <li *ngFor="let project of projects">
-    <a routerLink="/project/{{project.id}}">
-      <span class="badge">{{project.id}}</span>
-      <span class="desc">{{project.name}} </span>
-    </a>
-    <button class="delete" title="delete project"
-            (click)="delete(project)">x</button>
-  </li>
-</ul>
+<button mat-fab color="primary" class="fav-add-project" routerLink="create">
+  <mat-icon aria-label="Add new project">add</mat-icon>
+</button>
