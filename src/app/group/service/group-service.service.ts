@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class GroupService {
 
-  private groupUrl = 'http://localhost:8080/group';  // URL to web api
+  private groupUrl = 'http://localhost:8080/groups';  // URL to web api
 
   constructor(
     private http: HttpClient) { }

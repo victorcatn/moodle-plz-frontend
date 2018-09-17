@@ -19,9 +19,19 @@
       <ng-template matStepLabel>Choose the members</ng-template>
       <mat-form-field>
         <mat-select placeholder="Members" formControlName="membersSelection" name="members" multiple>
-          <mat-option *ngFor="let member of members" [value]="member.id">
+          <!--<mat-option *ngFor="let member of members" [value]="member.id">
             {{member.name}}
-          </mat-option>
+          </mat-option>-->
+          <mat-optgroup label="suggested" >
+            <mat-option *ngFor="let member of suggestedMembers" [value]="member.id">
+              {{member.name}}
+            </mat-option>
+          </mat-optgroup>
+          <mat-optgroup label="other" >
+            <mat-option *ngFor="let member of otherMembers" [value]="member.id">
+              {{member.name}}
+            </mat-option>
+          </mat-optgroup>
         </mat-select>
       </mat-form-field>
       <div>

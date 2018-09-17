@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class StaffMemberService {
 
-  private staffMembersUrl = 'http://localhost:8080/staffmember';  // URL to web api
+  private staffMembersUrl = 'http://localhost:8080/staffmembers';  // URL to web api
 
   constructor(
     private http: HttpClient) { }
