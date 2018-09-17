@@ -1,4 +1,4 @@
-.mat-button-edit{
+.fav-edit-project{
   position:fixed;
   bottom: 70px;
   right: 25px;
@@ -61,12 +61,3 @@
   margin-right: 10px;
 }
 
-button {
-  background-color: #eee;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  cursor: hand;
-  font-family: Arial;
-}

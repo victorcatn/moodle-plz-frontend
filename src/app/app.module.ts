@@ -1,8 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { MenubarComponent } from './components/menubar/menubar.component';
+import {AppComponent} from './app.component';
+import {MenubarComponent} from './components/menubar/menubar.component';
 import {CdkTableModule} from '@angular/cdk/table';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
@@ -32,26 +32,30 @@ import {
   MatSlideToggleModule,
   MatSnackBarModule,
   MatSortModule,
-  MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule
+  MatStepperModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule
 } from '@angular/material';
-import { AppRoutingModule } from './/app-routing.module';
-import { ProjectModelComponent } from './project/project-model/project-model.component';
-import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
-import { SkillDetailComponent } from './skill/skill-detail/skill-detail.component';
-import { SkillModelComponent } from './skill/skill-model/skill-model.component';
-import { KnowledgeModelComponent } from './knowledge/knowledge-model/knowledge-model.component';
-import { KnowledgeDetailComponent } from './knowledge/knowledge-detail/knowledge-detail.component';
-import { ProjectSearchComponent } from './project/project-search/project-search.component';
+import {AppRoutingModule} from './/app-routing.module';
+import {ProjectModelComponent} from './project/project-model/project-model.component';
+import {ProjectDetailComponent} from './project/project-detail/project-detail.component';
+import {SkillDetailComponent} from './skill/skill-detail/skill-detail.component';
+import {SkillModelComponent} from './skill/skill-model/skill-model.component';
+import {KnowledgeModelComponent} from './knowledge/knowledge-model/knowledge-model.component';
+import {KnowledgeDetailComponent} from './knowledge/knowledge-detail/knowledge-detail.component';
+import {ProjectSearchComponent} from './project/project-search/project-search.component';
 import {GroupListComponent} from './group/group-list/group-list.component';
 import {GroupDetailComponent} from './group/group-detail/group-detail.component';
 import {MessagesComponent} from "./components/messages/messages.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import { GroupCreationComponent } from './group/group-creation/group-creation.component';
-import { StaffmemberListComponent } from './staffmember/staffmember-list/staffmember-list.component';
-import { CreateSkillComponent } from './skill/create-skill/create-skill.component';
+import {GroupCreationComponent} from './group/group-creation/group-creation.component';
+import {StaffmemberListComponent} from './staffmember/staffmember-list/staffmember-list.component';
+import {CreateSkillComponent} from './skill/create-skill/create-skill.component';
 import {ProjectCreationComponent} from "./project/project-creation/project-creation.component";
-
+import {ProjectEditComponent} from './project/project-edit/project-edit.component';
 
 
 @NgModule({
@@ -72,6 +76,7 @@ import {ProjectCreationComponent} from "./project/project-creation/project-creat
     StaffmemberListComponent,
     CreateSkillComponent,
     ProjectCreationComponent,
+    ProjectEditComponent,
 
   ],
   imports: [
