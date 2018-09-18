@@ -21,34 +21,34 @@
 
   <mat-card-content>
     <mat-accordion class="mat-accordion">
-      <mat-expansion-panel>
+      <mat-expansion-panel *ngIf="skillAll" >
         <mat-expansion-panel-header>
           <mat-panel-title>Skills</mat-panel-title>
           <mat-panel-description>Show needed skills</mat-panel-description>
         </mat-expansion-panel-header>
 
         <mat-list role="list">
-          <mat-list-item *ngFor="let skill of project.neededSkills">
+          <mat-list-item *ngFor="let skill of skillAll">
             <ul class="p-list">
               <li>
-                <span class="badge">Id: {{skill.skillId}}</span>Score: {{skill.score}}
+                <span class="badge">Id: {{skill.skillId}}</span>Score: {{skill.score}} | Name: {{skill.name}}
               </li>
             </ul>
           </mat-list-item>
         </mat-list>
       </mat-expansion-panel>
 
-      <mat-expansion-panel>
+      <mat-expansion-panel *ngIf="knowledgeAll">
         <mat-expansion-panel-header>
           <mat-panel-title>Knowledges</mat-panel-title>
           <mat-panel-description>Show needed knowledges</mat-panel-description>
         </mat-expansion-panel-header>
 
         <mat-list role="list">
-          <mat-list-item *ngFor="let knowledge of project.neededKnowledges">
+          <mat-list-item *ngFor="let knowledge of knowledgeAll">
             <ul class="p-list">
               <li>
-                <span class="badge">Id: {{knowledge.knowledgeId}}</span>Score: {{knowledge.score}}
+                <span class="badge">Id: {{knowledge.knowledgeId}}</span>Score: {{knowledge.score}} | Name: {{knowledge.name}}
               </li>
             </ul>
           </mat-list-item>
@@ -63,7 +63,7 @@
 
 </mat-card>
 
-<button mat-fab color ="primary" class="fav-edit-project">
+<button mat-fab color ="primary" class="fav-edit-project" routerLink="../../{{project.id}}/edit" *ngIf="project">
   <mat-icon aria-label="Edit project">edit</mat-icon>
 </button>
 

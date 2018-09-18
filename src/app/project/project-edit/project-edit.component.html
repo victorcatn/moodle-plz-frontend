@@ -1,3 +1,14 @@
-<p>
-  project-edit works!
-</p>
+<mat-card class="mat-card">
+  <mat-card-title>Project name {{project.name}}</mat-card-title>
+  <mat-card-content>
+    <mat-form-field class="mat-form-field-input">
+      <input matInput placeholder="register project name" type="text" required [(ngModel)]="project.name" class="mat-input-element">
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<button mat-fab color="primary" class="fav-save-project" (click)="saveProject()" routerLink="../../">
+  <mat-icon aria-label="edit project">save</mat-icon>
+</button>
+
+

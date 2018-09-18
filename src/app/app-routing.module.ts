@@ -17,6 +17,7 @@ import {CreateKnowledgeComponent} from './knowledge/create-knowledge/create-know
 import {EditSkillComponent} from './skill/edit-skill/edit-skill.component';
 import {CreateStaffmemberComponent} from './staffmember/create-staffmember/create-staffmember.component';
 import {StaffmemberDetailComponent} from './staffmember/staffmember-detail/staffmember-detail.component';
+import {ProjectEditComponent} from "./project/project-edit/project-edit.component";
 
 const routes: Routes = [
   { path: 'staffmembers', component: StaffmemberListComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'staffmembers/:id', component: StaffmemberDetailComponent },
   { path: 'projects', component: ProjectModelComponent },
   { path: 'projects/:id/detail', component: ProjectDetailComponent },
+  { path: 'projects/:id/edit', component: ProjectEditComponent },
   { path: 'projects/create', component: ProjectCreationComponent },
   { path: 'groups', component: GroupListComponent },
   { path: 'groups/create', component: GroupCreationComponent },

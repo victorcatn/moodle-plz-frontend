@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, of} from "rxjs";
 import {Project} from "../Project";
@@ -21,7 +21,7 @@ export class ProjectServiceService {
     private messageService: MessageService) { }
 
   /** GET heroes from the server */
-  getProjects (): Observable<Project[]> {
+  getProjects () {
     return this.http.get<Project[]>(this.projectUrl)
       .pipe(
         tap(projects => this.log('fetched projects')),
