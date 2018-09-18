@@ -1,3 +1,13 @@
-<p>
-  staffmember-list works!
-</p>
+<h2>Staff Members</h2>
+
+<mat-list>
+  <mat-list-item *ngFor="let staffMember of staffMembers" routerLink="{{staffMember.id}}" class="staffMemberName">
+    <h4 mat-line rout>{{staffMember.name}} {{staffMember.lastName}}</h4>
+    <p mat-line>{{staffMember.email}}</p>
+    <mat-divider class="mat-divider"></mat-divider>
+  </mat-list-item>
+</mat-list>
+
+<button mat-fab color="primary" class="fav-add-group" routerLink="create">
+  <mat-icon aria-label="Add new staffMember">add</mat-icon>
+</button>

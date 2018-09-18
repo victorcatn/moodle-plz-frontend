@@ -1,3 +1,13 @@
-<p>
-  knowledge-model works!
-</p>
+<h2>Knowledge area</h2>
+
+<mat-card *ngFor="let knowledge of knowledges" class="group-card">
+  <mat-card-title routerLink="{{knowledge.id}}" class="knowledgeTitle">{{knowledge.name}}</mat-card-title>
+  <mat-card-actions>
+    <button mat-button routerLink="{{knowledge.id}}/edit">Edit</button>
+    <button mat-button (click)="delete(knowledge)">Delete</button>
+  </mat-card-actions>
+</mat-card>
+
+<button mat-fab color="primary" class="fav-add-group" routerLink="create">
+  <mat-icon aria-label="Add new knowledge">add</mat-icon>
+</button>

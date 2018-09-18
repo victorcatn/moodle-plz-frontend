@@ -3,7 +3,7 @@
 <mat-card *ngFor="let skill of skills" class="group-card">
   <mat-card-title routerLink="{{skill.id}}" class="skillTitle">{{skill.name}}</mat-card-title>
   <mat-card-actions>
-    <button mat-button>Edit</button>
+    <button mat-button routerLink="{{skill.id}}/edit">Edit</button>
     <button mat-button (click)="delete(skill)">Delete</button>
   </mat-card-actions>
 </mat-card>

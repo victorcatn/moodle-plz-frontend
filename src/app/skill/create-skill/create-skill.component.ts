@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Skill } from '../Skill';
 import { SkillServiceService } from '../service/skill-service.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-skill',
@@ -17,7 +18,7 @@ export class CreateSkillComponent implements OnInit {
     name:''
   };
 
-  constructor(private skillService: SkillServiceService) { }
+  constructor(private skillService: SkillServiceService, private location: Location) { }
 
   ngOnInit() {
     this.getSkills();
@@ -28,16 +29,17 @@ export class CreateSkillComponent implements OnInit {
       .subscribe(skills => this.skills = skills);
   }
 
-  saveSkill(): void{
-    if (!this.skill.name) { return; }
-    this.skillService.addSkill(this.skill)
+  saveSkill(name: string): void{
+    name = name.trim();
+    if (!name) { return; }
+    this.skillService.addSkill({ id:null, name } as Skill)
       .subscribe(skill => {
         this.skills.push(skill);
-        this.skill = {
-          id:'',
-          name:'',
-        };
-    });
+        });
+  }
+
+  goBack(): void{
+    this.location.back();
   }
 
 }

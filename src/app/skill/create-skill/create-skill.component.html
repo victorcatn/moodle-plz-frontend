@@ -2,7 +2,8 @@
 
 <form>
   <mat-form-field>
-    <input matInput placeholder="Skill name" class="skillName" [(ngModel)]="skill.name">
+    <input matInput placeholder="Skill name" class="skillName" #skillName />
   </mat-form-field>
-  <button mat-raised-button color="primary" class="botonCrear" (click)="saveSkill()" routerLink="../">Create</button>
+  <button mat-raised-button color="primary" class="botonCrear" (click)="saveSkill(skillName.value); skillName.value=''">Create</button>
+  <button mat-raised-button color="secundary" class="botonDevolver" (click)="goBack()">Go Back</button>
 </form>

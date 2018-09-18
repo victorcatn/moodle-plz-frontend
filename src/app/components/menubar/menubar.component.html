@@ -15,12 +15,38 @@
         <mat-icon mat-list-icon>home</mat-icon>
         <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
       </mat-list-item>
+      
+      <a mat-list-item routerLink="staffmembers">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Staff Members</span>
+        <mat-icon mat-list-icon>person</mat-icon>
+      </a>
+
+      <a mat-list-item routerLink="project">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Projects</span>
+        <mat-icon mat-list-icon>assignment</mat-icon>
+      </a>
+
+      <a mat-list-item routerLink="groups">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Groups</span>
+        <mat-icon mat-list-icon>group</mat-icon>
+      </a>
+
+      <a mat-list-item routerLink="skills">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Skills</span>
+        <mat-icon mat-list-icon>school</mat-icon>
+      </a>
+
+      <a mat-list-item routerLink="knowledges">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Knowledges</span>
+        <mat-icon mat-list-icon>bookmarks</mat-icon>
+      </a>
 
       <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
         <a mat-list-item href="projects">Projects</a>
         <a mat-list-item href="staffmember">Staff members</a>
         <a mat-list-item href="groups">Groups</a>
         <a mat-list-item href="skills">Skills</a>
+        <a mat-list-item href="knowledges">Knowledges</a>
         <mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
           <span class="full-width" *ngIf="isExpanded || isShowing">Nested Menu</span>
           <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>

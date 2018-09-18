@@ -27,18 +27,6 @@ export class SkillModelComponent implements OnInit {
       .subscribe(skills => this.skills = skills);
   }
 
-  /*add(): void {
-    if (!this.skill.name) { return; }
-    this.skillService.addSkill(this.skill)
-      .subscribe(skill => {
-        this.skills.push(skill);
-        this.skill = {
-          id:'',
-          name:''
-        };
-    });
-  }*/
-
   delete(skill: Skill): void {
     this.skills = this.skills.filter(h => h !== skill);
     this.skillService.deleteSkill(skill).subscribe();
