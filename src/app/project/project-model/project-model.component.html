@@ -1,6 +1,6 @@
 <h2>Projects</h2>
 
-<mat-card *ngFor="let project of projects" class="project-card" routerLink="id/{{project.id}}">
+<mat-card *ngFor="let project of projects" class="project-card" routerLink="{{project.id}}/detail">
   <mat-card-title>{{project.name}} information</mat-card-title>
   <mat-card-content>
     <mat-list>

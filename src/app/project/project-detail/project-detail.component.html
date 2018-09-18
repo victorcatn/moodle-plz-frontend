@@ -18,9 +18,6 @@
   </mat-grid-list>
   </mat-card-content>
 
-  <mat-card-content >
-    <mat-card-title> Assigned group:{{project.assignedGroupId}}</mat-card-title>
-  </mat-card-content>
 
   <mat-card-content>
     <mat-accordion class="mat-accordion">
@@ -33,7 +30,7 @@
         <mat-list role="list">
           <mat-list-item *ngFor="let skill of project.neededSkills">
             <ul class="p-list">
-              <li routerLink="../../../skills/{{skill.skillId}}">
+              <li>
                 <span class="badge">Id: {{skill.skillId}}</span>Score: {{skill.score}}
               </li>
             </ul>
@@ -50,7 +47,7 @@
         <mat-list role="list">
           <mat-list-item *ngFor="let knowledge of project.neededKnowledges">
             <ul class="p-list">
-              <li routerLink="../../../skills/{{knowledge.knowledgeId}}">
+              <li>
                 <span class="badge">Id: {{knowledge.knowledgeId}}</span>Score: {{knowledge.score}}
               </li>
             </ul>

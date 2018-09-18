@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Project} from "../Project";
 import {ProjectServiceService} from "../service/project-service.service";
@@ -8,7 +8,6 @@ import {Knowledge} from "../../knowledge/Knowledge";
 import {Skill} from "../../skill/Skill";
 import {SkillScore} from "../../skill/SkillScore";
 import {KnowledgeScore} from "../../knowledge/KnowledgeScore";
-import {Group} from "../../group/Group";
 
 
 @Component({
@@ -64,7 +63,7 @@ export class ProjectCreationComponent implements OnInit {
     });
 
     this.getSkills();
-    this.getKnowledges
+    this.getKnowledges();
   }
 
   /**
@@ -125,7 +124,9 @@ export class ProjectCreationComponent implements OnInit {
    * Take the values on the skillSelection form and take that like the needed knowldegs but without score
    */
   generateNeededKnowledges(): void{
+    console.log("hola")
     this.neededKnowledges = this.knowledgeSelection.value['knowledgeSelection'];
+    console.log(this.neededKnowledges)
   }
 
   /**
