@@ -1,11 +1,77 @@
-<div *ngIf="project">
-  <h2>{{project.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{project.id}}</div>
-  <div>
-    <label>name:
-      <input [(ngModel)]= project.name placeholder="name"/>
-    </label>
-  </div>
-  <button (click)="goBack()">go back</button>
-  <button (click)="save()">save</button>
-</div>
+<mat-card *ngIf="project">
+
+  <mat-card-title align="center">{{project.name}} details </mat-card-title>
+  <mat-card-content>
+  <mat-grid-list cols="2" rowHeight="130" class="mat-grid-tile-date">
+    <mat-grid-tile>
+  <mat-card *ngIf="project.startDate" class="mat-card-date">
+    <mat-card-title>Start date</mat-card-title>
+    <mat-card-content>{{project.startDate}}</mat-card-content>
+  </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+  <mat-card *ngIf="project.endDate" class="mat-card-date">
+    <mat-card-title>End date</mat-card-title>
+    <mat-card-content>{{project.endDate}}</mat-card-content>
+  </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+  </mat-card-content>
+
+  <mat-card-content >
+    <mat-card-title> Assigned group:{{project.assignedGroupId}}</mat-card-title>
+  </mat-card-content>
+
+  <mat-card-content>
+    <mat-accordion class="mat-accordion">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Skills</mat-panel-title>
+          <mat-panel-description>Show needed skills</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-list role="list">
+          <mat-list-item *ngFor="let skill of project.neededSkills">
+            <ul class="p-list">
+              <li routerLink="../../../skills/{{skill.skillId}}">
+                <span class="badge">Id: {{skill.skillId}}</span>Score: {{skill.score}}
+              </li>
+            </ul>
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Knowledges</mat-panel-title>
+          <mat-panel-description>Show needed knowledges</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-list role="list">
+          <mat-list-item *ngFor="let knowledge of project.neededKnowledges">
+            <ul class="p-list">
+              <li routerLink="../../../skills/{{knowledge.knowledgeId}}">
+                <span class="badge">Id: {{knowledge.knowledgeId}}</span>Score: {{knowledge.score}}
+              </li>
+            </ul>
+          </mat-list-item>
+
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+
+
+
+
+</mat-card>
+
+<button mat-fab color ="primary" class="fav-edit-project">
+  <mat-icon aria-label="Edit project">edit</mat-icon>
+</button>
+
+<mat-divider></mat-divider>
+<p>
+
+
+</p>
