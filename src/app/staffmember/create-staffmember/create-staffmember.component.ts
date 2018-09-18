@@ -99,7 +99,7 @@ export class CreateStaffmemberComponent implements OnInit {
 
   generateKnowledgeScore(): void{
     for(let idKnowledge of this.knowledges){
-      this.knowledgeScore.push({"id":idKnowledge.id,"score":Number((<HTMLInputElement>document.getElementById(idKnowledge.id.toString())).value)});
+      this.knowledgeScore.push({"knowledgeId":idKnowledge.id,"score":Number((<HTMLInputElement>document.getElementById(idKnowledge.id.toString())).value)});
     }
   }
 
