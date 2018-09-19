@@ -21,6 +21,7 @@ import {ProjectEditComponent} from "./project/project-edit/project-edit.componen
 import {CidimageComponent} from "./components/cidimage/cidimage.component";
 
 const routes: Routes = [
+  { path: '', component: CidimageComponent },
   { path: 'home', component: CidimageComponent },
   { path: 'staffmembers', component: StaffmemberListComponent },
   { path: 'staffmembers/create', component: CreateStaffmemberComponent },

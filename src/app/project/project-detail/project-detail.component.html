@@ -19,6 +19,7 @@
   </mat-card-content>
 
 
+
   <mat-card-content>
     <mat-accordion class="mat-accordion">
       <mat-expansion-panel *ngIf="skillAll" >
@@ -27,15 +28,15 @@
           <mat-panel-description>Show needed skills</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <mat-list role="list">
-          <mat-list-item *ngFor="let skill of skillAll">
-            <ul class="p-list">
-              <li>
-                <span class="badge">Id: {{skill.skillId}}</span>Score: {{skill.score}} | Name: {{skill.name}}
-              </li>
-            </ul>
-          </mat-list-item>
-        </mat-list>
+        <mat-card class="skill-card" *ngFor="let skill of skillAll">
+          <mat-card-title>{{skill.name}}</mat-card-title>
+          <mat-card-content>
+            Skill ID: {{skill.skillId}}
+          </mat-card-content>
+          <mat-card-content>
+            Needed score: {{skill.score}}
+          </mat-card-content>
+        </mat-card>
       </mat-expansion-panel>
 
       <mat-expansion-panel *ngIf="knowledgeAll">
@@ -44,16 +45,18 @@
           <mat-panel-description>Show needed knowledges</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <mat-list role="list">
-          <mat-list-item *ngFor="let knowledge of knowledgeAll">
-            <ul class="p-list">
-              <li>
-                <span class="badge">Id: {{knowledge.knowledgeId}}</span>Score: {{knowledge.score}} | Name: {{knowledge.name}}
-              </li>
-            </ul>
-          </mat-list-item>
+        <mat-card class="knowledge-card" *ngFor="let knowledge of knowledgeAll">
+          <mat-card-title>{{knowledge.name}}</mat-card-title>
+          <mat-card-content>
+            <mat-card-content>
+              Knowledge ID: {{knowledge.knowledgeId}}
+            </mat-card-content>
+            <mat-card-content>
+              Needed score: {{knowledge.score}}
+            </mat-card-content>
+          </mat-card-content>
+        </mat-card>
 
-        </mat-list>
       </mat-expansion-panel>
     </mat-accordion>
   </mat-card-content>

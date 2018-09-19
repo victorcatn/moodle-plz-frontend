@@ -60,4 +60,14 @@
   min-width: 40px;
   margin-right: 10px;
 }
+.skill-card{
+  display: inline-block;
+  width: 300px;
+  margin: 5px;
+}
+.knowledge-card{
+  display: inline-block;
+  width: 300px;
+  margin: 5px;
+}
 
