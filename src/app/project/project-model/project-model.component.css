@@ -1,8 +1,8 @@
 .project-card{
-  display: inline-block;
-  width: 300px;
-  margin: 5px;
-}
+   display: inline-block;
+   width: 300px;
+   margin: 5px;
+ }
 .fav-add-project{
   position:fixed;
   bottom: 70px;

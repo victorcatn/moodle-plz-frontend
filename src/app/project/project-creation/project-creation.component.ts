@@ -72,6 +72,8 @@ export class ProjectCreationComponent implements OnInit {
    * desactivated then assign null in these variables
    */
   saveProject():void{
+    this.generateKnowledgeScore();
+    this.generateSkillScore();
     this.project.name=this._projectName;
 
     if(this.slideStart){this.project.startDate=this._startDate;
@@ -87,8 +89,7 @@ export class ProjectCreationComponent implements OnInit {
 
 
     this.projectService.addProject(this.project)
-      .subscribe(project => {
-        this.project = new Project();
+      .subscribe(project => {this.project = null;
       });
   }
 
@@ -124,9 +125,7 @@ export class ProjectCreationComponent implements OnInit {
    * Take the values on the skillSelection form and take that like the needed knowldegs but without score
    */
   generateNeededKnowledges(): void{
-    console.log("hola")
     this.neededKnowledges = this.knowledgeSelection.value['knowledgeSelection'];
-    console.log(this.neededKnowledges)
   }
 
   /**

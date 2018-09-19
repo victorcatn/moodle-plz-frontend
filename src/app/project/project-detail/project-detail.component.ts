@@ -36,55 +36,51 @@ export class ProjectDetailComponent implements OnInit {
 
   ngOnInit(): void{
     this.getProject()
-    this.getSkillNames()
-    this.getKnowledgesNames()
   }
 
 
 
   getProject(): void {
+    /**
+     * Do a subscribe to a project, when have a project do a subscribe to getKnowledges
+     * and getSkills in order to take the name of the skills and knowledges needs in the project
+     */
     const id = this.route.snapshot.paramMap.get('id');
     this.projectService.getProject(id)
       .subscribe(project =>{
         this.project = project;
         this.skillScore = project.neededSkills;
         this.knowledgeScore = project.neededKnowledges;
+
+        this.skillService.getSkills().subscribe(skills => {
+          let skillAllList: SkillAll[] = [];
+          for(let skill of skills){
+            for(let skillS of this.skillScore){
+              if(skill.id == skillS.skillId){
+                skillAllList.push({skillId:skill.id, name:skill.name, score:skillS.score})
+              }
+            }
+          }
+          this.skillAll=skillAllList
+          skillAllList = []
+        });
+
+        this.knowledgeService.getKnowledges().subscribe(knowledges => {
+          let knowledgeAllList: KnowledgeAll[] = [];
+          for(let knowledge of knowledges){
+            for(let knowledgeS of this.knowledgeScore){
+              if(knowledge.id == knowledgeS.knowledgeId){
+                knowledgeAllList.push({knowledgeId:knowledge.id, name:knowledge.name, score:knowledgeS.score})
+              }
+            }
+          }
+          this.knowledgeAll=knowledgeAllList
+          knowledgeAllList = []
+        });
       });
+
+
   }
-
-  getSkillNames():void{
-    this.skillService.getSkills().subscribe(skills => {
-      let skillAllList: SkillAll[] = [];
-      for(let skill of skills){
-        for(let skillS of this.skillScore){
-          if(skill.id == skillS.skillId){
-            skillAllList.push({skillId:skill.id, name:skill.name, score:skillS.score})
-          }
-        }
-      }
-      this.skillAll=skillAllList
-      console.log(this.skillAll)
-      skillAllList = []
-    });
-  }
-
-  getKnowledgesNames():void{
-    this.knowledgeService.getKnowledges().subscribe(knowledges => {
-      let knowledgeAllList: KnowledgeAll[] = [];
-      for(let knowledge of knowledges){
-        for(let knowledgeS of this.knowledgeScore){
-          if(knowledge.id == knowledgeS.knowledgeId){
-            knowledgeAllList.push({knowledgeId:knowledge.id, name:knowledge.name, score:knowledgeS.score})
-          }
-        }
-      }
-      this.knowledgeAll=knowledgeAllList
-      console.log(this.knowledgeAll)
-      knowledgeAllList = []
-    });
-  }
-
-
 
 
 }

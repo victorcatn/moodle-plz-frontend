@@ -20,7 +20,7 @@ export class ProjectServiceService {
     private http: HttpClient,
     private messageService: MessageService) { }
 
-  /** GET heroes from the server */
+  /** GET projects from the server */
   getProjects () {
     return this.http.get<Project[]>(this.projectUrl)
       .pipe(
@@ -29,7 +29,7 @@ export class ProjectServiceService {
       );
   }
 
-  /** GET hero by id. Return `undefined` when id not found */
+  /** GET project by id. Return `undefined` when id not found */
   getProjectNo404<Data>(id: string): Observable<Project> {
     const url = `${this.projectUrl}/?id=${id}`;
     return this.http.get<Project[]>(url)
@@ -52,7 +52,7 @@ export class ProjectServiceService {
     );
   }
 
-  /* GET project whose fullName contains search term */
+  /** GET project whose fullName contains search term */
   searchProject(term: string): Observable<Project[]> {
     if (!term.trim()) {
       // if not search term, return empty project array.
@@ -70,11 +70,11 @@ export class ProjectServiceService {
   addProject (project: Project): Observable<Project> {
     return this.http.post<Project>(this.projectUrl, project, httpOptions).pipe(
       tap((customer: Project) => this.log(`added project w/ id=${customer.id}`)),
-      catchError(this.handleError<Project>('addHero'))
+      catchError(this.handleError<Project>('addProject'))
     );
   }
 
-  /** DELETE: delete the hero from the server */
+  /** DELETE: delete the project from the server */
   deleteProject (project: Project | number): Observable<Project> {
     const id = typeof project === 'number' ? project : project.id;
     const url = `${this.projectUrl}/${id}`;
@@ -87,7 +87,8 @@ export class ProjectServiceService {
 
   /** PUT: update the project on the server */
   updateProject (project: Project): Observable<any> {
-    return this.http.put(this.projectUrl, project, httpOptions).pipe(
+    const url = `${this.projectUrl}/${project.id}`;
+    return this.http.put(url, project, httpOptions).pipe(
       tap(_ => this.log(`updated project id=${project.id}`)),
       catchError(this.handleError<any>('updateProject'))
     );

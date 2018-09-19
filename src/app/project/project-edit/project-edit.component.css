@@ -3,3 +3,18 @@
   bottom: 70px;
   right: 25px;
 }
+.skill-card{
+  display: inline-block;
+  width: 300px;
+  margin: 5px;
+}
+.knowledge-card{
+  display: inline-block;
+  width: 300px;
+  margin: 5px;
+}
+.mat-form-field-input{
+  min-width: 300px;
+  max-width: 500px;
+  width: 100%;
+}

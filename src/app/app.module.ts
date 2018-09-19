@@ -60,6 +60,7 @@ import {CreateStaffmemberComponent} from './staffmember/create-staffmember/creat
 import {StaffmemberDetailComponent} from './staffmember/staffmember-detail/staffmember-detail.component';
 import {ProjectCreationComponent} from './project/project-creation/project-creation.component';
 import {ProjectEditComponent} from './project/project-edit/project-edit.component';
+import {CidimageComponent} from './components/cidimage/cidimage.component';
 
 
 @NgModule({
@@ -85,6 +86,7 @@ import {ProjectEditComponent} from './project/project-edit/project-edit.componen
     EditSkillComponent,
     CreateStaffmemberComponent,
     StaffmemberDetailComponent,
+    CidimageComponent,
 
   ],
   imports: [

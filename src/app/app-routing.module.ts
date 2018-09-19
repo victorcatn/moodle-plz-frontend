@@ -18,8 +18,10 @@ import {EditSkillComponent} from './skill/edit-skill/edit-skill.component';
 import {CreateStaffmemberComponent} from './staffmember/create-staffmember/create-staffmember.component';
 import {StaffmemberDetailComponent} from './staffmember/staffmember-detail/staffmember-detail.component';
 import {ProjectEditComponent} from "./project/project-edit/project-edit.component";
+import {CidimageComponent} from "./components/cidimage/cidimage.component";
 
 const routes: Routes = [
+  { path: 'home', component: CidimageComponent },
   { path: 'staffmembers', component: StaffmemberListComponent },
   { path: 'staffmembers/create', component: CreateStaffmemberComponent },
   { path: 'staffmembers/:id', component: StaffmemberDetailComponent },

@@ -66,13 +66,10 @@
         <mat-card-title>{{skill.name}} score</mat-card-title>
         <mat-card-content>
           <mat-form-field class="mat-form-field-input">
-          <input matInput type="number" placeholder="Score" min="10" max="100" [id]="skill.id" required>
+          <input matInput type="number" placeholder="Score 10-100" min="10" max="100" [id]="skill.id" required>
           </mat-form-field>
         </mat-card-content>
       </mat-card>
-      <div>
-        <button mat-button  (click)="generateSkillScore()" class="mat-button" color="primary">register skills</button>
-      </div>
     </form>
   </mat-step>
 
@@ -102,13 +99,10 @@
         <mat-card-title>{{knowledge.name}} score</mat-card-title>
         <mat-card-content>
           <mat-form-field class="mat-form-field-input">
-          <input matInput type="number" placeholder="Score" min="10" max="100" [id]="knowledge.id" required>
+          <input matInput type="number" placeholder="Score 10-100" min="10" max="100" [id]="knowledge.id" required>
           </mat-form-field>
         </mat-card-content>
       </mat-card>
-      <div>
-        <button mat-button  (click)="generateKnowledgeScore()" class="mat-button" color="primary">register knowledges</button>
-      </div>
     </form>
   </mat-step>
 

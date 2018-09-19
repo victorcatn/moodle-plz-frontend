@@ -10,10 +10,9 @@
 
     <mat-nav-list>
 
-      <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
+      <mat-list-item class="parent" routerLink="home">
         <span class="full-width" *ngIf="isExpanded || isShowing">Home</span>
         <mat-icon mat-list-icon>home</mat-icon>
-        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
       </mat-list-item>
       
       <a mat-list-item routerLink="staffmembers">
