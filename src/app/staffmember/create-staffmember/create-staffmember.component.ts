@@ -118,6 +118,8 @@ export class CreateStaffmemberComponent implements OnInit {
   }
 
   saveStaffMember(): void{
+    this.generateSkillScore();
+    this.staffMember.skills = this.skillScore;
     this.staffMemberService.addStaffMember(this.staffMember)
       .subscribe(staffMember => {this.staffMember = staffMember})
   }
