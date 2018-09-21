@@ -15,6 +15,7 @@
          </mat-grid-tile>
 
        <mat-grid-tile>
+         <mat-slide-toggle (toggleChange)="slideStartChange()" color="primary" [checked]="slideStart" *ngIf="editing"></mat-slide-toggle>
          <mat-form-field>
            <mat-label>Start date</mat-label>
            <input matInput [matDatepicker]="pickerStart" [(ngModel)]="newStartDate" class="mat-input-element" [disabled]="!editing || (editing && !slideStart)">
@@ -24,6 +25,7 @@
        </mat-grid-tile>
 
        <mat-grid-tile>
+         <mat-slide-toggle (toggleChange)="slideEndChange()" color="primary" [checked]="slideEnd" *ngIf="editing"></mat-slide-toggle>
        <mat-form-field>
          <mat-label>End date</mat-label>
          <input matInput [matDatepicker]="pickerEnd" [(ngModel)]="newEndDate" class="mat-input-element" [disabled]="!editing || (editing && !slideEnd)">
@@ -31,17 +33,6 @@
          <mat-datepicker #pickerEnd></mat-datepicker>
        </mat-form-field>
        </mat-grid-tile>
-
-       <mat-grid-tile *ngIf="editing">
-         <mat-slide-toggle (toggleChange)="slideStartChange()" color="primary" [checked]="slideStart"></mat-slide-toggle>
-       </mat-grid-tile>
-
-       <mat-grid-tile *ngIf="editing">
-         <mat-slide-toggle (toggleChange)="slideEndChange()" color="primary" [checked]="slideEnd"></mat-slide-toggle>
-       </mat-grid-tile>
-
-
-
 
      </mat-grid-list>
   </div>
@@ -68,7 +59,7 @@
             </mat-form-field>
           </mat-card-content>
           <mat-card-actions *ngIf="editing">
-            <button mat-mini-fab color ="primary" (click)="deleteSkill(skill.skillId)">
+            <button mat-mini-fab color ="primary" (click)="deleteSkill(skill.skillId)" *ngIf="canDeleteSkill">
               <mat-icon aria-label="Delete skill">
                 delete
               </mat-icon>
@@ -95,7 +86,7 @@
             </mat-form-field>
           </mat-card-content>
           <mat-card-actions *ngIf="editing">
-            <button mat-mini-fab color ="primary" (click)="deleteKnowledge(knowledge.knowledgeId)">
+            <button mat-mini-fab color ="primary" (click)="deleteKnowledge(knowledge.knowledgeId)" *ngIf="canDeleteKnowledge">
               <mat-icon aria-label="Delete skill">
                 delete
               </mat-icon>
@@ -114,14 +105,17 @@
   <div *ngIf="editing">
     <div>
       <h2>
-        <div>Add new needed skills
-        <mat-slide-toggle (toggleChange)="slideSkillChange()" color="primary"></mat-slide-toggle>
+        <div *ngIf="idMap">Add new needed skills
+        <mat-slide-toggle (toggleChange)="slideSkillChange()" color="primary" ></mat-slide-toggle>
+        </div>
+        <div *ngIf="!idMap">
+          Add needed skills
         </div>
       </h2>
 
 
       <div>
-      <mat-horizontal-stepper linear #stepper *ngIf="slideSkill">
+      <mat-horizontal-stepper linear #stepper *ngIf="slideSkill || !idMap">
         <mat-step [stepControl]="skillSelection">
           <form [formGroup]="skillSelection">
             <ng-template matStepLabel>Select skills</ng-template>
@@ -158,13 +152,16 @@
 
     <div>
       <h2>
-        <div>Add new needed knowledges
-          <mat-slide-toggle (toggleChange)="slideKnowledgeChange()" color="primary"></mat-slide-toggle>
+        <div *ngIf="idMap">Add new needed knowledges
+          <mat-slide-toggle (toggleChange)="slideKnowledgeChange()" color="primary" ></mat-slide-toggle>
+        </div>
+        <div *ngIf="!idMap">
+          Add needed knowledges
         </div>
       </h2>
 
       <div>
-        <mat-horizontal-stepper linear #stepper2 *ngIf="slideKnowledge">
+        <mat-horizontal-stepper linear #stepper2 *ngIf="slideKnowledge || !idMap">
           <mat-step [stepControl]="knowledgeSelection">
             <form [formGroup]="knowledgeSelection">
               <ng-template matStepLabel>Select knowledges</ng-template>
@@ -282,7 +279,7 @@
   <mat-icon aria-label="edit project">edit</mat-icon>
 </button>
 
-  <button mat-fab color="primary" class="fav-action-project" (click)="showChanguesInProject()" *ngIf="editing && !showing">
+  <button mat-fab color="primary" class="fav-action-project" (click)="showChangesInProject()" *ngIf="editing && !showing">
   <mat-icon aria-label="save">save</mat-icon>
 </button>
 
