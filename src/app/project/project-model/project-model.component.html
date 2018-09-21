@@ -1,6 +1,6 @@
 <h2>Projects</h2>
 
-<mat-card *ngFor="let project of projects" class="project-card" routerLink="{{project.id}}/detail">
+<mat-card *ngFor="let project of projects" class="project-card" routerLink="{{project.id}}">
   <mat-card-title>{{project.name}} information</mat-card-title>
   <mat-card-content>
     <mat-list>
@@ -16,11 +16,6 @@
     </mat-list>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-mini-fab color ="primary" routerLink="{{project.id}}/edit">
-      <mat-icon aria-label="Edit project">
-      edit
-      </mat-icon>
-    </button>
 
     <button mat-mini-fab (click)="delete(project)" color ="primary">
       <mat-icon aria-label="Delete project">

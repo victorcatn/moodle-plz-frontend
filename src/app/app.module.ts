@@ -61,6 +61,7 @@ import {StaffmemberDetailComponent} from './staffmember/staffmember-detail/staff
 import {ProjectCreationComponent} from './project/project-creation/project-creation.component';
 import {ProjectEditComponent} from './project/project-edit/project-edit.component';
 import {CidimageComponent} from './components/cidimage/cidimage.component';
+import {ProjectComponentComponent} from './project/project-component/project-component.component';
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import {CidimageComponent} from './components/cidimage/cidimage.component';
     CreateStaffmemberComponent,
     StaffmemberDetailComponent,
     CidimageComponent,
+    ProjectComponentComponent,
 
   ],
   imports: [

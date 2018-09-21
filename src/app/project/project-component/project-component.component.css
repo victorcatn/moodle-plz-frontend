@@ -1,0 +1,23 @@
+.fav-action-project{
+  position:fixed;
+  bottom: 70px;
+  right: 25px;
+}
+.mat-form-field-input{
+  min-width: 300px;
+  max-width: 500px;
+  width: 100%;
+}
+.mat-form-field-score{
+  min-width: 50px;
+  max-width: 150px;
+  width: 50%;
+}
+table{
+  width: 100%;
+}
+.mat-card{
+  display: inline-block;
+  width: 300px;
+  margin: 5px;
+}
