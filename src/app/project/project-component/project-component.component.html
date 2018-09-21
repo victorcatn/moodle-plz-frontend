@@ -9,7 +9,7 @@
          <mat-grid-tile colspan="2" rowspan="1">
              <mat-form-field class="mat-form-field-input">
                <mat-label>Project name</mat-label>
-               <input matInput type="text" required [(ngModel)]="project.name"
+               <input matInput type="text" required [(ngModel)]="name"
                       class="mat-input-element" [disabled]="!editing">
              </mat-form-field>
          </mat-grid-tile>
@@ -17,7 +17,7 @@
        <mat-grid-tile>
          <mat-form-field>
            <mat-label>Start date</mat-label>
-           <input matInput [matDatepicker]="pickerStart" [(ngModel)]="project.startDate" class="mat-input-element" [disabled]="!editing || (editing && !slideStart)">
+           <input matInput [matDatepicker]="pickerStart" [(ngModel)]="newStartDate" class="mat-input-element" [disabled]="!editing || (editing && !slideStart)">
            <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
            <mat-datepicker #pickerStart></mat-datepicker>
          </mat-form-field>
@@ -26,7 +26,7 @@
        <mat-grid-tile>
        <mat-form-field>
          <mat-label>End date</mat-label>
-         <input matInput [matDatepicker]="pickerEnd" [(ngModel)]="project.endDate" class="mat-input-element" [disabled]="!editing || (editing && !slideEnd)">
+         <input matInput [matDatepicker]="pickerEnd" [(ngModel)]="newEndDate" class="mat-input-element" [disabled]="!editing || (editing && !slideEnd)">
          <mat-datepicker-toggle matSuffix [for]="pickerEnd" ></mat-datepicker-toggle>
          <mat-datepicker #pickerEnd></mat-datepicker>
        </mat-form-field>
@@ -286,8 +286,8 @@
   <mat-icon aria-label="save">save</mat-icon>
 </button>
 
-  <button mat-fab color="primary" class="fav-action-project" (click)="saveProject()" *ngIf="showing">
-    <mat-icon aria-label="confirm">Check</mat-icon>
+  <button mat-fab color="primary" class="fav-action-project" routerLink="../" *ngIf="showing">
+    <mat-icon aria-label="confirm">check</mat-icon>
   </button>
 
 </div>

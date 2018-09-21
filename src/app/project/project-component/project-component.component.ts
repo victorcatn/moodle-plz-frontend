@@ -19,40 +19,71 @@ import {KnowledgeScore} from "../../knowledge/KnowledgeScore";
 })
 export class ProjectComponentComponent implements OnInit {
   @Input() project: Project;
-  String
 
 
+  /*Valores del proyecto*/
+  public name: String ='';
+  public newSkillScore: SkillScore[] = [];
+  public newKnowledgesScore: KnowledgeScore[] = [];
+  public newStartDate: Date = new Date();
+  public newEndDate: Date = new Date();
+
+
+
+
+  /*Obtienen el valor de neededSkills y neededKnowledges del proyecto cuando
+   *se envia un id por medio del url
+   */
   skillScore: SkillScore[];
-
   knowledgeScore: KnowledgeScore[];
+
+  /*Obtienen el id y el score de SkillScore y knowledgeScore, y el nombre lo obtienen
+   *en la funcion generateAll()
+   */
   skillAll: SkillAll[];
   knowledgeAll: KnowledgeAll[];
 
+  /*Seran las nuevas skills y knowledges necesarias del proyecto
+   *Nota: Solo son las skills y knowledges no las SkillScore o KnowledgeScore
+   *      por lo tanto estas solo se usan para crearlas
+   */
   public neededSkills: Skill[];
   public neededKnowledges: Knowledge[];
 
+  /*Obtienen todas las skills y knowledges registradas en el sistema para mostrarlas como
+   *eleccion si se desea agregar nuevas skills o knowledges
+   */
   public skills: Skill[];
   public knowledges: Knowledge[];
 
-  private newSkillScore: SkillScore[] = [];
-  private newKnowledgesScore: KnowledgeScore[] = [];
 
-  public idMap: boolean;
-  public editing: boolean = false;
-  public showing: boolean = false;
 
+
+
+  public idMap: boolean; //Indica si se envio un id por medio del url
+  public editing: boolean = false; //indica si se esta editiando o no
+  public showing: boolean = false; // Indica si se esta mostando el resultado de la edicion o creación
+
+  /*Formgroup necesarios para el control de los stepper
+   */
   public skillSelection: FormGroup;
   public knowledgeSelection: FormGroup;
   public skillScoreG: FormGroup;
   public knowledgeScoreG: FormGroup;
 
-
+  /*Indica si se le agregara o no fecha de inicio o fecha de finalizacion del proyecto
+   *Si el slide toggle esta en falso la fecha respectiva se pondra en null
+   */
   public slideStart:boolean = false;
   public slideEnd:boolean = false;
+
+  /*Indica si se le agregaran o no nuevas skill o nuevos knowledges
+   *si el slide respectivo esta en false entonces no se muestra el stepper para agregar nuevas necesidades
+   *si esta en true se muestra el stepper para agregar habilidades nuevas
+   */
   public slideSkill:boolean = false;
   public slideKnowledge:boolean = false;
 
-  public column: string[] = ['name','score'];
 
   constructor(private route: ActivatedRoute,
               private projectService: ProjectServiceService,
@@ -84,16 +115,36 @@ export class ProjectComponentComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id == null) {
       this.idMap = false;
-      this.editing = true;
+      if(!this.showing) {
+        this.editing = true;
+      }
+
       this.project = new Project();
+      this.project.name = this.name;
+      this.project.neededSkills = this.newSkillScore;
+      this.project.neededKnowledges = this.newKnowledgesScore;
+      this.project.startDate = this.newStartDate;
+      this.project.endDate = this.newEndDate;
+      if(this.showing){
+        this.skillScore = this.project.neededSkills;
+        this.knowledgeScore = this.project.neededKnowledges;
+        this.generateAll();
+      }
     }
     else{
       this.idMap = true;
-
       this.slideStart = true;
       this.slideEnd = true;
+
       this.projectService.getProject(id).subscribe(project => {
-        this.project = project;
+        if(!this.editing) {
+          this.project = project;
+          this.name = project.name;
+
+          this.newStartDate = project.startDate;
+          this.newEndDate = project.endDate;
+        }
+
         this.skillScore = project.neededSkills;
         this.knowledgeScore = project.neededKnowledges;
         this.generateAll();
@@ -136,62 +187,58 @@ export class ProjectComponentComponent implements OnInit {
 
   showChanguesInProject():void{
     this.showing = true;
+    this.editing = false;
     if(this.slideSkill) {
       this.generateSkillScore();
     }
     if(this.slideKnowledge) {
       this.generateKnowledgeScore();
     }
+
     if(this.idMap) {
-    if((this.idMap && !this.slideStart) || (!this.idMap && !this.slideStart)){
-      this.project.startDate = null;
-    }
-    if((this.idMap && !this.slideEnd) || (!this.idMap && !this.slideEnd)){
-      this.project.endDate = null;
-    }
+      if(!this.slideStart){
+        this.project.startDate = null;
+      }
+      else{
+        this.project.startDate = this.newStartDate;
+      }
+      if(!this.slideEnd){
+        this.project.endDate = null;
+      }
+      else{
+        this.project.endDate = this.newEndDate;
+      }
+
+      let newScoreSki: SkillScore[] = []
+      for(let skill of this.skillAll){
+        newScoreSki.push({skillId:skill.skillId, score:skill.score})
+      }
+      let newScoreKnw: KnowledgeScore[] = []
+      for(let knowledge of this.knowledgeAll){
+        newScoreKnw.push({knowledgeId:knowledge.knowledgeId, score:knowledge.score})
+      }
+
+      this.project.name = this.name;
+      this.project.neededSkills = newScoreSki.concat(this.newSkillScore);
+      this.project.neededKnowledges = newScoreKnw.concat(this.newKnowledgesScore);
 
 
-    let newScoreSki: SkillScore[] = []
-    for(let skill of this.skillAll){
-      newScoreSki.push({skillId:skill.skillId, score:skill.score})
-    }
-    let newScoreKnw: KnowledgeScore[] = []
-    for(let knowledge of this.knowledgeAll){
-      newScoreKnw.push({knowledgeId:knowledge.knowledgeId, score:knowledge.score})
-    }
+      this.updateProject();
 
-    this.project.neededSkills = newScoreSki.concat(this.newSkillScore);
-    this.project.neededKnowledges = newScoreKnw.concat(this.newKnowledgesScore);
-
-
-    this.saveProject()
     }else{
-
-      this.saveNewProject()
+      this.ngOnInit();
+      this.addProject();
     }
   }
 
-  saveProject():void{
+  updateProject():void{
 
     this.projectService.updateProject(this.project).
     subscribe(project => this.ngOnInit())
 
   }
 
-  saveNewProject():void{
-
-
-    if(!this.slideStart){
-      this.project.startDate = null
-    }
-
-    if(!this.slideEnd){
-      this.project.endDate=null;
-    }
-    this.project.neededSkills = this.newSkillScore;
-    this.project.neededKnowledges = this.newKnowledgesScore;
-    this.project.assignedGroupId = null;
-
+  addProject():void{
 
     this.projectService.addProject(this.project)
       .subscribe(project => {this.ngOnInit()
