@@ -5,13 +5,10 @@
   <mat-card-content>
     <mat-list>
       <mat-list-item>
-        Id:{{project.id}}
+        Start date: {{project.startDate | date : 'dd/MM/y'}}
       </mat-list-item>
       <mat-list-item>
-        Start date: {{project.startDate}}
-      </mat-list-item>
-      <mat-list-item>
-        End date: {{project.endDate}}
+        End date: {{project.endDate | date :'dd/MM/y'}}
       </mat-list-item>
     </mat-list>
   </mat-card-content>

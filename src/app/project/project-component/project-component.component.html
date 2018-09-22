@@ -2,6 +2,13 @@
 
 <div *ngIf="project && !showing">
   <h1 align="center">Project details</h1>
+  <p>
+
+  </p>
+  <mat-divider></mat-divider>
+  <p>
+
+  </p>
 
   <div>
      <mat-grid-list cols="2" rowHeight="6:1">
@@ -37,10 +44,7 @@
      </mat-grid-list>
   </div>
 
-  <mat-divider> </mat-divider>
-
-  <div>
-    <mat-accordion class="mat-accordion" *ngIf="skillAll || knowledgeAll">
+  <div class = "mat-expansion-edit">
 
       <mat-expansion-panel *ngIf="skillAll">
 
@@ -96,10 +100,12 @@
 
 
       </mat-expansion-panel>
-    </mat-accordion>
 
   </div>
 
+  <p>
+
+  </p>
   <mat-divider></mat-divider>
 
   <div *ngIf="editing">
@@ -197,6 +203,13 @@
     </div>
 
   </div>
+  <p>
+
+  </p>
+  <mat-divider></mat-divider>
+  <p>
+
+  </p>
 
 </div>
 
@@ -204,72 +217,80 @@
 <div *ngIf="project">
   <div>
   <h1 align="center">{{project.name}} details</h1>
-  <h2 align="left" *ngIf="project.startDate">Start date: {{project.startDate}}</h2>
-  <h2 align="left" *ngIf="project.endDate">End date: {{project.endDate}}</h2>
+    <p>
+
+    </p>
+    <mat-divider></mat-divider>
+    <mat-list>
+    <mat-list-item>
+      Start date: {{project.startDate | date : 'dd/MM/y'}}
+    </mat-list-item>
+    <mat-list-item>
+      End date: {{project.endDate | date :'dd/MM/y'}}
+    </mat-list-item>
+    </mat-list>
   </div>
 
-  <div>
-    <mat-accordion class="mat-accordion" *ngIf="skillAll || knowledgeAll">
+  <mat-divider></mat-divider>
 
-      <mat-expansion-panel *ngIf="skillAll">
-
-        <mat-expansion-panel-header>
-          <mat-panel-title>Skills</mat-panel-title>
-          <mat-panel-description>Show needed skills</mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <mat-card class="mat-card" *ngFor="let skill of skillAll">
-          <mat-card-title>{{skill.name}}</mat-card-title>
-          <mat-card-content>
-            <mat-label *ngIf="!editing">Score: {{skill.score}}</mat-label>
-            <mat-form-field class="mat-form-field-input" *ngIf="editing">
-              <input matInput placeholder="set score 10-100" type="number"  [(ngModel)]="skill.score" class="mat-input-element"
-                     min="10" max="100" required>
-            </mat-form-field>
-          </mat-card-content>
-          <mat-card-actions *ngIf="editing">
-            <button mat-mini-fab color ="primary" (click)="deleteSkill(skill.skillId)">
-              <mat-icon aria-label="Delete skill">
-                delete
-              </mat-icon>
-            </button>
-          </mat-card-actions>
-        </mat-card>
+  <div *ngIf="skillAll">
+    <h2>Needed skills</h2>
+    <table mat-table [dataSource]="skillAll" class="mat-elevation-z8">
 
 
-      </mat-expansion-panel>
+      <!-- Name Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let skill"> {{skill.name}} </td>
+      </ng-container>
 
-      <mat-expansion-panel *ngIf="knowledgeAll">
-        <mat-expansion-panel-header>
-          <mat-panel-title>Knowledges</mat-panel-title>
-          <mat-panel-description>Show needed knowledges</mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <mat-card class="mat-card" *ngFor="let knowledge of knowledgeAll">
-          <mat-card-title>{{knowledge.name}}</mat-card-title>
-          <mat-card-content>
-            <mat-label *ngIf="!editing">Score: {{knowledge.score}}</mat-label>
-            <mat-form-field class="mat-form-field-input" *ngIf="editing">
-              <input matInput placeholder="set score 10-100" type="number"  [(ngModel)]="knowledge.score" class="mat-input-element"
-                     min="10" max="100" required>
-            </mat-form-field>
-          </mat-card-content>
-          <mat-card-actions *ngIf="editing">
-            <button mat-mini-fab color ="primary" (click)="deleteKnowledge(knowledge.knowledgeId)">
-              <mat-icon aria-label="Delete skill">
-                delete
-              </mat-icon>
-            </button>
-          </mat-card-actions>
-        </mat-card>
+      <!-- Score Column -->
+      <ng-container matColumnDef="Score">
+        <th mat-header-cell *matHeaderCellDef> Score </th>
+        <td mat-cell *matCellDef="let skill"> {{skill.score}} </td>
+      </ng-container>
 
 
-      </mat-expansion-panel>
-    </mat-accordion>
+      <tr mat-header-row *matHeaderRowDef="['Name', 'Score']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['Name', 'Score'];"></tr>
+    </table>
+
+
+  </div>
+
+  <div *ngIf="knowledgeAll">
+    <h2>Needed knowledge</h2>
+
+    <table mat-table [dataSource]="knowledgeAll" class="mat-elevation-z8">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let knowledge"> {{knowledge.name}} </td>
+      </ng-container>
+
+      <!-- Score Column -->
+      <ng-container matColumnDef="Score">
+        <th mat-header-cell *matHeaderCellDef> Score </th>
+        <td mat-cell *matCellDef="let knowledge"> {{knowledge.score}} </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="['Name', 'Score']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['Name', 'Score'];"></tr>
+    </table>
+    <p>
+
+    </p>
+    <mat-divider></mat-divider>
+    <p>
+
+    </p>
 
   </div>
 
 </div>
+
 </div>
 
 
@@ -287,4 +308,11 @@
     <mat-icon aria-label="confirm">check</mat-icon>
   </button>
 
+  <button mat-fab color="primary" class="fav-cancel-back" routerLink="../" *ngIf="!showing">
+    <mat-icon aria-label="cancel"*ngIf="editing">clear</mat-icon>
+    <mat-icon aria-label="back" *ngIf="!editing">arrow_back</mat-icon>
+  </button>
+
 </div>
+
+

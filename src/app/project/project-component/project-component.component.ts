@@ -106,9 +106,7 @@ export class ProjectComponentComponent implements OnInit {
       knowledgeScoreG:[[], Validators.required]
     });
     this.getProject();
-
   }
-
 
   /**
    * getProject se divide en dos fases:
@@ -144,12 +142,8 @@ export class ProjectComponentComponent implements OnInit {
       }
     }
     else{
-      this.idMap = true
-      /*cuando se envio un proyecto para ser mostrado los slide toggle que controlan las fechas son activados
-      * para cuando se inicie la edicion del proyecto aparezcan las fechas del proyecto para ser editadas
-      * cuando los slide toggle estan en fals las fechas se ponen en null*/
-      this.slideStart = true;
-      this.slideEnd = true;
+      this.idMap = true;
+
 
       /*Se obtiene el proyecto desde el servicio get project y se subsribe a el cuando hay algun cambio*/
       this.projectService.getProject(id).subscribe(project => {
@@ -160,8 +154,28 @@ export class ProjectComponentComponent implements OnInit {
           this.project = project;
           this.name = project.name;
 
-          this.newStartDate = project.startDate;
-          this.newEndDate = project.endDate;
+          /*cuando se envio un proyecto para ser mostrado los slide toggle que controlan las fechas son activados
+          * para cuando se inicie la edicion del proyecto aparezcan las fechas del proyecto para ser editadas
+          * cuando los slide toggle estan en falso las fechas se ponen en null*/
+          if(!(this.project.startDate == null)) {
+            this.slideStart = true;
+            this.newStartDate = new Date(project.startDate);
+          }
+          else{
+            this.slideStart = false;
+            this.newStartDate = new Date();
+          }
+
+          if(!(this.project.endDate==null)) {
+            this.slideEnd = true;
+            this.newEndDate = new Date(project.endDate);
+          }
+          else{
+            this.slideStart = false;
+            this.newEndDate = new Date();
+          }
+
+
         }
 
         this.skillScore = project.neededSkills;
@@ -192,8 +206,7 @@ export class ProjectComponentComponent implements OnInit {
 
   /**Habilita mostrar el producto final y lo guarda*/
   showChangesInProject():void{
-    this.showing = true;
-    this.editing = false;
+
     if(this.slideSkill || !this.idMap) {
       this.generateSkillScore();
     }
@@ -203,10 +216,12 @@ export class ProjectComponentComponent implements OnInit {
 
     /**Si se esta modificando un proyecto*/
     if(this.idMap) {
+      this.showing = true;
+      this.editing = false;
       /*Se revisa si los slide toggle de las fechas estan desactivados, si lo estan
       * entonces la fecha respectiva es cambiada por un null, de lo contrario se le agregara
       * la fecha nueva, la cual puede ser tambien la fecha que tenia anteriormente
-      * TODO puede ser la fecha que el proyecto tenia anteriormente*/
+      */
       if(!this.slideStart){
         this.project.startDate = null;
       }
@@ -221,12 +236,12 @@ export class ProjectComponentComponent implements OnInit {
       }
 
       /*Se crea un lista de nuevas SkillScore y se une con las skillScore que tenia el proyecto anteriormente*/
-      let newScoreSki: SkillScore[] = []
+      let newScoreSki: SkillScore[] = [];
       for(let skill of this.skillAll){
         newScoreSki.push({skillId:skill.skillId, score:skill.score})
       }
       /*Se crea un lista de nuevas KnowledgeScore y se une con las knowledgeScore que tenia el proyecto anteriormente*/
-      let newScoreKnw: KnowledgeScore[] = []
+      let newScoreKnw: KnowledgeScore[] = [];
       for(let knowledge of this.knowledgeAll){
         newScoreKnw.push({knowledgeId:knowledge.knowledgeId, score:knowledge.score})
       }
@@ -240,7 +255,10 @@ export class ProjectComponentComponent implements OnInit {
       /*Se invoca la funcion actualizar proyecto*/
       this.updateProject();
 
-    }else{
+    }else {
+
+      this.showing = true;
+      this.editing = false;
 
       this.project.name = this.name;
       this.project.neededSkills = this.newSkillScore;
@@ -249,6 +267,7 @@ export class ProjectComponentComponent implements OnInit {
       this.project.endDate = this.newEndDate;
       /*Se invoca la funcion agregar proyecto*/
       this.addProject();
+
     }
   }
 
@@ -274,6 +293,7 @@ export class ProjectComponentComponent implements OnInit {
 
   /**
    * Genera las Skills y Knowledges del proyecto con su respectivo id, nombre y score
+   * TODO handle error when the user is creating a new project and don´t choose any skill or knowledge
    */
   generateAll():void{
     this.skillService.getSkills().subscribe(skills => {
@@ -304,8 +324,8 @@ export class ProjectComponentComponent implements OnInit {
           }
         }
       }
-      this.knowledgeAll = knowledgeAllList
-      knowledgeAllList = []
+      this.knowledgeAll = knowledgeAllList;
+      knowledgeAllList = [];
     });
   }
 
@@ -410,48 +430,28 @@ export class ProjectComponentComponent implements OnInit {
    * take the event of the slide of the start date
    */
   slideStartChange():void{
-    if(this.slideStart){
-      this.slideStart = false;
-    }
-    else{
-      this.slideStart = true;
-    }
+    this.slideStart = !this.slideStart;
   }
 
   /**
    * take the event of the slide of the end date
    */
   slideEndChange():void{
-    if(this.slideEnd){
-      this.slideEnd = false;
-    }
-    else{
-      this.slideEnd = true;
-    }
+    this.slideEnd = !this.slideEnd;
   }
 
   /**
    * take the event of the slide of the add new skill
    */
   slideSkillChange():void{
-    if(this.slideSkill){
-      this.slideSkill = false;
-    }
-    else{
-      this.slideSkill = true;
-    }
+    this.slideSkill = !this.slideSkill;
   }
 
   /**
    * take the event of the slide of the add new knowledge
    */
   slideKnowledgeChange():void{
-    if(this.slideKnowledge){
-      this.slideKnowledge = false;
-    }
-    else{
-      this.slideKnowledge = true;
-    }
+    this.slideKnowledge = !this.slideKnowledge;
   }
 
   /**
@@ -459,7 +459,7 @@ export class ProjectComponentComponent implements OnInit {
    * @param id skill id
    */
   deleteSkill(id: string):void{
-    let newSkillScore: SkillScore[] = []
+    let newSkillScore: SkillScore[] = [];
     for(let skill of this.skillScore){
       if(!(skill.skillId.toString() == id)){
         newSkillScore.push(skill)
@@ -474,7 +474,7 @@ export class ProjectComponentComponent implements OnInit {
    * @param id knowledge id
    */
   deleteKnowledge(id: string):void{
-    let newKmowledgeScore: KnowledgeScore[] = []
+    let newKmowledgeScore: KnowledgeScore[] = [];
     for(let knowledge of this.knowledgeScore){
       if(!(knowledge.knowledgeId.toString() == id)){
         newKmowledgeScore.push(knowledge)
