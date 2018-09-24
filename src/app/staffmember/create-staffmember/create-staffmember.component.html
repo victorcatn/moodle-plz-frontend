@@ -50,7 +50,23 @@
       </mat-card>
     </form>
     <div>
-      <button mat-button (click)="saveStaffMember()">Save</button>
+      <button mat-button (click)="generateSkillScore()">Next</button>
     </div>
+  </mat-step>
+
+  <mat-step [stepControl]="knowledgeSelection">
+    <form [formGroup]="knowledgeSelection">
+      <ng-template matStepLabel>Select the knowledges</ng-template>
+      <mat-form-field>
+        <mat-select placeholder="Knowledge" formControlName="knowledgeSelection" multiple required>
+          <mat-option *ngFor="let knowledge of knowledges" [value]="knowledge">
+            {{knowledge.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext class="matt-button" (click)="generateKnowledges()">Next</button>
+      </div> 
+    </form>
   </mat-step>
 </mat-horizontal-stepper>
