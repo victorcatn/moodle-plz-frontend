@@ -19,26 +19,27 @@ import {CidimageComponent} from "./components/cidimage/cidimage.component";
 import {ProjectComponentComponent} from "./project/project-component/project-component.component";
 
 const routes: Routes = [
-  {path: 'projects/create', component : ProjectComponentComponent},
-  {path: 'projects/:id', component : ProjectComponentComponent},
-
+  { path: 'projects/create', component : ProjectComponentComponent},
+  { path: 'projects/:id', component : ProjectComponentComponent},
+  { path: 'projects', component: ProjectListComponent },
 
   { path: '', component: CidimageComponent },
   { path: 'home', component: CidimageComponent },
+
   { path: 'staffmembers', component: StaffmemberListComponent },
   { path: 'staffmembers/create', component: CreateStaffmemberComponent },
   { path: 'staffmembers/:id', component: StaffmemberDetailComponent },
-  { path: 'projects', component: ProjectListComponent },
-
 
 
   { path: 'groups', component: GroupListComponent },
   { path: 'groups/create', component: GroupCreationComponent },
   { path: 'groups/:id', component: GroupDetailComponent },
+
   { path: 'skills', component: SkillModelComponent },
   { path: 'skills/create', component: CreateSkillComponent },
   { path: 'skills/:id/', component: SkillDetailComponent },
   { path: 'skills/:id/edit', component: EditSkillComponent },
+
   { path: 'knowledges', component: KnowledgeModelComponent },
   { path: 'knowledges/create', component: CreateKnowledgeComponent },
 ];
