@@ -145,7 +145,7 @@
               <mat-card-title>{{skill.name}} score</mat-card-title>
               <mat-card-content>
                 <mat-form-field class="mat-form-field-input">
-                  <input matInput type="number" placeholder="Score 10-100" min="10" max="100" [id]="skill.id" >
+                  <input matInput type="number" placeholder="Score 10-100" min="10" max="100" [id]="skill.id" value="10">
                 </mat-form-field>
               </mat-card-content>
             </mat-card>
@@ -191,7 +191,7 @@
                 <mat-card-title>{{knowledge.name}} score</mat-card-title>
                 <mat-card-content>
                   <mat-form-field class="mat-form-field-input">
-                    <input matInput type="number" placeholder="Score 10-100" min="10" max="100" [id]="knowledge.id">
+                    <input matInput type="number" placeholder="Score 10-100" min="10" max="100" [id]="knowledge.id" value="10">
                   </mat-form-field>
                 </mat-card-content>
               </mat-card>
@@ -300,7 +300,7 @@
   <mat-icon aria-label="edit project">edit</mat-icon>
 </button>
 
-  <button mat-fab color="primary" class="fav-action-project" (click)="showChangesInProject()" *ngIf="editing && !showing">
+  <button mat-fab color="primary" class="fav-action-project" (click)="saveAndShowProject()" *ngIf="editing && !showing">
   <mat-icon aria-label="save">save</mat-icon>
 </button>
 

@@ -11,6 +11,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Skill} from "../../skill/Skill";
 import {Knowledge} from "../../knowledge/Knowledge";
 import {KnowledgeScore} from "../../knowledge/KnowledgeScore";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-project-component',
@@ -89,7 +90,8 @@ export class ProjectComponentComponent implements OnInit {
               private projectService: ProjectServiceService,
               private skillService: SkillServiceService,
               private knowledgeService: KnowledgeServiceService,
-              private _formBuilder: FormBuilder
+              private _formBuilder: FormBuilder,
+              public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -116,8 +118,10 @@ export class ProjectComponentComponent implements OnInit {
    */
   getProject(): void {
     const id = this.route.snapshot.paramMap.get('id');
+    /*Si no hay id se esta creando un proyecto nuevo*/
     if (id == null) {
       this.idMap = false;
+
       /*Control de fase "mostrar" (feedback), si el resultado final se esta mostrando al usuario entonces 
       no se debe estar en modo editando por lo tanto si se es un proyecto nuevo y no se esta mostrando, se debe estar 
       en modo editando*/
@@ -205,70 +209,79 @@ export class ProjectComponentComponent implements OnInit {
   }
 
   /**Habilita mostrar el producto final y lo guarda*/
-  showChangesInProject():void{
+  saveAndShowProject():void{
 
-    if(this.slideSkill || !this.idMap) {
-      this.generateSkillScore();
-    }
-    if(this.slideKnowledge || !this.idMap) {
-      this.generateKnowledgeScore();
-    }
+    /*Se revisa que se cumplan los requisitos de creacion y modificacion del proyecto*/
+    if(this.reviewRequirements()) {
 
-    /**Si se esta modificando un proyecto*/
-    if(this.idMap) {
-      this.showing = true;
-      this.editing = false;
-      /*Se revisa si los slide toggle de las fechas estan desactivados, si lo estan
-      * entonces la fecha respectiva es cambiada por un null, de lo contrario se le agregara
-      * la fecha nueva, la cual puede ser tambien la fecha que tenia anteriormente
-      */
-      if(!this.slideStart){
-        this.project.startDate = null;
+      /*Si el usuario esta creando un proyecto nuevo o si desea agregar nuevas skills o knowledges se deben crear las
+      skillScore y los knowledgeScore*/
+      if (this.slideSkill || !this.idMap) {
+        this.generateSkillScore();
       }
-      else{
+      if (this.slideKnowledge || !this.idMap) {
+        this.generateKnowledgeScore();
+      }
+
+      /**Si se esta modificando un proyecto*/
+      if (this.idMap) {
+        this.showing = true;
+        this.editing = false;
+        /*Se revisa si los slide toggle de las fechas estan desactivados, si lo estan
+        * entonces la fecha respectiva es cambiada por un null, de lo contrario se le agregara
+        * la fecha nueva, la cual puede ser tambien la fecha que tenia anteriormente
+        */
+        if (!this.slideStart) {
+          this.project.startDate = null;
+        }
+        else {
+          this.project.startDate = this.newStartDate;
+        }
+        if (!this.slideEnd) {
+          this.project.endDate = null;
+        }
+        else {
+          this.project.endDate = this.newEndDate;
+        }
+
+        /*Se crea un lista de nuevas SkillScore y se une con las skillScore que tenia el proyecto anteriormente*/
+        let newScoreSki: SkillScore[] = [];
+        for (let skill of this.skillAll) {
+          newScoreSki.push({skillId: skill.skillId, score: skill.score})
+        }
+        /*Se crea un lista de nuevas KnowledgeScore y se une con las knowledgeScore que tenia el proyecto anteriormente*/
+        let newScoreKnw: KnowledgeScore[] = [];
+        for (let knowledge of this.knowledgeAll) {
+          newScoreKnw.push({knowledgeId: knowledge.knowledgeId, score: knowledge.score})
+        }
+
+        /*Se cambia los valores del proyecto por los valores en las variables del formulario*/
+        this.project.name = this.name;
+        this.project.neededSkills = newScoreSki.concat(this.newSkillScore);
+        this.project.neededKnowledges = newScoreKnw.concat(this.newKnowledgesScore);
+
+
+        /*Se invoca la funcion actualizar proyecto*/
+        this.updateProject();
+
+      }
+      /**Si se esta creando un proyecto nuevo*/
+      else {
+
+        this.showing = true;
+        this.editing = false;
+
+        this.project.name = this.name;
+        this.project.neededSkills = this.newSkillScore;
+        this.project.neededKnowledges = this.newKnowledgesScore;
         this.project.startDate = this.newStartDate;
-      }
-      if(!this.slideEnd){
-        this.project.endDate = null;
-      }
-      else{
         this.project.endDate = this.newEndDate;
+        /*Se invoca la funcion agregar proyecto*/
+        this.addProject();
+
       }
-
-      /*Se crea un lista de nuevas SkillScore y se une con las skillScore que tenia el proyecto anteriormente*/
-      let newScoreSki: SkillScore[] = [];
-      for(let skill of this.skillAll){
-        newScoreSki.push({skillId:skill.skillId, score:skill.score})
-      }
-      /*Se crea un lista de nuevas KnowledgeScore y se une con las knowledgeScore que tenia el proyecto anteriormente*/
-      let newScoreKnw: KnowledgeScore[] = [];
-      for(let knowledge of this.knowledgeAll){
-        newScoreKnw.push({knowledgeId:knowledge.knowledgeId, score:knowledge.score})
-      }
-
-      /*Se cambia los valores del proyecto por los valores en las variables del formulario*/
-      this.project.name = this.name;
-      this.project.neededSkills = newScoreSki.concat(this.newSkillScore);
-      this.project.neededKnowledges = newScoreKnw.concat(this.newKnowledgesScore);
-
-
-      /*Se invoca la funcion actualizar proyecto*/
-      this.updateProject();
-
-    }else {
-
-      this.showing = true;
-      this.editing = false;
-
-      this.project.name = this.name;
-      this.project.neededSkills = this.newSkillScore;
-      this.project.neededKnowledges = this.newKnowledgesScore;
-      this.project.startDate = this.newStartDate;
-      this.project.endDate = this.newEndDate;
-      /*Se invoca la funcion agregar proyecto*/
-      this.addProject();
-
     }
+
   }
 
   /**
@@ -293,7 +306,7 @@ export class ProjectComponentComponent implements OnInit {
 
   /**
    * Genera las Skills y Knowledges del proyecto con su respectivo id, nombre y score
-   * TODO handle error when the user is creating a new project and don´t choose any skill or knowledge
+   *
    */
   generateAll():void{
     this.skillService.getSkills().subscribe(skills => {
@@ -484,5 +497,48 @@ export class ProjectComponentComponent implements OnInit {
     this.projectService.updateProject(this.project).subscribe(project => this.ngOnInit());
 
   }
+
+
+  /**
+   * Review if the new project have all the requirements like have skill, knowledge and name
+   * @return return true if have all requirements and false if don´t
+   */
+  reviewRequirements(): boolean {
+    let message: string = '';
+    let review: boolean = true;
+
+    if (this.name.trim().length == 0) {
+        message += 'The project must have name, \n';
+        review = false;
+    }
+
+      if ((this.neededSkills == undefined && !this.idMap)  || (this.neededSkills == undefined && this.slideSkill)) {
+        message += 'You have to register at least one needed skill, \n';
+        review = false;
+      }
+      if ((this.neededKnowledges == undefined && !this.idMap)  || (this.neededKnowledges == undefined && this.slideKnowledge)) {
+        message += 'You have to register at least one needed knowledge \n';
+        review = false;
+      }
+      if (!review) {
+        this.openSnackBar(message, "Accept")
+      }
+
+    return review;
+
+  }
+
+  /**
+   * Show a message to the user
+   * @param message the message to the user
+   * @param action the text of the button
+   */
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+    });
+  }
+
+
 
 }
