@@ -39,7 +39,7 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import {AppRoutingModule} from './/app-routing.module';
-import {ProjectModelComponent} from './project/project-model/project-model.component';
+import {ProjectListComponent} from './project/project-list/project-list.component';
 import {ProjectDetailComponent} from './project/project-detail/project-detail.component';
 import {SkillDetailComponent} from './skill/skill-detail/skill-detail.component';
 import {SkillModelComponent} from './skill/skill-model/skill-model.component';
@@ -68,7 +68,7 @@ import {ProjectComponentComponent} from './project/project-component/project-com
   declarations: [
     AppComponent,
     MenubarComponent,
-    ProjectModelComponent,
+    ProjectListComponent,
     ProjectDetailComponent,
     SkillDetailComponent,
     SkillModelComponent,

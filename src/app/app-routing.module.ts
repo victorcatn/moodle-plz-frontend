@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 
 import {StaffmemberListComponent} from "./staffmember/staffmember-list/staffmember-list.component";
-import {ProjectModelComponent} from "./project/project-model/project-model.component";
+import {ProjectListComponent} from "./project/project-list/project-list.component";
 import {GroupListComponent} from './group/group-list/group-list.component';
 import {GroupDetailComponent} from './group/group-detail/group-detail.component';
 import {GroupCreationComponent} from './group/group-creation/group-creation.component';
@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'staffmembers', component: StaffmemberListComponent },
   { path: 'staffmembers/create', component: CreateStaffmemberComponent },
   { path: 'staffmembers/:id', component: StaffmemberDetailComponent },
-  { path: 'projects', component: ProjectModelComponent },
+  { path: 'projects', component: ProjectListComponent },
 
 
 

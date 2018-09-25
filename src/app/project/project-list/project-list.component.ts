@@ -4,10 +4,10 @@ import {ProjectServiceService} from "../service/project-service.service";
 
 @Component({
   selector: 'app-project-model',
-  templateUrl: './project-model.component.html',
-  styleUrls: ['./project-model.component.css']
+  templateUrl: './project-list.component.html',
+  styleUrls: ['./project-list.component.css']
 })
-export class ProjectModelComponent implements OnInit {
+export class ProjectListComponent implements OnInit {
   projects: Project[];
 
   project: Project = {
