@@ -1,4 +1,4 @@
 export class KnowledgeScore{
-  id:String;
+  knowledgeId:String;
   score:number;
 }

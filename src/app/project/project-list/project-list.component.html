@@ -1,0 +1,27 @@
+<h2>Projects</h2>
+
+<mat-card *ngFor="let project of projects" class="project-card" routerLink="{{project.id}}">
+  <mat-card-title>{{project.name}} information</mat-card-title>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item>
+        Start date: {{project.startDate | date : 'dd/MM/y'}}
+      </mat-list-item>
+      <mat-list-item>
+        End date: {{project.endDate | date :'dd/MM/y'}}
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+
+    <button mat-mini-fab (click)="delete(project)" color ="primary">
+      <mat-icon aria-label="Delete project">
+        delete
+      </mat-icon>
+      </button>
+  </mat-card-actions>
+</mat-card>
+
+<button mat-fab color="primary" class="fav-add-project" routerLink="create">
+  <mat-icon aria-label="Add new project">add</mat-icon>
+</button>

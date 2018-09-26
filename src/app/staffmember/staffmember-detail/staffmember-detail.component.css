@@ -1,4 +1,4 @@
-h2{
+h1, h2{
     text-align: center;
 }
 
@@ -15,4 +15,46 @@ h2{
 
 .mat-line{
     margin-bottom: 9px!important;
+}
+
+.fav-action-staffMember{
+    position:fixed;
+    bottom: 70px;
+    right: 25px;
+}
+
+.fav-cancel-back{
+    position:fixed;
+    bottom: 70px;
+    right: 85px;
+}
+.mat-form-field-input{
+    min-width: 300px;
+    max-width: 500px;
+    width: 100%;
+}
+.mat-form-field-score{
+    min-width: 50px;
+    max-width: 150px;
+    width: 50%;
+}
+table{
+    width: 100%;
+}
+.mat-card{
+    display: inline-block;
+    width: 300px;
+    margin: 5px;
+}
+
+.mat-elevation-z8{
+width: 50%;
+margin-left: 25%;
+margin-right: 25%;
+}
+
+.mat-expansion-edit{
+width: 70%;
+margin-left: 15%;
+margin-right: 15%;
 }
