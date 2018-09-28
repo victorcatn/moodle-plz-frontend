@@ -5,8 +5,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {StaffmemberListComponent} from "./staffmember/staffmember-list/staffmember-list.component";
 import {ProjectListComponent} from "./project/project-list/project-list.component";
 import {GroupListComponent} from './group/group-list/group-list.component';
-import {GroupDetailComponent} from './group/group-detail/group-detail.component';
-import {GroupCreationComponent} from './group/group-creation/group-creation.component';
 import {SkillModelComponent} from './skill/skill-model/skill-model.component';
 import {SkillDetailComponent} from './skill/skill-detail/skill-detail.component';
 import {CreateSkillComponent} from './skill/create-skill/create-skill.component';
@@ -33,8 +31,8 @@ const routes: Routes = [
 
 
   { path: 'groups', component: GroupListComponent, },
-  { path: 'groups/create', component: GroupCreationComponent },
-  { path: 'groups/:id', component: GroupDetailComponent },
+  { path: 'groups/create', component: GroupComponentComponent },
+  { path: 'groups/:id', component: GroupComponentComponent },
   { path: 'groups/:id/edit', component: GroupComponentComponent },
 
   { path: 'skills', component: SkillModelComponent },
