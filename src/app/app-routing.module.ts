@@ -17,6 +17,7 @@ import {CreateStaffmemberComponent} from './staffmember/create-staffmember/creat
 import {StaffmemberDetailComponent} from './staffmember/staffmember-detail/staffmember-detail.component';
 import {CidimageComponent} from "./components/cidimage/cidimage.component";
 import {ProjectComponentComponent} from "./project/project-component/project-component.component";
+import {GroupComponentComponent} from './group/group-component/group-component.component';
 
 const routes: Routes = [
   { path: 'projects/create', component : ProjectComponentComponent},
@@ -31,9 +32,10 @@ const routes: Routes = [
   { path: 'staffmembers/:id', component: StaffmemberDetailComponent },
 
 
-  { path: 'groups', component: GroupListComponent },
+  { path: 'groups', component: GroupListComponent, },
   { path: 'groups/create', component: GroupCreationComponent },
   { path: 'groups/:id', component: GroupDetailComponent },
+  { path: 'groups/:id/edit', component: GroupComponentComponent },
 
   { path: 'skills', component: SkillModelComponent },
   { path: 'skills/create', component: CreateSkillComponent },
