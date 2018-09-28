@@ -57,6 +57,7 @@ import {StaffmemberDetailComponent} from './staffmember/staffmember-detail/staff
 import {CidimageComponent} from './components/cidimage/cidimage.component';
 import {ProjectComponentComponent} from './project/project-component/project-component.component';
 import { GroupComponentComponent } from './group/group-component/group-component.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { GroupComponentComponent } from './group/group-component/group-component
     CidimageComponent,
     ProjectComponentComponent,
     GroupComponentComponent,
+    LoginComponent,
 
   ],
   imports: [

@@ -16,8 +16,11 @@ import {StaffmemberDetailComponent} from './staffmember/staffmember-detail/staff
 import {CidimageComponent} from "./components/cidimage/cidimage.component";
 import {ProjectComponentComponent} from "./project/project-component/project-component.component";
 import {GroupComponentComponent} from './group/group-component/group-component.component';
+import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
+  {path: 'login', component: LoginComponent},
+
   { path: 'projects/create', component : ProjectComponentComponent},
   { path: 'projects/:id', component : ProjectComponentComponent},
   { path: 'projects', component: ProjectListComponent },
