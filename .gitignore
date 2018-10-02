@@ -11,7 +11,7 @@
 # IDEs and editors
 /.idea
 .project
-.iml
+*.iml
 .classpath
 .c9/
 *.launch
