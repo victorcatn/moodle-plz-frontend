@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, of} from "rxjs";
-import {StaffMember} from "../StaffMember";
-import {catchError, map, tap} from "rxjs/operators";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {StaffMember} from '../StaffMember';
+import {catchError, map, tap} from 'rxjs/operators';
 import { MessageService } from '../../message.service';
 
 
@@ -86,7 +86,10 @@ export class StaffMemberService {
 
   /** PUT: update the staffMember on the server */
   updateStaffMember (staffMember: StaffMember): Observable<any> {
-    return this.http.put(this.staffMembersUrl, staffMember, httpOptions).pipe(
+    const id = typeof staffMember === 'number' ? staffMember : staffMember.id;
+    const url = `${this.staffMembersUrl}/${id}`;
+
+    return this.http.put(url, staffMember, httpOptions).pipe(
       tap(_ => this.log(`updated staffMember id=${staffMember.id}`)),
       catchError(this.handleError<any>('StaffMember'))
     );

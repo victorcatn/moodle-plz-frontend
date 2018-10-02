@@ -38,14 +38,12 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
-import {AppRoutingModule} from './/app-routing.module';
-import {ProjectModelComponent} from './project/project-model/project-model.component';
-import {ProjectDetailComponent} from './project/project-detail/project-detail.component';
+import {AppRoutingModule} from './app-routing.module';
+import {ProjectListComponent} from './project/project-list/project-list.component';
 import {SkillDetailComponent} from './skill/skill-detail/skill-detail.component';
 import {SkillModelComponent} from './skill/skill-model/skill-model.component';
 import {KnowledgeModelComponent} from './knowledge/knowledge-model/knowledge-model.component';
 import {KnowledgeDetailComponent} from './knowledge/knowledge-detail/knowledge-detail.component';
-import {ProjectSearchComponent} from './project/project-search/project-search.component';
 import {GroupListComponent} from './group/group-list/group-list.component';
 import {GroupDetailComponent} from './group/group-detail/group-detail.component';
 import {MessagesComponent} from "./components/messages/messages.component";
@@ -56,37 +54,31 @@ import {StaffmemberListComponent} from './staffmember/staffmember-list/staffmemb
 import {CreateSkillComponent} from './skill/create-skill/create-skill.component';
 import {CreateKnowledgeComponent} from './knowledge/create-knowledge/create-knowledge.component';
 import {EditSkillComponent} from './skill/edit-skill/edit-skill.component';
-import {CreateStaffmemberComponent} from './staffmember/create-staffmember/create-staffmember.component';
 import {StaffmemberDetailComponent} from './staffmember/staffmember-detail/staffmember-detail.component';
-import {ProjectCreationComponent} from './project/project-creation/project-creation.component';
-import {ProjectEditComponent} from './project/project-edit/project-edit.component';
 import {CidimageComponent} from './components/cidimage/cidimage.component';
+import {ProjectComponentComponent} from './project/project-component/project-component.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MenubarComponent,
-    ProjectModelComponent,
-    ProjectDetailComponent,
+    ProjectListComponent,
     SkillDetailComponent,
     SkillModelComponent,
     KnowledgeModelComponent,
     KnowledgeDetailComponent,
-    ProjectSearchComponent,
     GroupListComponent,
     GroupDetailComponent,
     MessagesComponent,
     GroupCreationComponent,
     StaffmemberListComponent,
     CreateSkillComponent,
-    ProjectCreationComponent,
-    ProjectEditComponent,
     CreateKnowledgeComponent,
     EditSkillComponent,
-    CreateStaffmemberComponent,
     StaffmemberDetailComponent,
     CidimageComponent,
+    ProjectComponentComponent,
 
   ],
   imports: [
@@ -133,4 +125,5 @@ import {CidimageComponent} from './components/cidimage/cidimage.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

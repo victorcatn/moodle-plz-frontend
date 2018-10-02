@@ -12,6 +12,7 @@
 /.idea
 .iml
 .project
+.iml
 .classpath
 .c9/
 *.launch
