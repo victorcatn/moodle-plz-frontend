@@ -1,0 +1,46 @@
+<h1>Group</h1>
+<h2>Project:</h2>
+
+<h3 *ngIf="viewing && group">{{ getProjectById( group.projectId ).name }}</h3>
+
+<mat-select *ngIf="!viewing" placeholder="Project" name="project" #selectedProject [(ngModel)]="selectedProjectVal" required>
+  <mat-option *ngFor="let project of projects" [value]="project">
+    {{project.name}}
+  </mat-option>
+</mat-select>
+
+<h2>Staff</h2>
+
+<mat-list *ngIf="viewing && group">
+  <mat-list-item *ngFor="let member of group.membersId" >
+    {{member}}
+  </mat-list-item>
+</mat-list>
+
+<div *ngIf="!viewing">
+  <mat-selection-list  [(ngModel)]="selectedSuggested">
+    <h4>Suggested staff for this project</h4>
+    <mat-list-option *ngFor="let member of suggestedMembers" [value]="member.id" >
+      {{member.name}}
+    </mat-list-option>
+  </mat-selection-list>
+
+
+
+  <mat-selection-list [(ngModel)]="selectedOther">
+    <h4>Other staff available</h4>
+    <mat-list-option *ngFor="let member of otherMembers" [value]="member.id" >
+      {{member.name}}
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+
+
+
+<button mat-raised-button color="primary" (click)="saveGroup()" *ngIf="creating">Create</button>
+<button mat-raised-button color="primary" (click)="saveGroup()" *ngIf="editing">Edit</button>
+
+
+<button mat-fab color="primary" class="fav-edit-group" *ngIf="viewing" routerLink="edit">
+  <mat-icon>edit</mat-icon>
+</button>
