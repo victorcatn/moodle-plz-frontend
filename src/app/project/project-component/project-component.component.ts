@@ -118,6 +118,7 @@ export class ProjectComponentComponent implements OnInit {
    */
   getProject(): void {
     const id = this.route.snapshot.paramMap.get('id');
+
     /*Si no hay id se esta creando un proyecto nuevo*/
     if (id == null) {
       this.idMap = false;
