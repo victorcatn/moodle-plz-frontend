@@ -10,7 +10,7 @@
         </mat-list>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button>edit</button>
+        <button mat-button routerLink="{{group.id+'/edit'}}">edit</button>
         <button mat-button (click)="delete(group)" >delete</button>
     </mat-card-actions>
 </mat-card>

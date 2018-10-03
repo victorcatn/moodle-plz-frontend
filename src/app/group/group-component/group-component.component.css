@@ -1,0 +1,8 @@
+mat-selection-list{
+  width: 500px;
+}
+.fav-edit-group{
+  position:fixed;
+  bottom: 70px;
+  right: 25px;
+}
