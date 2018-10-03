@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 
-import {StaffmemberListComponent} from './staffmember/staffmember-list/staffmember-list.component';
-import {ProjectListComponent} from './project/project-list/project-list.component';
+import {StaffmemberListComponent} from "./staffmember/staffmember-list/staffmember-list.component";
+import {ProjectListComponent} from "./project/project-list/project-list.component";
 import {GroupListComponent} from './group/group-list/group-list.component';
 import {GroupDetailComponent} from './group/group-detail/group-detail.component';
 import {GroupCreationComponent} from './group/group-creation/group-creation.component';
@@ -33,12 +33,10 @@ const routes: Routes = [
   { path: 'groups', component: GroupListComponent },
   { path: 'groups/create', component: GroupCreationComponent },
   { path: 'groups/:id', component: GroupDetailComponent },
-
   { path: 'skills', component: SkillModelComponent },
   { path: 'skills/create', component: CreateSkillComponent },
   { path: 'skills/:id/', component: SkillDetailComponent },
   { path: 'skills/:id/edit', component: EditSkillComponent },
-
   { path: 'knowledges', component: KnowledgeModelComponent },
   { path: 'knowledges/create', component: CreateKnowledgeComponent },
 ];

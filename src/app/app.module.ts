@@ -1,5 +1,5 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {MenubarComponent} from './components/menubar/menubar.component';
@@ -46,9 +46,9 @@ import {KnowledgeModelComponent} from './knowledge/knowledge-model/knowledge-mod
 import {KnowledgeDetailComponent} from './knowledge/knowledge-detail/knowledge-detail.component';
 import {GroupListComponent} from './group/group-list/group-list.component';
 import {GroupDetailComponent} from './group/group-detail/group-detail.component';
-import {MessagesComponent} from './components/messages/messages.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {MessagesComponent} from "./components/messages/messages.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 import {GroupCreationComponent} from './group/group-creation/group-creation.component';
 import {StaffmemberListComponent} from './staffmember/staffmember-list/staffmember-list.component';
 import {CreateSkillComponent} from './skill/create-skill/create-skill.component';
