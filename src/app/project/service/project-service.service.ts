@@ -4,6 +4,7 @@ import {Observable, of} from "rxjs";
 import {Project} from "../Project";
 import {catchError, map, tap} from "rxjs/operators";
 import {MessageService} from "../../message.service";
+import { environment} from '../../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,7 +15,7 @@ const httpOptions = {
 })
 export class ProjectServiceService {
 
-  private projectUrl = 'http://localhost:8080/projects';  // URL to web api
+  private projectUrl = environment.apiUrl + '/projects';  // URL to web api
 
   constructor(
     private http: HttpClient,

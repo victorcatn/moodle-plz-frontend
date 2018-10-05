@@ -4,6 +4,7 @@ import {Observable, of} from "rxjs";
 import {catchError, map, tap} from "rxjs/operators";
 import {MessageService} from "../../message.service";
 import { Knowledge } from '../Knowledge';
+import { environment} from '../../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,7 +15,7 @@ const httpOptions = {
 })
 export class KnowledgeServiceService {
 
-  private knowledgeUrl = 'http://localhost:8080/knowledges'
+  private knowledgeUrl = environment.apiUrl + '/knowledges'
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 

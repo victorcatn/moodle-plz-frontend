@@ -4,7 +4,7 @@ import {Observable, of} from 'rxjs';
 import {StaffMember} from '../StaffMember';
 import {catchError, map, tap} from 'rxjs/operators';
 import { MessageService } from '../../message.service';
-
+import { environment} from '../../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class StaffMemberService {
 
-  private staffMembersUrl = 'http://localhost:8080/staffmembers';  // URL to web api
+  private staffMembersUrl = environment.apiUrl + '/staffmembers';  // URL to web api
 
   constructor(
     private http: HttpClient, private messageService: MessageService) { }

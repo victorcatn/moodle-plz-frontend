@@ -4,6 +4,7 @@ import {Observable, of} from "rxjs";
 import {Group} from "../Group";
 import {Project} from "../../project/Project";
 import {catchError, map, tap} from "rxjs/operators";
+import { environment} from '../../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,7 +15,7 @@ const httpOptions = {
 })
 export class GroupService {
 
-  private groupUrl = 'http://localhost:8080/groups';  // URL to web api
+  private groupUrl = environment.apiUrl + '/groups';  // URL to web api
 
   constructor(
     private http: HttpClient) { }
