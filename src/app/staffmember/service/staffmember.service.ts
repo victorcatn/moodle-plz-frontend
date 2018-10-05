@@ -4,11 +4,16 @@ import {Observable, of} from 'rxjs';
 import {StaffMember} from '../StaffMember';
 import {catchError, map, tap} from 'rxjs/operators';
 import { MessageService } from '../../message.service';
+import {environment} from "../../../environments/environment";
+import {Router} from "@angular/router";
+import {CidimageComponent} from "../../components/cidimage/cidimage.component";
 
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
+cidimage: CidimageComponent;
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +23,7 @@ export class StaffMemberService {
   private staffMembersUrl = 'http://localhost:8080/staffmembers';  // URL to web api
 
   constructor(
-    private http: HttpClient, private messageService: MessageService) { }
+    private http: HttpClient, private messageService: MessageService, private router: Router) { }
 
   /** GET staff members from the server */
   getStaffMembers (): Observable<StaffMember[]> {
@@ -119,4 +124,18 @@ export class StaffMemberService {
   private log(message: string) {
     console.log(`staffmemberService: ${message}`);
   }
+
+  /*loginStaffMember(staffMember: StaffMember): Observable<any>{
+    const url = `${this.staffMembersUrl}/login`;
+    return this.http.post(url, staffMember, {responseType: 'text'})
+      .pipe(tap(data => {
+        environment.credentials.document = staffMember.document.toString();
+        environment.credentials.password = staffMember.password.toString();
+        environment.httpOptions.headers = httpOptions.headers;
+        environment.httpOptions.headers = environment.httpOptions.headers.append('Authorization', 'Basic '
+          + btoa(staffMember.document + ':' + staffMember.password));
+        environment.authentication = true;
+        this.router.navigate(['/']);
+      }));
+  }*/
 }

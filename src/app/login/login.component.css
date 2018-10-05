@@ -7,6 +7,10 @@
   height: 20vh;
 }
 
+.mat-form-field{
+  width: 100%;
+}
+
 .login-container{
   margin: auto;
   width: 300px;
@@ -17,6 +21,10 @@
 .login-form{
   display: flex;
   flex-direction: column;
+}
+
+.login{
+  text-align: center;
 }
 
 #login-fab {

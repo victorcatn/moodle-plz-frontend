@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, Injectable, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {MenubarComponent} from './components/menubar/menubar.component';
@@ -46,7 +46,14 @@ import {KnowledgeModelComponent} from './knowledge/knowledge-model/knowledge-mod
 import {KnowledgeDetailComponent} from './knowledge/knowledge-detail/knowledge-detail.component';
 import {MessagesComponent} from "./components/messages/messages.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpClient
+} from "@angular/common/http";
 import {StaffmemberListComponent} from './staffmember/staffmember-list/staffmember-list.component';
 import {CreateSkillComponent} from './skill/create-skill/create-skill.component';
 import {CreateKnowledgeComponent} from './knowledge/create-knowledge/create-knowledge.component';
@@ -55,8 +62,22 @@ import {StaffmemberDetailComponent} from './staffmember/staffmember-detail/staff
 import {CidimageComponent} from './components/cidimage/cidimage.component';
 import {ProjectComponentComponent} from './project/project-component/project-component.component';
 import {GroupComponentComponent} from './group/group-component/group-component.component';
+import {GroupListComponent} from "./group/group-list/group-list.component";
 import {LoginComponent} from './login/login.component';
+import {AppService} from "./app.service";
 
+@Injectable()
+export class XhrInterceptor implements HttpInterceptor{
+  constructor(private http: HttpClient, private cidi: CidimageComponent){}
+
+  intercept(req: HttpRequest<any>, next: HttpHandler){
+    const token = this.cidi.getHeader();
+    const xhr = req.clone({
+      headers: req.headers.set('Authorization', 'Basic ' + token)
+    });
+    return next.handle(xhr);
+  }
+}
 
 @NgModule({
   declarations: [
@@ -67,7 +88,6 @@ import {LoginComponent} from './login/login.component';
     SkillModelComponent,
     KnowledgeModelComponent,
     KnowledgeDetailComponent,
-    GroupListComponent,
     MessagesComponent,
     StaffmemberListComponent,
     CreateSkillComponent,
@@ -77,8 +97,9 @@ import {LoginComponent} from './login/login.component';
     CidimageComponent,
     ProjectComponentComponent,
     GroupComponentComponent,
+    GroupListComponent,
     LoginComponent,
-
+    //NgxSpinnerModule
   ],
   imports: [
     HttpClientModule,
@@ -121,7 +142,16 @@ import {LoginComponent} from './login/login.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    AppService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: XhrInterceptor,
+      multi: true
+    },
+    CidimageComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule {
