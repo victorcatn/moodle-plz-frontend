@@ -65,16 +65,21 @@ import {GroupComponentComponent} from './group/group-component/group-component.c
 import {GroupListComponent} from "./group/group-list/group-list.component";
 import {LoginComponent} from './login/login.component';
 import {AppService} from "./app.service";
+import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor{
-  constructor(private http: HttpClient, private cidi: CidimageComponent){}
+  constructor(private http: HttpClient, private cidi: CidimageComponent, private spinner: NgxSpinnerService){}
 
   intercept(req: HttpRequest<any>, next: HttpHandler){
     const token = this.cidi.getHeader();
     const xhr = req.clone({
       headers: req.headers.set('Authorization', 'Basic ' + token)
     });
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 500);
     return next.handle(xhr);
   }
 }
@@ -98,8 +103,7 @@ export class XhrInterceptor implements HttpInterceptor{
     ProjectComponentComponent,
     GroupComponentComponent,
     GroupListComponent,
-    LoginComponent,
-    //NgxSpinnerModule
+    LoginComponent
   ],
   imports: [
     HttpClientModule,
@@ -140,7 +144,8 @@ export class XhrInterceptor implements HttpInterceptor{
     MatTooltipModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule
   ],
   providers: [
     AppService,
