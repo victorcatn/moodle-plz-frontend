@@ -217,18 +217,23 @@
 <div *ngIf="project">
   <div>
   <h1 align="center">{{project.name}} details</h1>
-    <p>
+    <div>
+      <mat-grid-list cols="2" rowHeight="6:1">
 
-    </p>
-    <mat-divider></mat-divider>
-    <mat-list>
-    <mat-list-item>
-      Start date: {{project.startDate | date : 'dd/MM/y'}}
-    </mat-list-item>
-    <mat-list-item>
-      End date: {{project.endDate | date :'dd/MM/y'}}
-    </mat-list-item>
-    </mat-list>
+        <mat-grid-tile [colspan]="2" *ngIf="project.id">
+          <p><b>Project identification:</b> {{project.id}}</p>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1" *ngIf="project.startDate">
+          <p><b>Start date:</b> {{project.startDate | date : "dd/MM/yyyy"}}</p>
+        </mat-grid-tile>
+
+        <mat-grid-tile *ngIf="project.endDate">
+          <p><b>End date:</b> {{project.endDate | date : "dd/MM/yyyy"}}</p>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+    </div>
   </div>
 
   <mat-divider></mat-divider>
@@ -309,7 +314,7 @@
   </button>
 
   <button mat-fab color="primary" class="fav-cancel-back" routerLink="../" *ngIf="!showing">
-    <mat-icon aria-label="cancel"*ngIf="editing">clear</mat-icon>
+    <mat-icon aria-label="cancel" *ngIf="editing">clear</mat-icon>
     <mat-icon aria-label="back" *ngIf="!editing">arrow_back</mat-icon>
   </button>
 

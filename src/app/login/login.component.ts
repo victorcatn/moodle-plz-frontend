@@ -1,11 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {StaffMemberService} from "../staffmember/service/staffmember.service";
+import {Component, OnInit} from '@angular/core';
 import {StaffMember} from "../staffmember/StaffMember";
 import {AppService} from "../app.service";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
-import {SkillScore} from "../skill/SkillScore";
-import {KnowledgeScore} from "../knowledge/KnowledgeScore";
 import {Observable} from "rxjs";
 
 @Component({
@@ -25,6 +22,7 @@ export class LoginComponent implements OnInit{
     lastName:'',
 
     isHumanResourcesManager:false, //TODO: separate classes for HRM and staff member
+    available:null,
 
     skills:[],
     knowledges:[],

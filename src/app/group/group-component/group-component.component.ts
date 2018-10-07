@@ -1,13 +1,11 @@
-import {AfterContentChecked, AfterContentInit, AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Group} from '../Group';
 import {Project} from '../../project/Project';
 import {StaffMember} from '../../staffmember/StaffMember';
 import {GroupService} from '../service/group-service.service';
 import {ProjectServiceService} from '../../project/service/project-service.service';
-import {StaffMemberService} from '../../staffmember/service/staffmember.service';
 import {MatSelect} from '@angular/material';
-import {group} from '@angular/animations';
 import {AlgorithmGroup} from "../AlgorithmGroup";
 
 @Component({
@@ -42,10 +40,10 @@ export class GroupComponentComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private groupService: GroupService,
-              private projectService: ProjectServiceService,
-              private staffMemberService: StaffMemberService) { }
+              private projectService: ProjectServiceService) { }
 
   ngOnInit() {
+    this.algorithm = null;
     this.getProjects();
 
     if (this.route.snapshot.url[1].path === 'create') {

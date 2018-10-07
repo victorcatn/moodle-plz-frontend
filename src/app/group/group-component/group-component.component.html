@@ -17,7 +17,7 @@
   </mat-list-item>
 </mat-list>
 
-<div *ngIf="!viewing">
+<div *ngIf="!viewing && algorithm">
   <mat-selection-list  [(ngModel)]="selectedSuggested">
     <h4>Suggested staff for this project</h4>
     <mat-list-option *ngFor="let member of algorithm.suggestedStaffMember" [value]="member.id" >

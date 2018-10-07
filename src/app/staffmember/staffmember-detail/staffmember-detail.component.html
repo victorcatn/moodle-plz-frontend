@@ -4,35 +4,36 @@
 
   <div class="container">
     <mat-grid-list cols="2" rowHeight="6:1">
-      <mat-grid-tile colspan="2" rowspan="1">
+
+      <mat-grid-tile colspan="1" rowspan="1">
         <mat-form-field class="mat-form-field-input">
           <mat-label>Name</mat-label>
           <input matInput type="text" required [(ngModel)]="name" class="mat-input-element" [disabled]="!editing">
         </mat-form-field>
       </mat-grid-tile>
 
-      <mat-grid-tile colspan="2" rowspan="1">
+      <mat-grid-tile colspan="1" rowspan="1">
           <mat-form-field class="mat-form-field-input">
             <mat-label>Last name</mat-label>
             <input matInput type="text" required [(ngModel)]="lastName" class="mat-input-element" [disabled]="!editing">
           </mat-form-field>
         </mat-grid-tile>
 
-      <mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
         <mat-form-field class="mat-form-field-input">
           <mat-label>Email</mat-label>
           <input matInput type="email" required [(ngModel)]="email" class="mat-input-element" [disabled]="!editing">
         </mat-form-field>
       </mat-grid-tile>
 
-      <mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
         <mat-form-field class="mat-form-field-input">
           <mat-label>Document</mat-label>
           <input matInput type="text" required [(ngModel)]="document" class="mat-input-element" [disabled]="!editing">
         </mat-form-field>
       </mat-grid-tile>
 
-      <mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="1">
         <mat-form-field class="mat-form-field-input">
           <mat-label>Password</mat-label>
           <input matInput type="password" required [(ngModel)]="password" class="mat-input-element" [disabled]="!editing"
@@ -42,6 +43,8 @@
         </mat-form-field>
       </mat-grid-tile>
     </mat-grid-list>
+
+  </div>
 
     <div class="mat-expansion-edit">
       <mat-expansion-panel *ngIf="skillAll">
@@ -185,65 +188,73 @@
     <mat-divider></mat-divider>
 
   </div>
-</div>
+
 
 <div *ngIf="showing">
 
   <div *ngIf="staffMember">
-    <h2>Staff Member Detail</h2>
-    <div class="container">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>{{staffMember.name}} {{staffMember.lastName}}</mat-card-title>
-          <mat-card-subtitle>{{staffMember.email}}</mat-card-subtitle>
-          <mat-card-subtitle>{{staffMember.document}}</mat-card-subtitle>
-        </mat-card-header>
+    <h1>Staff Member Detail</h1>
+    <div>
+      <mat-grid-list cols="2" rowHeight="6:1">
 
-        <mat-divider></mat-divider>
+        <mat-grid-tile [colspan]="2">
+          <h3><b>Name:</b> {{staffMember.name}} {{staffMember.lastName}}</h3>
+        </mat-grid-tile>
 
-        <mat-card-content>
-          <div *ngIf="skillAll">
-            <table mat-table [dataSource]="skillAll" class="mat-elevation-z8">
-              <!-- Name Column -->
-              <ng-container matColumnDef="Name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let skill"> {{skill.name}} </td>
-              </ng-container>
-        
-              <!-- Score Column -->
-              <ng-container matColumnDef="Score">
-                <th mat-header-cell *matHeaderCellDef> Score </th>
-                <td mat-cell *matCellDef="let skill"> {{skill.score}} </td>
-              </ng-container>
-        
-        
-              <tr mat-header-row *matHeaderRowDef="['Name', 'Score']"></tr>
-              <tr mat-row *matRowDef="let row; columns: ['Name', 'Score'];"></tr>
-            </table>
-          </div>
+        <mat-grid-tile>
+          <p><b>Document:</b> {{staffMember.document}}</p>
+        </mat-grid-tile>
 
-          <div *ngIf="knowledgeAll">
-            <table mat-table [dataSource]="knowledgeAll" class="mat-elevation-z8">
-              <!-- Name Column -->
-              <ng-container matColumnDef="Name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let knowledge"> {{knowledge.name}} </td>
-              </ng-container>
-        
-              <!-- Score Column -->
-              <ng-container matColumnDef="Score">
-                <th mat-header-cell *matHeaderCellDef> Score </th>
-                <td mat-cell *matCellDef="let knowledge"> {{knowledge.score}} </td>
-              </ng-container>
+        <mat-grid-tile colspan="1" rowspan="1">
+          <p><b>Email:</b> {{staffMember.email}}</p>
+        </mat-grid-tile>
 
-              <tr mat-header-row *matHeaderRowDef="['Name', 'Score']"></tr>
-              <tr mat-row *matRowDef="let row; columns: ['Name', 'Score'];"></tr>
-            </table>
-          </div>
-        </mat-card-content>
-      </mat-card>
-      <mat-divider></mat-divider>
+
+
+      </mat-grid-list>
     </div>
+
+  </div>
+  <mat-divider></mat-divider>
+  <div *ngIf="skillAll">
+    <h2>Added skills</h2>
+    <table mat-table [dataSource]="skillAll" class="mat-elevation-z8">
+      <!-- Name Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let skill"> {{skill.name}} </td>
+      </ng-container>
+
+      <!-- Score Column -->
+      <ng-container matColumnDef="Score">
+        <th mat-header-cell *matHeaderCellDef> Score </th>
+        <td mat-cell *matCellDef="let skill"> {{skill.score}} </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="['Name', 'Score']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['Name', 'Score'];"></tr>
+    </table>
+  </div>
+
+  <div *ngIf="knowledgeAll">
+    <h2>Added knowledges</h2>
+    <table mat-table [dataSource]="knowledgeAll" class="mat-elevation-z8">
+      <!-- Name Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let knowledge"> {{knowledge.name}} </td>
+      </ng-container>
+
+      <!-- Score Column -->
+      <ng-container matColumnDef="Score">
+        <th mat-header-cell *matHeaderCellDef> Score </th>
+        <td mat-cell *matCellDef="let knowledge"> {{knowledge.score}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['Name', 'Score']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['Name', 'Score'];"></tr>
+    </table>
   </div>
 
 </div>

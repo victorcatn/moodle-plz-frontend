@@ -10,6 +10,7 @@ export class StaffMember{
   lastName:String;
 
   isHumanResourcesManager:Boolean; //TODO: separate classes for HRM and staff member
+  available:Boolean;
 
   skills:SkillScore[];
   knowledges:KnowledgeScore[];

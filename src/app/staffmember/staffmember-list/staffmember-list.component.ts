@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { StaffMember } from '../StaffMember';
-import { StaffMemberService } from '../service/staffmember.service';
+import {Component, OnInit} from '@angular/core';
+import {StaffMember} from '../StaffMember';
+import {StaffMemberService} from '../service/staffmember.service';
 
 @Component({
   selector: 'app-staffmember-list',
@@ -19,6 +19,7 @@ export class StaffmemberListComponent implements OnInit {
     name: '',
     lastName: '',
     isHumanResourcesManager: null,
+    available:null,
     skills: [],
     knowledges: []
   };

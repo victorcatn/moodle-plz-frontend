@@ -38,13 +38,11 @@ h1, h2{
     max-width: 150px;
     width: 50%;
 }
-table{
-    width: 100%;
-}
+
 .mat-card{
-    display: inline-block;
-    width: 300px;
-    margin: 5px;
+  display: inline-block;
+  width: 300px;
+  margin: 5px;
 }
 
 .mat-elevation-z8{

@@ -1,17 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { StaffMember } from '../StaffMember';
-import { StaffMemberService } from '../service/staffmember.service';
-import { ActivatedRoute } from '@angular/router';
-import { SkillServiceService } from '../../skill/service/skill-service.service';
-import { KnowledgeServiceService } from '../../knowledge/service/knowledge-service.service';
-import { Skill } from '../../skill/Skill';
-import { Knowledge } from '../../knowledge/Knowledge';
-import { SkillAll } from '../../skill/SkillAll';
-import { KnowledgeAll } from '../../knowledge/KnowledgeAll';
-import { SkillScore } from '../../skill/SkillScore';
-import { KnowledgeScore } from '../../knowledge/KnowledgeScore';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import {Component, Input, OnInit} from '@angular/core';
+import {StaffMember} from '../StaffMember';
+import {StaffMemberService} from '../service/staffmember.service';
+import {ActivatedRoute} from '@angular/router';
+import {SkillServiceService} from '../../skill/service/skill-service.service';
+import {KnowledgeServiceService} from '../../knowledge/service/knowledge-service.service';
+import {Skill} from '../../skill/Skill';
+import {Knowledge} from '../../knowledge/Knowledge';
+import {SkillAll} from '../../skill/SkillAll';
+import {KnowledgeAll} from '../../knowledge/KnowledgeAll';
+import {SkillScore} from '../../skill/SkillScore';
+import {KnowledgeScore} from '../../knowledge/KnowledgeScore';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-staffmember-detail',
@@ -165,6 +165,8 @@ export class StaffmemberDetailComponent implements OnInit {
       this.staffMember.document = this.document;
       this.staffMember.email = this.email;
       this.staffMember.password = this.password;
+      this.staffMember.isHumanResourcesManager = false;
+      this.staffMember.available = true;
       this.getSkills();
       this.getKnowledges();
       /*Control de fase "mostrar" (feedback), si el staff member nuevo se esta mostrando al usuario se debe asegurar que 
