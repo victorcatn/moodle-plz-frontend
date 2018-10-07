@@ -35,7 +35,10 @@
       <mat-grid-tile>
         <mat-form-field class="mat-form-field-input">
           <mat-label>Password</mat-label>
-          <input matInput type="text" required [(ngModel)]="password" class="mat-input-element" [disabled]="!editing">
+          <input matInput type="password" required [(ngModel)]="password" class="mat-input-element" [disabled]="!editing"
+                 *ngIf="!editing">
+          <input matInput type="text" required [(ngModel)]="password" class="mat-input-element" [disabled]="!editing"
+                 *ngIf="editing">
         </mat-form-field>
       </mat-grid-tile>
     </mat-grid-list>
@@ -199,7 +202,7 @@
         <mat-divider></mat-divider>
 
         <mat-card-content>
-          <div *ngIf="SkillAll">
+          <div *ngIf="skillAll">
             <table mat-table [dataSource]="skillAll" class="mat-elevation-z8">
               <!-- Name Column -->
               <ng-container matColumnDef="Name">

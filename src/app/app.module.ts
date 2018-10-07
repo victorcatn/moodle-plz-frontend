@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, Injectable, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {MenubarComponent} from './components/menubar/menubar.component';
@@ -44,10 +44,16 @@ import {SkillDetailComponent} from './skill/skill-detail/skill-detail.component'
 import {SkillModelComponent} from './skill/skill-model/skill-model.component';
 import {KnowledgeModelComponent} from './knowledge/knowledge-model/knowledge-model.component';
 import {KnowledgeDetailComponent} from './knowledge/knowledge-detail/knowledge-detail.component';
-import {GroupListComponent} from './group/group-list/group-list.component';
 import {MessagesComponent} from "./components/messages/messages.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpClient
+} from "@angular/common/http";
 import {StaffmemberListComponent} from './staffmember/staffmember-list/staffmember-list.component';
 import {CreateSkillComponent} from './skill/create-skill/create-skill.component';
 import {CreateKnowledgeComponent} from './knowledge/create-knowledge/create-knowledge.component';
@@ -56,8 +62,27 @@ import {StaffmemberDetailComponent} from './staffmember/staffmember-detail/staff
 import {CidimageComponent} from './components/cidimage/cidimage.component';
 import {ProjectComponentComponent} from './project/project-component/project-component.component';
 import {GroupComponentComponent} from './group/group-component/group-component.component';
+import {GroupListComponent} from "./group/group-list/group-list.component";
 import {LoginComponent} from './login/login.component';
+import {AppService} from "./app.service";
+import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 
+@Injectable()
+export class XhrInterceptor implements HttpInterceptor{
+  constructor(private http: HttpClient, private cidi: CidimageComponent, private spinner: NgxSpinnerService){}
+
+  intercept(req: HttpRequest<any>, next: HttpHandler){
+    const token = this.cidi.getHeader();
+    const xhr = req.clone({
+      headers: req.headers.set('Authorization', 'Basic ' + token)
+    });
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 500);
+    return next.handle(xhr);
+  }
+}
 
 @NgModule({
   declarations: [
@@ -68,7 +93,6 @@ import {LoginComponent} from './login/login.component';
     SkillModelComponent,
     KnowledgeModelComponent,
     KnowledgeDetailComponent,
-    GroupListComponent,
     MessagesComponent,
     StaffmemberListComponent,
     CreateSkillComponent,
@@ -78,8 +102,8 @@ import {LoginComponent} from './login/login.component';
     CidimageComponent,
     ProjectComponentComponent,
     GroupComponentComponent,
-    LoginComponent,
-
+    GroupListComponent,
+    LoginComponent
   ],
   imports: [
     HttpClientModule,
@@ -120,9 +144,19 @@ import {LoginComponent} from './login/login.component';
     MatTooltipModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule
   ],
-  providers: [],
+  providers: [
+    AppService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: XhrInterceptor,
+      multi: true
+    },
+    CidimageComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule {
