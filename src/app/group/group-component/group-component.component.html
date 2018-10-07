@@ -20,16 +20,21 @@
 <div *ngIf="!viewing">
   <mat-selection-list  [(ngModel)]="selectedSuggested">
     <h4>Suggested staff for this project</h4>
-    <mat-list-option *ngFor="let member of suggestedMembers" [value]="member.id" >
+    <mat-list-option *ngFor="let member of algorithm.suggestedStaffMember" [value]="member.id" >
       {{member.name}}
     </mat-list-option>
   </mat-selection-list>
 
-
-
   <mat-selection-list [(ngModel)]="selectedOther">
     <h4>Other staff available</h4>
-    <mat-list-option *ngFor="let member of otherMembers" [value]="member.id" >
+    <mat-list-option *ngFor="let member of algorithm.others" [value]="member.id" >
+      {{member.name}}
+    </mat-list-option>
+  </mat-selection-list>
+
+  <mat-selection-list [(ngModel)]="selectedNonSuggested">
+    <h4>Non suggested staff</h4>
+    <mat-list-option *ngFor="let member of algorithm.nonSuggestedStaffMember" [value]="member.id" >
       {{member.name}}
     </mat-list-option>
   </mat-selection-list>

@@ -4,6 +4,7 @@ import {Observable, of} from "rxjs";
 import {Group} from "../Group";
 import {Project} from "../../project/Project";
 import {catchError, map, tap} from "rxjs/operators";
+import {AlgorithmGroup} from "../AlgorithmGroup";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -54,12 +55,12 @@ export class GroupService {
     );
   }
   
-  generateGroup (project: Project): Observable<Group> {
+  generateGroup (project: Project): Observable<AlgorithmGroup> {
     if(project.neededKnowledges == null){project.neededKnowledges = []}; //TODO: move this to backend
     if(project.neededSkills == null){project.neededSkills = []};
     const url = `${this.groupUrl}/generate`;
-    return this.http.post<Group>(url, project, httpOptions).pipe(
-      catchError(this.handleError<Group>('generateGroup'))
+    return this.http.post<AlgorithmGroup>(url, project, httpOptions).pipe(
+      catchError(this.handleError<AlgorithmGroup>('generateGroup'))
     );
   }
 

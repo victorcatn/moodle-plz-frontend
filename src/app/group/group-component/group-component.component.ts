@@ -8,6 +8,7 @@ import {ProjectServiceService} from '../../project/service/project-service.servi
 import {StaffMemberService} from '../../staffmember/service/staffmember.service';
 import {MatSelect} from '@angular/material';
 import {group} from '@angular/animations';
+import {AlgorithmGroup} from "../AlgorithmGroup";
 
 @Component({
   selector: 'app-group-component',
@@ -23,13 +24,16 @@ export class GroupComponentComponent implements OnInit, AfterViewInit {
   @Input()group: Group;
 
   projects: Project[];
+  algorithm: AlgorithmGroup;
   members: StaffMember[];
 
   suggestedMembers: StaffMember[];
   otherMembers: StaffMember[];
+  nonSuggestedStaffmembers: StaffMember[];
 
   selectedSuggested = [];
   selectedOther = [];
+  selectedNonSuggested = [];
 
 
   @ViewChild(MatSelect) selectedProject: MatSelect;
@@ -57,37 +61,14 @@ export class GroupComponentComponent implements OnInit, AfterViewInit {
   }
 
   generateGroup(project: Project) {
-    this.groupService.generateGroup(project)
-      .subscribe((group) => {
-        if (this.creating) {
-          this.group = group;
-        }
-
-        this.staffMemberService.getStaffMembers() // TODO: make a more efficient aproach in backend
-          .subscribe(members => {
-            this.suggestedMembers = [];
-            this.otherMembers = [];
-            members.forEach(member => {
-              if (group.membersId.includes(member.id)) {
-                this.suggestedMembers.push(member);
-                if (this.editing && this.group.membersId.includes(member.id)) {
-                  this.selectedSuggested.push(member.id);
-                }
-              } else {
-                this.otherMembers.push(member);
-                if (this.editing && this.group.membersId.includes(member.id)) {
-                  this.selectedOther.push(member.id);
-                }
-              }
-            });
-            this.members = members;
-          });
-      });
+    this.groupService.generateGroup(project).subscribe(algorithm =>
+    this.algorithm = algorithm);
   }
 
   getProjects() {
     this.projectService.getProjects()
-      .subscribe(projects => {this.projects = projects;
+      .subscribe(projects => {
+        this.projects = projects;
         if (!this.creating) { this.getGroup(); }
 
       });
@@ -107,7 +88,7 @@ export class GroupComponentComponent implements OnInit, AfterViewInit {
   }
 
   saveGroup() {
-    this.group.membersId = this.selectedSuggested.concat(this.selectedOther);
+    this.group.membersId = this.selectedSuggested.concat(this.selectedOther, this.selectedNonSuggested);
     this.group.projectId = this.selectedProjectVal.id;
     this.groupService.addGroup(this.group)
       .subscribe(group => {
