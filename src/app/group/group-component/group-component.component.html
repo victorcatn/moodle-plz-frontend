@@ -5,7 +5,21 @@
 
 <mat-select *ngIf="!viewing" placeholder="Project" name="project" #selectedProject [(ngModel)]="selectedProjectVal" required>
   <mat-option *ngFor="let project of projects" [value]="project">
-    {{project.name}}
+    <mat-grid-list cols="3" rowHeight="6:1">
+
+      <mat-grid-tile [colspan]="1" *ngIf="project.id">
+        <p><b> id:</b> {{project.id}}</p>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" *ngIf="project.name">
+        <p><b> name:</b> {{project.name}}</p>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" *ngIf="project.assignedGroupId">
+        <p><b> assigned group:</b> {{project.assignedGroupId}}</p>
+      </mat-grid-tile>
+
+    </mat-grid-list>
   </mat-option>
 </mat-select>
 
@@ -23,6 +37,7 @@
     <mat-list-option *ngFor="let member of algorithm.suggestedStaffMember" [value]="member.id" >
       {{member.name}}
     </mat-list-option>
+    <p *ngIf="algorithm.suggestedStaffMember.length==0" >There is not suggested staff members</p>
   </mat-selection-list>
 
   <mat-selection-list [(ngModel)]="selectedOther">
@@ -30,6 +45,7 @@
     <mat-list-option *ngFor="let member of algorithm.others" [value]="member.id" >
       {{member.name}}
     </mat-list-option>
+    <p *ngIf="algorithm.others.length==0" >There is not suggested others staff members</p>
   </mat-selection-list>
 
   <mat-selection-list [(ngModel)]="selectedNonSuggested">
@@ -37,6 +53,7 @@
     <mat-list-option *ngFor="let member of algorithm.nonSuggestedStaffMember" [value]="member.id" >
       {{member.name}}
     </mat-list-option>
+    <p *ngIf="algorithm.nonSuggestedStaffMember.length==0" >There is not non suggested staff members</p>
   </mat-selection-list>
 </div>
 
