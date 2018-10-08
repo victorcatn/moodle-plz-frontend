@@ -1,0 +1,14 @@
+h2{
+    text-align: center;
+}
+
+.fav-add-group{
+    position: fixed;
+    bottom: 70px;
+    right: 25px;
+}
+
+.staffMemberName{
+    cursor: pointer;
+    width: 40%;
+}

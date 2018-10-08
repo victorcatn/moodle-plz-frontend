@@ -1,0 +1,32 @@
+<div class="login-page">
+  <div class="alert alert-danger" [hidden]="!error">
+    There was a problem logging in. Please try again.
+  </div>
+  <div class="login-spacer"></div>
+  <div class="login-container">
+    <div id="login-fab" class="mdl-color--accent mdl-color-text--white">
+      <i id="lock-icon" class="material-icons">lock</i>
+    </div>
+    <h2 class="card-heading">
+      Login
+    </h2>
+    <form class="login-form" role="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+      <div [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+        <mat-form-field >
+          <input matInput placeholder="Document" name="username" [(ngModel)]="staffMember.document" #username="ngModel"
+                 required>
+          <div *ngIf="f.submitted && !username.valid">Document is required</div>
+        </mat-form-field>
+      </div>
+      <div [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+        <mat-form-field>
+          <input matInput type='password' placeholder="Password" name="password" [(ngModel)]="staffMember.password" #password="ngModel" required>
+          <div *ngIf="f.submitted && !password.valid">Password is required</div>
+        </mat-form-field>
+      </div>
+      <div class="login">
+        <button mat-raised-button color="primary" type="submit" >Login</button>
+      </div>
+    </form>
+  </div>
+</div>

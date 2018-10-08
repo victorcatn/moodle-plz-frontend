@@ -1,0 +1,54 @@
+.example-toolbar{
+   display: flex;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+ }
+.example-toolbar-down{
+  display: flex;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+
+}
+
+.example-container {
+  height: auto;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 60px;
+  bottom: 60px;
+  left: 0px;
+  right: 0px;
+
+}
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.example-sidenav {
+  user-select: none;
+}
+.full-width {
+  width: 100%;
+}
+.menu-button {
+  transition: 300ms ease-in-out;
+  transform: rotate(0deg);
+}
+.menu-button.rotated {
+  transform: rotate(180deg);
+}
+.submenu {
+  overflow-y: hidden;
+  transition: transform 300ms ease;
+  transform: scaleY(0);
+  transform-origin: top;
+  padding-left: 30px;
+}
+.submenu.expanded {
+  transform: scaleY(1);
+}

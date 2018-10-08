@@ -1,0 +1,9 @@
+.skill-name{
+    min-width: 700px;
+    width: 100%;
+}
+
+.botonCrear{
+    display: inline-block;
+    margin: 0 10px;
+}
