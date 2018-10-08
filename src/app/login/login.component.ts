@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SkillScore} from "../skill/SkillScore";
 import {KnowledgeScore} from "../knowledge/KnowledgeScore";
 import {Observable} from "rxjs";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,10 @@ export class LoginComponent implements OnInit{
     knowledges:[],
   }
 
-  constructor(private app: AppService, private http: HttpClient, private router: Router, private route: ActivatedRoute){}
+  auth: boolean;
+
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute,
+              private appcom: AppComponent, private service: AppService){}
 
   ngOnInit(){
     sessionStorage.setItem('token', '')
@@ -43,12 +47,18 @@ export class LoginComponent implements OnInit{
       password: this.staffMember.password
     }).subscribe(isValid => {
       if(isValid){
-        sessionStorage.setItem('token', btoa(this.staffMember.document + ':' + this.staffMember.password));
+        this.service.setToken(btoa(this.staffMember.document + ':' + this.staffMember.password));
+        this.appcom.mostrarMenu(true);
         this.router.navigate(['']);
       } else{
         alert("Failed");
+        this.appcom.mostrarMenu(false);
       }
     })
+  }
+
+  getAuth(){
+    return this.auth;
   }
 
   /*login(){

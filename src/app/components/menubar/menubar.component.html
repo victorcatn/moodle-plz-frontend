@@ -14,7 +14,7 @@
         <span class="full-width" *ngIf="isExpanded || isShowing">Home</span>
         <mat-icon mat-list-icon>home</mat-icon>
       </mat-list-item>
-      
+
       <a mat-list-item routerLink="../staffmembers">
         <span class="full-width" *ngIf="isExpanded || isShowing">Staff Members</span>
         <mat-icon mat-list-icon>person</mat-icon>
@@ -38,6 +38,11 @@
       <a mat-list-item routerLink="../knowledges">
         <span class="full-width" *ngIf="isExpanded || isShowing">Knowledges</span>
         <mat-icon mat-list-icon>bookmarks</mat-icon>
+      </a>
+
+      <a mat-list-item routerLink="../login">
+        <span class="full-width" *ngIf="isExpanded || isShowing" (click)="logout()">Logout</span>
+        <mat-icon mat-list-icon>exit_to_app</mat-icon>
       </a>
 
 

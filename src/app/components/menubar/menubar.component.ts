@@ -1,23 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
-import {trigger, state, style, animate, transition, animation} from '@angular/animations';
+import {CidimageComponent} from "../cidimage/cidimage.component";
+import {AppService} from "../../app.service";
+import {AppComponent} from "../../app.component";
 
 
 @Component({
   selector: 'app-menubar',
   templateUrl: './menubar.component.html',
-  styleUrls: ['./menubar.component.css'],
-  /*animations: [
-    trigger('animacionMenu',[
-      state('sinMouse', style({
-        transform : 'translateX(-80%)'
-      })),
-      state('conMouse', style({
-        transform : 'translateX(0)'
-      })),
-      transition('sinMouse <=> conMouse', animate('300ms'))
-    ])
-  ]*/
+  styleUrls: ['./menubar.component.css']
 })
 export class MenubarComponent {
   @ViewChild('sidenav') sidenav: MatSidenav;
@@ -28,6 +19,13 @@ export class MenubarComponent {
 
   estado = "conMouse"
   estado2 = "sinMouse"
+
+  constructor(private service: AppService, private appcom: AppComponent){};
+
+  logout(){
+    this.service.logout();
+    this.appcom.mostrarMenu(false);
+  }
   mouseenter() {
     if (!this.isExpanded) {
       this.isShowing = true;

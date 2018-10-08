@@ -69,10 +69,10 @@ import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor{
-  constructor(private http: HttpClient, private cidi: CidimageComponent, private spinner: NgxSpinnerService){}
+  constructor(private http: HttpClient, private service: AppService, private spinner: NgxSpinnerService){}
 
   intercept(req: HttpRequest<any>, next: HttpHandler){
-    const token = this.cidi.getHeader();
+    const token = this.service.getToken();
     const xhr = req.clone({
       headers: req.headers.set('Authorization', 'Basic ' + token)
     });
@@ -153,8 +153,7 @@ export class XhrInterceptor implements HttpInterceptor{
       provide: HTTP_INTERCEPTORS,
       useClass: XhrInterceptor,
       multi: true
-    },
-    CidimageComponent
+    }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

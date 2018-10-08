@@ -1,9 +1,53 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
+import {LoginComponent} from "./login/login.component";
+import {throwError} from "rxjs";
+import {AppComponent} from "./app.component";
 
 @Injectable()
 export class AppService {
-  authenticated = false;
+   constructor(){}
+
+   setToken(token){
+     sessionStorage.setItem('token', token);
+   }
+
+   getToken(){
+     return sessionStorage.getItem('token');
+   }
+
+   logout(){
+     sessionStorage.setItem('token', '');
+   }
+
+  private handleError(error: HttpErrorResponse){
+    if(error.error instanceof ErrorEvent){
+      console.error('An error ocurred:', error.error.message);
+    } else{
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`
+      );
+    }
+    return throwError(
+      'Something go bad, try again'
+    )
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*authenticated = false;
 
   constructor(private http: HttpClient){}
 
@@ -20,5 +64,5 @@ export class AppService {
       }
       return callback && callback();
     })
-  }
+  }*/
 }

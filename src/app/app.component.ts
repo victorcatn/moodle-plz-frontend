@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AppService} from "./app.service";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {NgxSpinnerService} from "ngx-spinner";
+import {CidimageComponent} from "./components/cidimage/cidimage.component";
 
 @Component({
   selector: 'app-root',
@@ -11,23 +11,21 @@ import {NgxSpinnerService} from "ngx-spinner";
 })
 export class AppComponent implements OnInit{
 
-  constructor(private app: AppService, private http: HttpClient, private router: Router, private spinner: NgxSpinnerService) {
-    this.app.authenticate(undefined, undefined);
+  constructor(private http: HttpClient, private router: Router) {
+    //this.app.authenticate(undefined, undefined);
   }
 
   ngOnInit(){
-    /*this.spinner.show();
+    //this.mostrarMenu();
+  }
 
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 300);*/
+  menuActivado = false;
+
+  mostrarMenu(menu){
+    return this.menuActivado = menu;
+    console.log(this.menuActivado);
   }
-  logout(){
-    this.http.post('logout',{}).subscribe(() =>{
-      this.app.authenticated = false;
-      this.router.navigateByUrl('/login');
-    });
-  }
+
 
   title = 'moodle-plzFE';
 }

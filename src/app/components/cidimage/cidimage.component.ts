@@ -3,6 +3,7 @@ import {AppService} from "../../app.service";
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpRequest, HttpResponse} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
 import { catchError, map, tap} from 'rxjs/operators';
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-cidimage',
@@ -12,57 +13,24 @@ import { catchError, map, tap} from 'rxjs/operators';
 export class CidimageComponent implements OnInit {
 
   title: 'ModdlePlz';
-  greeting: {}
 
   document: String;
+  auth: boolean;
 
-  constructor(private app: AppService, private http: HttpClient){
-  }
-
-  authenticated(){
-    return this.app.authenticated;
+  constructor(private http: HttpClient){
   }
 
   ngOnInit() {
-    let url = 'http://localhost:8080/user';
 
-    let headers: HttpHeaders = new HttpHeaders({
+    //let url = 'http://localhost:8080/user';
+
+    /*let headers: HttpHeaders = new HttpHeaders({
       'Authorization': 'Basic ' + sessionStorage.getItem('token')
-    });
+    });*/
 
-    let options = {headers: headers};
-    this.http.post<Observable<Object>>(url, {}, options).
-    subscribe(principal => {
-        this.document = principal['document'];
-      },
-      error => {
-        if(error.status == 401)
-          alert('Unauthorized')
-      })
-
-    this.getHeader();
+    //this.getHeader();
   }
 
-  getHeader(){
-    return sessionStorage.getItem('token');
-  }
 
-  logout(){
-    sessionStorage.setItem('token', '');
-  }
-
-  private handleError(error: HttpErrorResponse){
-    if(error.error instanceof ErrorEvent){
-      console.error('An error ocurred:', error.error.message);
-    } else{
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`
-      );
-    }
-    return throwError(
-      'Something go bad, try again'
-    )
-  }
 
 }
