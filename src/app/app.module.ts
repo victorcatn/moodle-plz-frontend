@@ -47,12 +47,12 @@ import {KnowledgeDetailComponent} from './knowledge/knowledge-detail/knowledge-d
 import {MessagesComponent} from "./components/messages/messages.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {
-  HttpClientModule,
   HTTP_INTERCEPTORS,
-  HttpInterceptor,
-  HttpRequest,
+  HttpClient,
+  HttpClientModule,
   HttpHandler,
-  HttpClient
+  HttpInterceptor,
+  HttpRequest
 } from "@angular/common/http";
 import {StaffmemberListComponent} from './staffmember/staffmember-list/staffmember-list.component';
 import {CreateSkillComponent} from './skill/create-skill/create-skill.component';
@@ -66,6 +66,7 @@ import {GroupListComponent} from "./group/group-list/group-list.component";
 import {LoginComponent} from './login/login.component';
 import {AppService} from "./app.service";
 import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
+import {KnowledgeEditComponent} from './knowledge/knowledge-edit/knowledge-edit.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor{
@@ -103,7 +104,8 @@ export class XhrInterceptor implements HttpInterceptor{
     ProjectComponentComponent,
     GroupComponentComponent,
     GroupListComponent,
-    LoginComponent
+    LoginComponent,
+    KnowledgeEditComponent
   ],
   imports: [
     HttpClientModule,

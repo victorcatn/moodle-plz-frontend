@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, of} from "rxjs";
 import {catchError, map, tap} from "rxjs/operators";
 import {MessageService} from "../../message.service";
-import { Knowledge } from '../Knowledge';
+import {Knowledge} from '../Knowledge';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -85,7 +85,9 @@ export class KnowledgeServiceService {
 
   /** PUT: update the knowledge on the server */
   updateKnowledge (knowledge: Knowledge): Observable<any> {
-    return this.http.put(this.knowledgeUrl, knowledge, httpOptions).pipe(
+    const id = typeof knowledge === 'number' ? knowledge : knowledge.id;
+    const url = `${this.knowledgeUrl}/${id}`;
+    return this.http.put(url, knowledge, httpOptions).pipe(
       tap(_ => this.log(`updated knowledge id=${knowledge.id}`)),
       catchError(this.handleError<any>('Knowledge'))
     );

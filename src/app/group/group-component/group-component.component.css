@@ -1,8 +1,34 @@
 mat-selection-list{
-  width: 500px;
+  margin-left: 20%;
+  margin-right: 20%;
 }
+mat-grid-list{
+  margin-right: 10%;
+}
+
+.mat-list{
+  margin-left: 10%;
+}
+
 .fav-edit-group{
   position:fixed;
   bottom: 70px;
   right: 25px;
+}
+
+.mat-divider-selection{
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.fav-action-group{
+  position:fixed;
+  bottom: 70px;
+  right: 25px;
+}
+
+.mat-elevation-z8{
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
 }

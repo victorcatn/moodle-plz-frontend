@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, of} from "rxjs";
 import {Group} from "../Group";
 import {Project} from "../../project/Project";
-import {catchError, map, tap} from "rxjs/operators";
+import {catchError, map} from "rxjs/operators";
 import {AlgorithmGroup} from "../AlgorithmGroup";
 
 const httpOptions = {
@@ -76,7 +76,9 @@ export class GroupService {
 
   /** PUT: update the group on the server */
   updateGroup (group: Group): Observable<any> {
-    return this.http.put(this.groupUrl, group, httpOptions).pipe(
+    const id = typeof group === 'number' ? group : group.id;
+    const url = `${this.groupUrl}/${id}`
+    return this.http.put(url, group, httpOptions).pipe(
       catchError(this.handleError<any>('updateGroup'))
     );
   }

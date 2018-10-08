@@ -16,6 +16,8 @@ import {CidimageComponent} from "./components/cidimage/cidimage.component";
 import {ProjectComponentComponent} from "./project/project-component/project-component.component";
 import {GroupComponentComponent} from './group/group-component/group-component.component';
 import {LoginComponent} from './login/login.component';
+import {KnowledgeDetailComponent} from "./knowledge/knowledge-detail/knowledge-detail.component";
+import {KnowledgeEditComponent} from "./knowledge/knowledge-edit/knowledge-edit.component";
 
 const routes: Routes = [
   {path: 'projects/create', component: ProjectComponentComponent},
@@ -30,12 +32,15 @@ const routes: Routes = [
   {path: 'groups/create', component: GroupComponentComponent},
   {path: 'groups/:id', component: GroupComponentComponent},
   {path: 'groups/:id/edit', component: GroupComponentComponent},
+
   {path: 'skills', component: SkillModelComponent},
   {path: 'skills/create', component: CreateSkillComponent},
-  {path: 'skills/:id/', component: SkillDetailComponent},
+  {path: 'skills/:id', component: SkillDetailComponent},
   {path: 'skills/:id/edit', component: EditSkillComponent},
   {path: 'knowledges', component: KnowledgeModelComponent},
   {path: 'knowledges/create', component: CreateKnowledgeComponent},
+  {path: 'knowledges/:id', component: KnowledgeDetailComponent},
+  {path: 'knowledges/:id/edit', component: KnowledgeEditComponent},
   {path: 'login', component: LoginComponent}
 ];
 

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, of} from "rxjs";
-import { Skill } from '../Skill';
+import {Skill} from '../Skill';
 import {catchError, map, tap} from "rxjs/operators";
 import {MessageService} from "../../message.service";
 
@@ -27,7 +27,7 @@ export class SkillServiceService {
       );
   }
 
-  /** GET skill by id. Return `undefined` when id not found */
+  /** GET knowledge by id. Return `undefined` when id not found */
   getProjectNo404<Data>(id: string): Observable<Skill> {
     const url = `${this.skillUrl}/?id=${id}`;
     return this.http.get<Skill[]>(url)
@@ -41,7 +41,7 @@ export class SkillServiceService {
       );
   }
 
-  /** GET skill by id. Will 404 if id not found */
+  /** GET knowledge by id. Will 404 if id not found */
   getSkill(id: string): Observable<Skill> {
     const url = `${this.skillUrl}/${id}`;
     return this.http.get<Skill>(url).pipe(
@@ -50,10 +50,10 @@ export class SkillServiceService {
     );
   }
 
-  /* GET skill whose name contains search term */
+  /* GET knowledge whose name contains search term */
   searchSkill(term: string): Observable<Skill[]> {
     if (!term.trim()) {
-      // if not search term, return empty skill array.
+      // if not search term, return empty knowledge array.
       return of([]);
     }
     return this.http.get<Skill[]>(`${this.skillUrl}/?name=${term}`).pipe(
@@ -64,7 +64,7 @@ export class SkillServiceService {
 
   //////// Save methods //////////
 
-  /** POST: add a new skill to the server */
+  /** POST: add a new knowledge to the server */
   addSkill (skill: Skill): Observable<Skill> {
     return this.http.post<Skill>(this.skillUrl, skill, httpOptions).pipe(
       tap((skill: Skill) => this.log(`added skill w/ id=${skill.id}`)),
@@ -72,7 +72,7 @@ export class SkillServiceService {
     );
   }
 
-  /** DELETE: delete the skill from the server */
+  /** DELETE: delete the knowledge from the server */
   deleteSkill (skill: Skill | number): Observable<Skill> {
     const id = typeof skill === 'number' ? skill : skill.id;
     const url = `${this.skillUrl}/${id}`;
@@ -83,9 +83,11 @@ export class SkillServiceService {
     );
   }
 
-  /** PUT: update the skill on the server */
+  /** PUT: update the knowledge on the server */
   updateSkill (skill: Skill): Observable<any> {
-    return this.http.put(this.skillUrl, skill, httpOptions).pipe(
+    const id = typeof skill === 'number' ? skill : skill.id;
+    const url = `${this.skillUrl}/${id}`;
+    return this.http.put(url, skill, httpOptions).pipe(
       tap(_ => this.log(`updated skill id=${skill.id}`)),
       catchError(this.handleError<any>('Skill'))
     );

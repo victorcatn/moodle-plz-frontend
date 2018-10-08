@@ -1,0 +1,10 @@
+<h2>Edit Knowledge</h2>
+
+<div *ngIf="knowledge">
+  <form>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Knowledge name" class="knowledgeName" [(ngModel)]="name" required name="first">
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="botonCrear" (click)="save()">Update</button>
+  </form>
+</div>

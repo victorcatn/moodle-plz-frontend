@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Skill } from '../Skill';
-import { SkillServiceService } from '../service/skill-service.service';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import {Component, Input, OnInit} from '@angular/core';
+import {Skill} from '../Skill';
+import {SkillServiceService} from '../service/skill-service.service';
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-edit-skill',
@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 export class EditSkillComponent implements OnInit {
 
   @Input() skill: Skill;
+  name : string;
 
   constructor(
     private skillService: SkillServiceService,
@@ -26,7 +27,10 @@ export class EditSkillComponent implements OnInit {
   getSkill(){
     const id = this.route.snapshot.paramMap.get('id');
     this.skillService.getSkill(id)
-    .subscribe(skill => this.skill = skill)
+    .subscribe(skill => {
+      this.skill = skill;
+      this.name = skill.name.toString();
+    })
   }
 
   goBack(): void {
@@ -34,6 +38,8 @@ export class EditSkillComponent implements OnInit {
   }
 
   save(): void{
+
+    this.skill.name = this.name;
     this.skillService.updateSkill(this.skill)
       .subscribe()
   }

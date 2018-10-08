@@ -7,6 +7,7 @@ import {GroupService} from '../service/group-service.service';
 import {ProjectServiceService} from '../../project/service/project-service.service';
 import {MatSelect} from '@angular/material';
 import {AlgorithmGroup} from "../AlgorithmGroup";
+import {StaffMemberService} from "../../staffmember/service/staffmember.service";
 
 @Component({
   selector: 'app-group-component',
@@ -25,10 +26,8 @@ export class GroupComponentComponent implements OnInit, AfterViewInit {
   algorithm: AlgorithmGroup;
   members: StaffMember[];
 
-  suggestedMembers: StaffMember[];
-  otherMembers: StaffMember[];
-  nonSuggestedStaffmembers: StaffMember[];
 
+  selectedMembersInProject = [];
   selectedSuggested = [];
   selectedOther = [];
   selectedNonSuggested = [];
@@ -40,11 +39,13 @@ export class GroupComponentComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private groupService: GroupService,
-              private projectService: ProjectServiceService) { }
+              private projectService: ProjectServiceService,
+              private staffService : StaffMemberService) { }
 
   ngOnInit() {
     this.algorithm = null;
     this.getProjects();
+    this.getStafMembers();
 
     if (this.route.snapshot.url[1].path === 'create') {
       this.creating = true;
@@ -72,6 +73,11 @@ export class GroupComponentComponent implements OnInit, AfterViewInit {
       });
   }
 
+  getStafMembers(): void {
+    this.staffService.getStaffMembers()
+      .subscribe(members => this.members = members);
+  }
+
   getGroup() {
     const id = this.route.snapshot.paramMap.get('id');
     this.groupService.getGroup(id)
@@ -80,37 +86,53 @@ export class GroupComponentComponent implements OnInit, AfterViewInit {
 
         if (this.editing) {
           this.selectedProjectVal = this.projects.filter(project => project.id === sgroup.projectId)[0];
-          this.generateGroup(this.selectedProjectVal); }
+          this.generateGroup(this.selectedProjectVal);
+        }
 
       });
   }
 
+
   saveGroup() {
-    this.group.membersId = this.selectedSuggested.concat(this.selectedOther, this.selectedNonSuggested);
+    this.group.membersId = this.selectedSuggested.concat(this.selectedOther, this.selectedNonSuggested, this.selectedMembersInProject);
     this.group.projectId = this.selectedProjectVal.id;
-    this.groupService.addGroup(this.group)
-      .subscribe(group => {
-        this.group = new Group();
-        this.router.navigate(['/groups']);
-      });
+    if(this.creating) {
+      this.groupService.addGroup(this.group)
+        .subscribe(group => {
+          this.group = new Group();
+          this.router.navigate(['/groups']);
+        });
+    }
+    else if(this.editing){
+      this.group.id = this.route.snapshot.paramMap.get('id')
+      this.groupService.updateGroup(this.group)
+        .subscribe(group => {
+          this.group = new Group();
+          this.router.navigate(['/groups'])
+        })
+    }
   }
 
   getProjectById(id): Project {
     return this.projects.filter(project => project.id === id)[0];
   }
 
-
-  log() {
-    console.log(this.selectedSuggested);
-    console.log(this.selectedOther);
-    console.log(this.group);
-    // this.selectedOther = ["5b974358b9d2162bb0188c55"];
-    this.selectedOther = this.selectedOther.slice(0);
-
-  }
   ngAfterViewInit() {
-    if (!this.viewing){
+    if (this.creating){
       this.selectedProject.selectionChange.subscribe( s => this.generateGroup(s.value) );
     }
+  }
+
+  getMembersInGroup(membersId : String[]) : StaffMember[]{
+    let staffmembers : StaffMember[] = [];
+    for(let idMember of membersId){
+      for(let staffMember of this.members){
+        if(idMember == staffMember.id){
+          staffmembers.push(staffMember);
+        }
+      }
+    }
+
+    return staffmembers;
   }
 }

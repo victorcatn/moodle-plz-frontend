@@ -1,68 +1,87 @@
-<h1>Group</h1>
-<h2>Project:</h2>
+<h1 align="center" *ngIf="viewing">Group details</h1>
+<h1 align="center" *ngIf="editing">Group edit</h1>
 
-<h3 *ngIf="viewing && group">{{ getProjectById( group.projectId ).name }}</h3>
+<mat-divider> </mat-divider>
+<div>
+  <mat-grid-list cols="2" rowHeight="6:1">
 
-<mat-select *ngIf="!viewing" placeholder="Project" name="project" #selectedProject [(ngModel)]="selectedProjectVal" required>
-  <mat-option *ngFor="let project of projects" [value]="project">
-    <mat-grid-list cols="3" rowHeight="6:1">
+    <mat-grid-tile colspan="1" >
+      <h2>Project: </h2>
+    </mat-grid-tile>
 
-      <mat-grid-tile [colspan]="1" *ngIf="project.id">
-        <p><b> id:</b> {{project.id}}</p>
-      </mat-grid-tile>
+    <mat-grid-tile colspan="1" *ngIf="viewing && group" >
+      <h3 >{{ getProjectById( group.projectId ).name }}</h3>
+    </mat-grid-tile>
 
-      <mat-grid-tile [colspan]="1" *ngIf="project.name">
-        <p><b> name:</b> {{project.name}}</p>
-      </mat-grid-tile>
+    <mat-grid-tile colspan="1" *ngIf="!viewing">
+      <mat-select  placeholder="Project" name="project" #selectedProject [(ngModel)]="selectedProjectVal" required>
+        <mat-option *ngFor="let project of projects" [value]="project" [disabled]="editing">
+          <p><b>Name: </b>{{project.name}} <b *ngIf="project.assignedGroupId">-Has assigned group-</b> </p>
+        </mat-option>
+      </mat-select>
+    </mat-grid-tile>
 
-      <mat-grid-tile [colspan]="1" *ngIf="project.assignedGroupId">
-        <p><b> assigned group:</b> {{project.assignedGroupId}}</p>
-      </mat-grid-tile>
+  </mat-grid-list>
+</div>
 
-    </mat-grid-list>
-  </mat-option>
-</mat-select>
 
-<h2>Staff</h2>
+<mat-divider> </mat-divider>
+<h2>Staff members</h2>
 
-<mat-list *ngIf="viewing && group">
-  <mat-list-item *ngFor="let member of group.membersId" >
-    {{member}}
+<mat-list *ngIf="viewing && group" class="mat-list">
+  <mat-list-item *ngFor="let member of getMembersInGroup(group.membersId)" >
+    <p><b>Document: </b>{{member.document}} - <b>Name: </b> {{member.name}} {{member.lastName}}</p>
   </mat-list-item>
 </mat-list>
 
 <div *ngIf="!viewing && algorithm">
+
+  <mat-selection-list  [(ngModel)]="selectedMembersInProject" *ngIf="editing && members && group">
+    <h3>Staff members in group</h3>
+    <mat-list-option *ngFor="let member of getMembersInGroup(group.membersId)" [value]="member.id" selected="true" >
+      <p><b>Document: </b>{{member.document}} <b>Name: </b> {{member.name}} {{member.lastName}}</p>
+    </mat-list-option>
+  </mat-selection-list>
+
+  <mat-divider class="mat-divider-selection"></mat-divider>
   <mat-selection-list  [(ngModel)]="selectedSuggested">
-    <h4>Suggested staff for this project</h4>
+    <h3>Suggested staff for this project</h3>
     <mat-list-option *ngFor="let member of algorithm.suggestedStaffMember" [value]="member.id" >
-      {{member.name}}
+      <p><b>Document: </b>{{member.document}} <b>Name: </b> {{member.name}} {{member.lastName}}</p>
     </mat-list-option>
     <p *ngIf="algorithm.suggestedStaffMember.length==0" >There is not suggested staff members</p>
   </mat-selection-list>
 
+  <mat-divider class="mat-divider-selection"></mat-divider>
   <mat-selection-list [(ngModel)]="selectedOther">
-    <h4>Other staff available</h4>
+    <h3>Other staff available</h3>
     <mat-list-option *ngFor="let member of algorithm.others" [value]="member.id" >
-      {{member.name}}
+      <p><b>Document: </b>{{member.document}} <b>Name: </b> {{member.name}} {{member.lastName}}</p>
     </mat-list-option>
     <p *ngIf="algorithm.others.length==0" >There is not suggested others staff members</p>
   </mat-selection-list>
 
+  <mat-divider class="mat-divider-selection"></mat-divider>
   <mat-selection-list [(ngModel)]="selectedNonSuggested">
-    <h4>Non suggested staff</h4>
+    <h3>Non suggested staff</h3>
     <mat-list-option *ngFor="let member of algorithm.nonSuggestedStaffMember" [value]="member.id" >
-      {{member.name}}
+      <p><b>Document: </b>{{member.document}} <b>Name: </b> {{member.name}} {{member.lastName}}</p>
     </mat-list-option>
     <p *ngIf="algorithm.nonSuggestedStaffMember.length==0" >There is not non suggested staff members</p>
   </mat-selection-list>
 </div>
+<p>
+
+</p>
+<mat-divider> </mat-divider>
+<p>
+
+</p>
 
 
-
-<button mat-raised-button color="primary" (click)="saveGroup()" *ngIf="creating">Create</button>
-<button mat-raised-button color="primary" (click)="saveGroup()" *ngIf="editing">Edit</button>
-
-
+<button mat-fab color="primary" class="fav-action-group" (click)="saveGroup()" *ngIf="!viewing">
+  <mat-icon>save</mat-icon>
+</button>
 <button mat-fab color="primary" class="fav-edit-group" *ngIf="viewing" routerLink="edit">
   <mat-icon>edit</mat-icon>
 </button>

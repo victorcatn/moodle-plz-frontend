@@ -207,7 +207,7 @@ export class StaffmemberDetailComponent implements OnInit {
   generateAll():void{
     this.skillService.getSkills().subscribe(skills => {
       /*se toman todas las skills registradas en el sistema y se itera por cada una para comparar
-      * su id con las skills del staff member, de esta forma se puede construir una skill que tenga id, nombre y score
+      * su id con las skills del staff member, de esta forma se puede construir una knowledge que tenga id, nombre y score
       * y agregarla a lista de skillAll*/
       let skillAllList: SkillAll[] = [];
       for (let skill of skills) {
@@ -348,7 +348,7 @@ export class StaffmemberDetailComponent implements OnInit {
   }
 
   /**
-   * take the event of the slide of the add new skill
+   * take the event of the slide of the add new knowledge
    */
   slideSkillChange():void{
     this.slideSkill = !this.slideSkill;
@@ -369,7 +369,7 @@ export class StaffmemberDetailComponent implements OnInit {
   }
 
   /**
-   * Review if the new staff member have all the requirements like have skill, knowledge and name
+   * Review if the new staff member have all the requirements like have knowledge, knowledge and name
    * @return return true if have all requirements and false if don´t
    */
   reviewRequirements(): boolean {

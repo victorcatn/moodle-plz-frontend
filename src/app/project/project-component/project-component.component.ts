@@ -74,7 +74,7 @@ export class ProjectComponentComponent implements OnInit {
   public slideStart:boolean = false;
   public slideEnd:boolean = false;
 
-  /*Indica si se le agregaran o no nuevas skill o nuevos knowledges
+  /*Indica si se le agregaran o no nuevas knowledge o nuevos knowledges
    *si el slide respectivo esta en false entonces no se muestra el stepper para agregar nuevas necesidades
    *si esta en true se muestra el stepper para agregar habilidades nuevas
    */
@@ -187,7 +187,7 @@ export class ProjectComponentComponent implements OnInit {
         this.knowledgeScore = project.neededKnowledges;
 
         /*Condicionales para controlar la posibilidad de dejar un proyecto con skills y knowledges vacias
-         *cuando solo queda una skill o una habilidad se deshabilita el boton delete
+         *cuando solo queda una knowledge o una habilidad se deshabilita el boton delete
          */
         if(this.skillScore.length<=1){
           this.canDeleteSkill = false;
@@ -312,7 +312,7 @@ export class ProjectComponentComponent implements OnInit {
   generateAll():void{
     this.skillService.getSkills().subscribe(skills => {
       /*se toman todas las skills registradas en el sistema y se itera por cada una para comparar
-      * su id con las skills del proyecto, de esta forma se puede construir una skill que tenga id, nombre y score
+      * su id con las skills del proyecto, de esta forma se puede construir una knowledge que tenga id, nombre y score
       * y agregarla a lista de skillAll*/
       let skillAllList: SkillAll[] = [];
       for (let skill of skills) {
@@ -345,7 +345,7 @@ export class ProjectComponentComponent implements OnInit {
 
   /**
    * Take the elements input on the HTML by its code and take its value
-   * in order to do a object skillScore, that is the needed skill with the required score
+   * in order to do a object skillScore, that is the needed knowledge with the required score
    */
   generateSkillScore(): void{
     for(let idSkill of this.neededSkills){
@@ -455,7 +455,7 @@ export class ProjectComponentComponent implements OnInit {
   }
 
   /**
-   * take the event of the slide of the add new skill
+   * take the event of the slide of the add new knowledge
    */
   slideSkillChange():void{
     this.slideSkill = !this.slideSkill;
@@ -469,8 +469,8 @@ export class ProjectComponentComponent implements OnInit {
   }
 
   /**
-   * Delete a skill of the project with the id provided by the url
-   * @param id skill id
+   * Delete a knowledge of the project with the id provided by the url
+   * @param id knowledge id
    */
   deleteSkill(id: string):void{
     let newSkillScore: SkillScore[] = [];
@@ -501,7 +501,7 @@ export class ProjectComponentComponent implements OnInit {
 
 
   /**
-   * Review if the new project have all the requirements like have skill, knowledge and name
+   * Review if the new project have all the requirements like have knowledge, knowledge and name
    * @return return true if have all requirements and false if don´t
    */
   reviewRequirements(): boolean {
@@ -514,7 +514,7 @@ export class ProjectComponentComponent implements OnInit {
     }
 
       if ((this.neededSkills == undefined && !this.idMap)  || (this.neededSkills == undefined && this.slideSkill)) {
-        message += 'You have to register at least one needed skill, \n';
+        message += 'You have to register at least one needed knowledge, \n';
         review = false;
       }
       if ((this.neededKnowledges == undefined && !this.idMap)  || (this.neededKnowledges == undefined && this.slideKnowledge)) {

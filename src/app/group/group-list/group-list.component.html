@@ -1,17 +1,20 @@
 <h2>Groups</h2>
 
-<mat-card *ngFor="let group of groups" class="group-card" >
-    <mat-card-title routerLink="{{group.id}}" >{{group.id}}</mat-card-title>
+<mat-card *ngFor="let group of groups" class="group-card" routerLink="{{group.id}}" >
+    <mat-card-title *ngIf="projects" >{{getProjectName(group.projectId)}}</mat-card-title>
     <mat-card-content>
-        <mat-list>
-            <mat-list-item *ngFor="let staffMember of group.getStaffMembers"> <!--TODO: make this method-->
-                {{staffMember.name}}
+        <mat-list *ngIf="members">
+            <mat-list-item *ngFor="let staffMember of getMembersInGroup(group.membersId)"> <!--TODO: make this method-->
+                <p><b>Name: </b> {{staffMember.name}} {{staffMember.lastName}}</p>
             </mat-list-item>
         </mat-list>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button routerLink="{{group.id+'/edit'}}">edit</button>
-        <button mat-button (click)="delete(group)" >delete</button>
+      <button mat-mini-fab (click)="delete(group)" color ="primary">
+        <mat-icon aria-label="Delete group">
+          delete
+        </mat-icon>
+      </button>
     </mat-card-actions>
 </mat-card>
 
