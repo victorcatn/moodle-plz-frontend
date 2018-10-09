@@ -39,7 +39,7 @@ export class AppService {
   }
 
   setHUA(admin){
-    sessionStorage.setItem('isHUA', 'true');
+    sessionStorage.setItem('isHUA', admin);
     this.admin = admin;
   }
 
