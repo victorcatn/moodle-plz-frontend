@@ -1,32 +1,45 @@
-import {Injectable} from "@angular/core";
-import {HttpErrorResponse} from "@angular/common/http";
-import {throwError} from "rxjs";
-import {Router} from "@angular/router";
-
 @Injectable()
 export class AppService {
-   constructor(private router: Router){}
+  constructor(private router: Router){}
 
-   admin = false;
+  admin = false;
+  session = false;
 
-   setToken(token){
-     sessionStorage.setItem('token', token);
-   }
+  setToken(token){
+    sessionStorage.setItem('token', token);
+    this.session = true;
+  }
 
-   getToken(){
-     return sessionStorage.getItem('token');
-   }
+  getToken(){
+    return sessionStorage.getItem('token');
+  }
 
-   logout(){
-     sessionStorage.setItem('token', '');
-     this.router.navigate(['login']).then(() => console.log('redirigido desde logout'));
-   }
+  isSessionActive(){
+    if(this.getToken() !== ''){
+      this.session = true;
+    } else{
+      this.session = false;
+    };
+    return this.session;
+  }
 
-   isHUA(){
-     return this.admin;
-   }
+  logout(){
+    sessionStorage.setItem('token', '');
+    this.session = false;
+    this.router.navigate(['login']).then(() => console.log('redirigido desde logout'));
+  }
+
+  isHUA(){
+    if(sessionStorage.getItem('isHUA') === 'true'){
+      this.admin = true;
+    } else{
+      this.admin = false;
+    };
+    return this.admin;
+  }
 
   setHUA(admin){
+    sessionStorage.setItem('isHUA', 'true');
     this.admin = admin;
   }
 
@@ -76,3 +89,9 @@ export class AppService {
     })
   }*/
 }
+
+import {Injectable} from "@angular/core";
+import {HttpErrorResponse} from "@angular/common/http";
+import {throwError} from "rxjs";
+
+import {Router} from "@angular/router";

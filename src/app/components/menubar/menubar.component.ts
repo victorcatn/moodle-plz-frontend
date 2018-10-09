@@ -12,12 +12,7 @@ import {AppComponent} from "../../app.component";
 export class MenubarComponent implements OnInit{
   @ViewChild('sidenav') sidenav: MatSidenav;
   isExpanded = true;
-  showSubmenu = false;
   isShowing = false;
-  showSubSubMenu = false;
-
-  estado = "conMouse"
-  estado2 = "sinMouse"
 
   constructor(private service: AppService, private appcom: AppComponent){};
 
@@ -26,8 +21,8 @@ export class MenubarComponent implements OnInit{
   }
 
   logout(){
-    this.service.logout();
     this.appcom.mostrarMenu(false);
+    this.service.logout();
   }
   show = false;
 

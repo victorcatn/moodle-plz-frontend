@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {AppService} from "./app.service";
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,12 @@ import {Router} from "@angular/router";
 })
 export class AppComponent implements OnInit{
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private service: AppService) {
     //this.app.authenticate(undefined, undefined);
   }
 
   ngOnInit(){
-    //this.mostrarMenu();
+    this.menuActivado = this.service.isSessionActive();
   }
 
   menuActivado = false;
