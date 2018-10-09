@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
 import {AppComponent} from "../app.component";
 import {MenubarComponent} from "../components/menubar/menubar.component";
 import {CidimageComponent} from "../components/cidimage/cidimage.component";
+import {StaffMemberService} from "../staffmember/service/staffmember.service";
 
 @Component({
   selector: 'app-login',
