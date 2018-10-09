@@ -1,9 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AppService} from "../../app.service";
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpRequest, HttpResponse} from "@angular/common/http";
-import {Observable, throwError} from "rxjs";
-import { catchError, map, tap} from 'rxjs/operators';
-import {AppComponent} from "../../app.component";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-cidimage',

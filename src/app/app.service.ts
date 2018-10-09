@@ -1,8 +1,6 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {LoginComponent} from "./login/login.component";
+import {HttpErrorResponse} from "@angular/common/http";
 import {throwError} from "rxjs";
-import {AppComponent} from "./app.component";
 import {Router} from "@angular/router";
 
 @Injectable()

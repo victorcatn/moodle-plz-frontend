@@ -5,8 +5,6 @@ import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {AppComponent} from "../app.component";
-import {MenubarComponent} from "../components/menubar/menubar.component";
-import {CidimageComponent} from "../components/cidimage/cidimage.component";
 import {StaffMemberService} from "../staffmember/service/staffmember.service";
 
 @Component({
