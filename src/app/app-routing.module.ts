@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: 'projects/create', component: ProjectComponentComponent},
   {path: 'projects/:id', component: ProjectComponentComponent},
   {path: 'projects', component: ProjectListComponent},
-  {path: '', pathMatch: 'full', redirectTo: 'home'},
+  {path: '', pathMatch: 'full', redirectTo: 'login'},
   {path: 'home', component: CidimageComponent},
   {path: 'staffmembers', component: StaffmemberListComponent},
   {path: 'staffmembers/create', component: StaffmemberDetailComponent},

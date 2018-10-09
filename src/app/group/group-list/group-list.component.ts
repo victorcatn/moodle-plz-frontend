@@ -5,6 +5,7 @@ import {ProjectServiceService} from "../../project/service/project-service.servi
 import {StaffMember} from "../../staffmember/StaffMember";
 import {Project} from "../../project/Project";
 import {StaffMemberService} from "../../staffmember/service/staffmember.service";
+import {AppService} from "../../app.service";
 
 @Component({
   selector: 'app-group-list',
@@ -18,12 +19,14 @@ export class GroupListComponent implements OnInit {
 
   constructor(private groupService: GroupService,
               private projectService: ProjectServiceService,
-              private staffService: StaffMemberService) { }
+              private staffService: StaffMemberService,
+              private service: AppService) { }
 
   ngOnInit() {
     this.getGroups();
     this.getprojects();
     this.getStafMembers();
+    this.showButton(this.service.isHUA());
   }
 
   getprojects() : void{
@@ -66,6 +69,12 @@ export class GroupListComponent implements OnInit {
     }
 
     return staffmembers;
+  }
+
+  show = false;
+
+  showButton(section){
+    return this.show = section;
   }
 
 }

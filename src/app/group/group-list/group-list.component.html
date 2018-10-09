@@ -10,7 +10,7 @@
         </mat-list>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-mini-fab (click)="delete(group)" color ="primary">
+      <button mat-mini-fab (click)="delete(group)" color ="primary" *ngIf="show">
         <mat-icon aria-label="Delete group">
           delete
         </mat-icon>
@@ -18,6 +18,6 @@
     </mat-card-actions>
 </mat-card>
 
-<button mat-fab color="primary" class="fav-add-group" routerLink="create">
+<button mat-fab color="primary" class="fav-add-group" routerLink="create" *ngIf="show">
     <mat-icon aria-label="Add new group">add</mat-icon>
 </button>

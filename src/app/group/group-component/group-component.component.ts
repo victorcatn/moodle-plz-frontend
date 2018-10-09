@@ -5,9 +5,10 @@ import {Project} from '../../project/Project';
 import {StaffMember} from '../../staffmember/StaffMember';
 import {GroupService} from '../service/group-service.service';
 import {ProjectServiceService} from '../../project/service/project-service.service';
+import {StaffMemberService} from '../../staffmember/service/staffmember.service';
 import {MatSelect} from '@angular/material';
 import {AlgorithmGroup} from "../AlgorithmGroup";
-import {StaffMemberService} from "../../staffmember/service/staffmember.service";
+import {AppService} from "../../app.service";
 
 @Component({
   selector: 'app-group-component',
@@ -40,7 +41,8 @@ export class GroupComponentComponent implements OnInit, AfterViewInit {
               private router: Router,
               private groupService: GroupService,
               private projectService: ProjectServiceService,
-              private staffService : StaffMemberService) { }
+              private staffMemberService: StaffMemberService,
+              private service: AppService) { }
 
   ngOnInit() {
     this.algorithm = null;
@@ -57,6 +59,8 @@ export class GroupComponentComponent implements OnInit, AfterViewInit {
     } else {
       this.viewing = true;
     }
+
+    this.showButton(this.service.isHUA());
   }
 
   generateGroup(project: Project) {
@@ -74,7 +78,7 @@ export class GroupComponentComponent implements OnInit, AfterViewInit {
   }
 
   getStafMembers(): void {
-    this.staffService.getStaffMembers()
+    this.staffMemberService.getStaffMembers()
       .subscribe(members => this.members = members);
   }
 
@@ -134,5 +138,11 @@ export class GroupComponentComponent implements OnInit, AfterViewInit {
     }
 
     return staffmembers;
+  }
+
+  show = false;
+
+  showButton(section){
+    return this.show = section;
   }
 }

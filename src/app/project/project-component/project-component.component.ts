@@ -12,6 +12,7 @@ import {Skill} from "../../skill/Skill";
 import {Knowledge} from "../../knowledge/Knowledge";
 import {KnowledgeScore} from "../../knowledge/KnowledgeScore";
 import {MatSnackBar} from "@angular/material";
+import {AppService} from "../../app.service";
 
 @Component({
   selector: 'app-project-component',
@@ -91,7 +92,8 @@ export class ProjectComponentComponent implements OnInit {
               private skillService: SkillServiceService,
               private knowledgeService: KnowledgeServiceService,
               private _formBuilder: FormBuilder,
-              public snackBar: MatSnackBar
+              public snackBar: MatSnackBar,
+              private service: AppService
   ) { }
 
   ngOnInit() {
@@ -108,6 +110,7 @@ export class ProjectComponentComponent implements OnInit {
       knowledgeScoreG:[[], Validators.required]
     });
     this.getProject();
+    this.showButton(this.service.isHUA());
   }
 
   /**
@@ -538,6 +541,12 @@ export class ProjectComponentComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 3000,
     });
+  }
+
+  show = false;
+
+  showButton(section){
+    return this.show = section;
   }
 
 

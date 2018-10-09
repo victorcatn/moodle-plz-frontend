@@ -56,6 +56,15 @@ export class StaffMemberService {
     );
   }
 
+  /** GET staffMembers by id. Will 404 if id not found */
+  getStaffMemberByDocument(document: string): Observable<StaffMember> {
+    const url = `${this.staffMembersUrl}/bydocument/${document}`;
+    return this.http.get<StaffMember>(url).pipe(
+      tap(_ => this.log(`fetched hero id=${document}`)),
+      catchError(this.handleError<StaffMember>(`getStaffMembers id=${document}`))
+    );
+  }
+
   /* GET staffMember whose name contains search term */
   searchStaffMember(term: string): Observable<StaffMember[]> {
     if (!term.trim()) {

@@ -1,34 +1,15 @@
 
-<app-menubar>
+
+
+<router-outlet>
+</router-outlet>
+
+<app-menubar *ngIf="menuActivado">
 </app-menubar>
 
 <ngx-spinner
   bdColor = "rgba(51, 51, 51, 0.8)" size = "medium" color = "#6bbde1" type = "ball-zig-zag"
 ></ngx-spinner>
-
-
-
-<!--<div class="container">
-  <ul class="nav nav-pills">
-    <li><a routerLinkActive="active" routerLink="/home">Home</a></li>
-    <li><a routerLinkActive="active" routerLink="/login">Login</a></li>
-    <li><a (click)="logout()">Logout</a></li>
-  </ul>
-</div>
-<div class="container">
-  <router-outlet></router-outlet>
-</div>-->
-
-
-<!--<div [hidden]="!HTTPActivity">
-
-  <!--<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#029fe1" type="ball-zig-zag"></ngx-spinner>
-  <div class="mat-app-background basic-container">
-    <app-menubar>
-
-    </app-menubar>
-  </div>
-</div>-->
 
 
 

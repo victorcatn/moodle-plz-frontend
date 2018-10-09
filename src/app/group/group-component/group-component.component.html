@@ -82,6 +82,6 @@
 <button mat-fab color="primary" class="fav-action-group" (click)="saveGroup()" *ngIf="!viewing">
   <mat-icon>save</mat-icon>
 </button>
-<button mat-fab color="primary" class="fav-edit-group" *ngIf="viewing" routerLink="edit">
+<button mat-fab color="primary" class="fav-edit-group" *ngIf="viewing && show" routerLink="edit">
   <mat-icon>edit</mat-icon>
 </button>
