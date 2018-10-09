@@ -6,7 +6,7 @@ import {StaffMember} from '../../staffmember/StaffMember';
 import {GroupService} from '../service/group-service.service';
 import {ProjectServiceService} from '../../project/service/project-service.service';
 import {StaffMemberService} from '../../staffmember/service/staffmember.service';
-import {MatSelect} from '@angular/material';
+import {MatSelect, MatSnackBar} from '@angular/material';
 import {AlgorithmGroup} from "../AlgorithmGroup";
 import {AppService} from "../../app.service";
 
@@ -42,7 +42,8 @@ export class GroupComponentComponent implements OnInit, AfterViewInit {
               private groupService: GroupService,
               private projectService: ProjectServiceService,
               private staffMemberService: StaffMemberService,
-              private service: AppService) { }
+              private service: AppService,
+              public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.algorithm = null;
@@ -98,22 +99,27 @@ export class GroupComponentComponent implements OnInit, AfterViewInit {
 
 
   saveGroup() {
-    this.group.membersId = this.selectedSuggested.concat(this.selectedOther, this.selectedNonSuggested, this.selectedMembersInProject);
-    this.group.projectId = this.selectedProjectVal.id;
-    if(this.creating) {
-      this.groupService.addGroup(this.group)
-        .subscribe(group => {
-          this.group = new Group();
-          this.router.navigate(['/groups']);
-        });
+    if(this.selectedSuggested.concat(this.selectedOther, this.selectedNonSuggested, this.selectedMembersInProject).length>0) {
+      this.group.membersId = this.selectedSuggested.concat(this.selectedOther, this.selectedNonSuggested, this.selectedMembersInProject);
+      this.group.projectId = this.selectedProjectVal.id;
+      if (this.creating) {
+        this.groupService.addGroup(this.group)
+          .subscribe(group => {
+            this.group = new Group();
+            this.router.navigate(['/groups']);
+          });
+      }
+      else if (this.editing) {
+        this.group.id = this.route.snapshot.paramMap.get('id');
+        this.groupService.updateGroup(this.group)
+          .subscribe(group => {
+            this.group = new Group();
+            this.router.navigate(['/groups'])
+          })
+      }
     }
-    else if(this.editing){
-      this.group.id = this.route.snapshot.paramMap.get('id')
-      this.groupService.updateGroup(this.group)
-        .subscribe(group => {
-          this.group = new Group();
-          this.router.navigate(['/groups'])
-        })
+    else{
+      this.openSnackBar("You have to choose at least one staff member", "Accept");
     }
   }
 
@@ -138,6 +144,17 @@ export class GroupComponentComponent implements OnInit, AfterViewInit {
     }
 
     return staffmembers;
+  }
+
+  /**
+   * Show a message to the user
+   * @param message the message to the user
+   * @param action the text of the button
+   */
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+    });
   }
 
   show = false;
