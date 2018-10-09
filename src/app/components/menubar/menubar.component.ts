@@ -10,7 +10,7 @@ import {AppComponent} from "../../app.component";
   templateUrl: './menubar.component.html',
   styleUrls: ['./menubar.component.css']
 })
-export class MenubarComponent {
+export class MenubarComponent implements OnInit{
   @ViewChild('sidenav') sidenav: MatSidenav;
   isExpanded = true;
   showSubmenu = false;
@@ -22,10 +22,21 @@ export class MenubarComponent {
 
   constructor(private service: AppService, private appcom: AppComponent){};
 
+  ngOnInit(){
+    this.showSection(this.service.isHUA());
+  }
+
   logout(){
     this.service.logout();
     this.appcom.mostrarMenu(false);
   }
+
+  show = false;
+
+  showSection(section){
+      return this.show = section;
+  }
+
   mouseenter() {
     if (!this.isExpanded) {
       this.isShowing = true;

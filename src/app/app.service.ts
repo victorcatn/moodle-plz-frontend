@@ -8,6 +8,8 @@ import {AppComponent} from "./app.component";
 export class AppService {
    constructor(){}
 
+   admin = false;
+
    setToken(token){
      sessionStorage.setItem('token', token);
    }
@@ -19,6 +21,14 @@ export class AppService {
    logout(){
      sessionStorage.setItem('token', '');
    }
+
+   isHUA(){
+     return this.admin;
+   }
+
+  setHUA(admin){
+    this.admin = admin;
+  }
 
   private handleError(error: HttpErrorResponse){
     if(error.error instanceof ErrorEvent){

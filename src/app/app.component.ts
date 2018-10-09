@@ -23,7 +23,6 @@ export class AppComponent implements OnInit{
 
   mostrarMenu(menu){
     return this.menuActivado = menu;
-    console.log(this.menuActivado);
   }
 
 

@@ -8,6 +8,7 @@ import {SkillScore} from "../skill/SkillScore";
 import {KnowledgeScore} from "../knowledge/KnowledgeScore";
 import {Observable} from "rxjs";
 import {AppComponent} from "../app.component";
+import {MenubarComponent} from "../components/menubar/menubar.component";
 
 @Component({
   selector: 'app-login',
@@ -34,7 +35,8 @@ export class LoginComponent implements OnInit{
   auth: boolean;
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute,
-              private appcom: AppComponent, private service: AppService){}
+              private appcom: AppComponent, private service: AppService, private staffMemberService: StaffMemberService,
+              ){}
 
   ngOnInit(){
     sessionStorage.setItem('token', '')
@@ -48,8 +50,13 @@ export class LoginComponent implements OnInit{
     }).subscribe(isValid => {
       if(isValid){
         this.service.setToken(btoa(this.staffMember.document + ':' + this.staffMember.password));
-        this.appcom.mostrarMenu(true);
-        this.router.navigate(['']);
+        this.staffMemberService.getStaffMemberByDocument(this.staffMember.document.toString()).subscribe(staffmember => {
+          this.service.setHUA(staffmember.isHumanResourcesManager);
+          this.appcom.mostrarMenu(true);
+          this.router.navigate(['']);
+
+        })
+
       } else{
         alert("Failed");
         this.appcom.mostrarMenu(false);
