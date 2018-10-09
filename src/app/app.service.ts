@@ -3,10 +3,11 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {LoginComponent} from "./login/login.component";
 import {throwError} from "rxjs";
 import {AppComponent} from "./app.component";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AppService {
-   constructor(){}
+   constructor(private router: Router){}
 
    admin = false;
 
@@ -20,6 +21,7 @@ export class AppService {
 
    logout(){
      sessionStorage.setItem('token', '');
+     this.router.navigate(['login']).then(() => console.log('redirigido desde logout'));
    }
 
    isHUA(){

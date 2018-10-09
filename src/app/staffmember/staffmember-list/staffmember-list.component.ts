@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StaffMember } from '../StaffMember';
 import { StaffMemberService } from '../service/staffmember.service';
+import {AppService} from "../../app.service";
 
 @Component({
   selector: 'app-staffmember-list',
@@ -23,10 +24,11 @@ export class StaffmemberListComponent implements OnInit {
     knowledges: []
   };
 
-  constructor(private staffMemberService: StaffMemberService) { }
+  constructor(private staffMemberService: StaffMemberService, private service: AppService) { }
 
   ngOnInit() {
     this.getStaffMembers();
+    this.showButton(this.service.isHUA())
   }
 
   getStaffMembers(): void{
@@ -36,6 +38,12 @@ export class StaffmemberListComponent implements OnInit {
   delete(staffMember: StaffMember): void{
     this.staffMembers = this.staffMembers.filter(h => h !== staffMember);
     this.staffMemberService.deleteStaffMember(staffMember).subscribe();
+  }
+
+  show = false;
+
+  showButton(section){
+    return this.show = section;
   }
 
 }

@@ -12,6 +12,7 @@ import { SkillScore } from '../../skill/SkillScore';
 import { KnowledgeScore } from '../../knowledge/KnowledgeScore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import {AppService} from "../../app.service";
 
 @Component({
   selector: 'app-staffmember-detail',
@@ -71,7 +72,8 @@ export class StaffmemberDetailComponent implements OnInit {
     private skillService: SkillServiceService,
     private knowledgeService: KnowledgeServiceService,
     private _formBuilder: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private service: AppService
   ) { }
 
   ngOnInit() {
@@ -87,7 +89,8 @@ export class StaffmemberDetailComponent implements OnInit {
     this.knowledgeScoreG = this._formBuilder.group({
       knowledgeScoreG: [[], Validators.required]
     });
-    this.getStaffMember()
+    this.getStaffMember();
+    this.showButton(this.service.isHUA());
   }
 
   getSkills(): void {
@@ -416,6 +419,12 @@ export class StaffmemberDetailComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 3000,
     });
+  }
+
+  show = false;
+
+  showButton(section){
+    return this.show = section;
   }
 
 }

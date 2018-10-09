@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
-import {CidimageComponent} from "../cidimage/cidimage.component";
 import {AppService} from "../../app.service";
 import {AppComponent} from "../../app.component";
 
@@ -30,7 +29,6 @@ export class MenubarComponent implements OnInit{
     this.service.logout();
     this.appcom.mostrarMenu(false);
   }
-
   show = false;
 
   showSection(section){

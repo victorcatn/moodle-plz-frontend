@@ -10,11 +10,11 @@
         </mat-list>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button routerLink="{{group.id+'/edit'}}">edit</button>
-        <button mat-button (click)="delete(group)" >delete</button>
+        <button mat-button routerLink="{{group.id+'/edit'}}" *ngIf="show">edit</button>
+        <button mat-button (click)="delete(group)" *ngIf="show">delete</button>
     </mat-card-actions>
 </mat-card>
 
-<button mat-fab color="primary" class="fav-add-group" routerLink="create">
+<button mat-fab color="primary" class="fav-add-group" routerLink="create" *ngIf="show">
     <mat-icon aria-label="Add new group">add</mat-icon>
 </button>

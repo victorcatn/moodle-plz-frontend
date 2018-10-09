@@ -31,6 +31,13 @@ export class CidimageComponent implements OnInit {
     //this.getHeader();
   }
 
+  show = true;
+
+  showLogin(show){
+    console.log(show);
+    return this.show = show;
+
+  }
 
 
 }

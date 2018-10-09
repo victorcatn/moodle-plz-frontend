@@ -9,6 +9,7 @@ import {KnowledgeScore} from "../knowledge/KnowledgeScore";
 import {Observable} from "rxjs";
 import {AppComponent} from "../app.component";
 import {MenubarComponent} from "../components/menubar/menubar.component";
+import {CidimageComponent} from "../components/cidimage/cidimage.component";
 
 @Component({
   selector: 'app-login',
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit{
   auth: boolean;
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute,
-              private appcom: AppComponent, private service: AppService, private staffMemberService: StaffMemberService,
+              private appcom: AppComponent, private service: AppService, private staffMemberService: StaffMemberService
               ){}
 
   ngOnInit(){
@@ -53,7 +54,7 @@ export class LoginComponent implements OnInit{
         this.staffMemberService.getStaffMemberByDocument(this.staffMember.document.toString()).subscribe(staffmember => {
           this.service.setHUA(staffmember.isHumanResourcesManager);
           this.appcom.mostrarMenu(true);
-          this.router.navigate(['']);
+          this.router.navigate(['/home']);
 
         })
 
