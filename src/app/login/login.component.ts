@@ -4,6 +4,9 @@ import {AppService} from "../app.service";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs";
+import {AppComponent} from "../app.component";
+import {MenubarComponent} from "../components/menubar/menubar.component";
+import {CidimageComponent} from "../components/cidimage/cidimage.component";
 
 @Component({
   selector: 'app-login',
@@ -28,7 +31,11 @@ export class LoginComponent implements OnInit{
     knowledges:[],
   }
 
-  constructor(private app: AppService, private http: HttpClient, private router: Router, private route: ActivatedRoute){}
+  auth: boolean;
+
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute,
+              private appcom: AppComponent, private service: AppService, private staffMemberService: StaffMemberService
+              ){}
 
   ngOnInit(){
     sessionStorage.setItem('token', '')
@@ -41,12 +48,23 @@ export class LoginComponent implements OnInit{
       password: this.staffMember.password
     }).subscribe(isValid => {
       if(isValid){
-        sessionStorage.setItem('token', btoa(this.staffMember.document + ':' + this.staffMember.password));
-        this.router.navigate(['']);
+        this.service.setToken(btoa(this.staffMember.document + ':' + this.staffMember.password));
+        this.staffMemberService.getStaffMemberByDocument(this.staffMember.document.toString()).subscribe(staffmember => {
+          this.service.setHUA(staffmember.isHumanResourcesManager);
+          this.appcom.mostrarMenu(true);
+          this.router.navigate(['/home']);
+
+        })
+
       } else{
         alert("Failed");
+        this.appcom.mostrarMenu(false);
       }
     })
+  }
+
+  getAuth(){
+    return this.auth;
   }
 
   /*login(){

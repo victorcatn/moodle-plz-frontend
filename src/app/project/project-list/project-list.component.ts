@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Project} from "../Project";
 import {ProjectServiceService} from "../service/project-service.service";
+import {AppService} from "../../app.service";
 
 @Component({
   selector: 'app-project-model',
@@ -22,15 +23,16 @@ export class ProjectListComponent implements OnInit {
   assignedGroupId:'',
 };
 
-  constructor(private projectService: ProjectServiceService) { }
+  constructor(private projectService: ProjectServiceService, private service: AppService) { }
 
   ngOnInit() {
     this.getProjects();
+    this.showButton(this.service.isHUA());
   }
 
   getProjects(): void {
     this.projectService.getProjects()
-      .subscribe(projects => this.projects = projects);
+      .subscribe((projects) => {this.projects = projects});
   }
 
 
@@ -38,5 +40,12 @@ export class ProjectListComponent implements OnInit {
     this.projects = this.projects.filter(h => h !== project);
     this.projectService.deleteProject(project).subscribe();
   }
+
+  show = false;
+
+  showButton(section){
+    return this.show = section;
+  }
+
 
 }

@@ -261,7 +261,8 @@
 
 <div>
 
-  <button mat-fab color="primary" class="fav-action-staffMember" (click)="editStaffMember()" *ngIf="!editing && !showing">
+  <button mat-fab color="primary" class="fav-action-staffMember" (click)="editStaffMember()"
+          *ngIf="(!editing && !showing) && show">
     <mat-icon aria-label="edit staf member">edit</mat-icon>
   </button>
   

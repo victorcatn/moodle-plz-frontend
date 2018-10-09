@@ -59,10 +59,10 @@
 
 
 
-<button mat-raised-button color="primary" (click)="saveGroup()" *ngIf="creating">Create</button>
-<button mat-raised-button color="primary" (click)="saveGroup()" *ngIf="editing">Edit</button>
+<button mat-raised-button color="primary" (click)="saveGroup()" *ngIf="creating && show">Create</button>
+<button mat-raised-button color="primary" (click)="saveGroup()" *ngIf="editing && show">Edit</button>
 
 
-<button mat-fab color="primary" class="fav-edit-group" *ngIf="viewing" routerLink="edit">
+<button mat-fab color="primary" class="fav-edit-group" *ngIf="viewing && show" routerLink="edit">
   <mat-icon>edit</mat-icon>
 </button>
